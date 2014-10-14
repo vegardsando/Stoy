@@ -22,14 +22,55 @@ $_(document).ready(function() {
 		detect_size();
 	};
 	
-	$html.addClass('lastet');
+	setTimeout(function(){
+		$html.addClass('lastet');
+	},200)
+	
+
+	  var mySwiper = new Swiper('.swiper-container',{
+	    //Your options here:
+	    mode:'horizontal',
+	    speed:1000,
+	    autoplay: 8000,
+	    //etc..	    
+	  });
+
+
 /*=======================================================
 				  @Click/hover events
 =======================================================*/
 
+
+
 /*=======================================================
 					@function events
 =======================================================*/
+
+	// Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
+	function setImageSize() {
+		$('.setsrc:not(".loaded")').each(function(){
+
+			var denne = $(this);
+
+			if (denne.is('img:not(":hidden")')) {
+				denne.attr('src', $(this).data(lable));
+				if(!denne.hasClass('setsize')){
+					return
+				}
+
+				// Når bildet er lastet
+				denne.imageready(function () {
+					imgCover(denne);
+				});
+
+			} else {
+				denne.css('background-image', 'url(' + $(this).data(lable) + ')');
+			}
+
+
+		});
+	}
+
 		
 	function detect_size(){
 		var window_width = $window.width();
@@ -56,6 +97,12 @@ $_(document).ready(function() {
 				console.log('desktop');
 			}
 		}
+
+		if(gammel_label != lable){
+			$('.img_cover img.loaded').removeClass('loaded');
+			setImageSize();
+		}
+
 		gammel_label = lable;
 	}
 

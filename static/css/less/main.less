@@ -1,4 +1,4 @@
-  //  @import "_project.less";
+  @import "_project.less";
   //  @import "_grid.less";
   @import "_lesshat.less"; // http://lesshat.com/ for dokumentasjon
 
@@ -170,15 +170,278 @@ div#important_msg{
 }
 /* End Mustasj fixes */
 
+html, body {
+  height: 100%;
+}
+
+#frontpage {
+  height: 100%;
+}
+
+.logo {
+  position: absolute;
+  top: 100px;
+  left: 10%;
+  z-index: 2;
+  .transition(opacity 1s ease .8s, transform 1s ease .8s);
+  .opacity(0);
+  .transform(scale(0.6), translate3d(50%,50%,0));
+}
+
+.nav_main {
+  position: absolute;
+  top: 15px;
+  width: 100%;
+  text-align: right;
+  padding-right: 150px;
+  z-index: 2;
+
+  ul {
+    li {
+      display: inline-block;
+      position: relative;
+      margin-left: 4px;
+      margin-right: 4px;
+      .opacity(0);
+      .translate3d(0,200%,0);
+
+      &:nth-of-type(1) {
+        .transition(transform 1s ease .8s, opacity 2s ease .8s);
+      }
+
+      &:nth-of-type(2) {
+        .transition(transform 1s ease 1s, opacity 2s ease 1s);
+      }
+
+      &:nth-of-type(3) {
+        .transition(transform 1s ease 1.2s, opacity 2s ease 1.2s);
+      }
+
+      &:nth-of-type(4) {
+        .transition(transform 1s ease 1.4s, opacity 2s ease 1.4s);
+      }       
+
+      a {
+        color: white;
+        font-weight: bold;
+        .uppercase;
+        .font-size(13);
+        cursor: pointer;
+      }
+
+      // Interpunct
+      &:before {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        color: transparent;
+        content: '•';
+        text-shadow: 0 0 transparent;
+        font-size: 1.2em;
+        .transition(text-shadow .3s ease-in-out, color .3s ease-in-out, transform .3s ease-in-out);
+        .transform(translateX(-50%));
+        pointer-events: none;
+      }
+
+      &:hover:before {
+        color: #fff;
+        text-shadow: 10px 0 #fff, -10px 0 #fff;
+      }      
+
+    }   
+
+  }
+}
+
+.slide-text {
+  position: absolute;
+  bottom: 30%;
+  width: 30%;
+  text-align: center;
+
+  .text-left &{
+    left: 10%;
+  }
+
+  .text-right &{
+    right: 10%;
+  }
+
+  p {
+    .font-size(14);
+    font-weight: normal;
+    color: white;
+  }
+}
+
+.emblem-heading {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2em;
+
+  h2 {
+    position: relative;
+  }
+
+  h2:before {
+    content: '';
+    background-image: url('/static/img/emblem.png');
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: .7em;
+    margin-bottom: .5em;
+  }
+}
+
+.lastet {
+  .nav_main ul li {
+    .opacity(1);
+    .translate3d(0,0,0);
+  }
+
+  .logo {
+    .opacity(1);
+    .transform(scale(1), translate3d(0,0,0));
+  }
+}
 
 
+/*
+ * Swiper 2.7.0
+ * Mobile touch slider and framework with hardware accelerated transitions
+ *
+ * http://www.idangero.us/sliders/swiper/
+ *
+ * Copyright 2010-2014, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us/
+ *
+ * Licensed under GPL & MIT
+ *
+ * Released on: August 30, 2014
+*/
+/* ===============================================================
+Basic Swiper Styles 
+================================================================*/
+.swiper-container {
+  margin:0 auto;
+  position:relative;
+  overflow:hidden;
+  -webkit-backface-visibility:hidden;
+  -moz-backface-visibility:hidden;
+  -ms-backface-visibility:hidden;
+  -o-backface-visibility:hidden;
+  backface-visibility:hidden;
+  /* Fix of Webkit flickering */
+  z-index:1;
+}
+.swiper-wrapper {
+  position:relative;
+  width:100%;
+  -webkit-transition-property:-webkit-transform, left, top;
+  -webkit-transition-duration:0s;
+  -webkit-transform:translate3d(0px,0,0);
+  -webkit-transition-timing-function:ease;
+  
+  -moz-transition-property:-moz-transform, left, top;
+  -moz-transition-duration:0s;
+  -moz-transform:translate3d(0px,0,0);
+  -moz-transition-timing-function:ease;
+  
+  -o-transition-property:-o-transform, left, top;
+  -o-transition-duration:0s;
+  -o-transform:translate3d(0px,0,0);
+  -o-transition-timing-function:ease;
+  -o-transform:translate(0px,0px);
+  
+  -ms-transition-property:-ms-transform, left, top;
+  -ms-transition-duration:0s;
+  -ms-transform:translate3d(0px,0,0);
+  -ms-transition-timing-function:ease;
+  
+  transition-property:transform, left, top;
+  transition-duration:0s;
+  transform:translate3d(0px,0,0);
+  transition-timing-function:ease;
 
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -ms-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  margin: 0 auto;
+}
+.swiper-slide {
+  float: left;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
 
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+  -ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+  -ms-touch-action: pan-x;
+}
 
+/* ===============================================================
+Your custom styles, here you need to specify container's and slide's
+sizes, pagination, etc.
+================================================================*/
+.swiper-container {
+  /* Specify Swiper's Size: */
 
+  /*width:200px;
+  height: 100px;*/
+  height: 100%;
+  border: 10px solid white;
+  background-color: #1e1815;
+}
+.swiper-slide {
+  /* Specify Slides's Size: */
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  position: relative;
+  .transition(transform .9s ease, opacity 1s ease);
+  .opacity(0);
+  .scale(0.9);
+}
+.swiper-slide-active {
+  /* Specific active slide styling: */
+  .opacity(1);
+  .scale(1);
+}
+.swiper-slide-visible {
+  /* Specific visible slide styling: */ 
 
+}
+/* ===============================================================
+Pagination Styles
+================================================================*/
+.swiper-pagination-switch {
+  /* Stylize pagination button: */  
 
-
+}
+.swiper-active-switch {
+  /* Specific active button style: */ 
+  
+}
+.swiper-visible-switch {
+  /* Specific visible button style: */  
+  
+}
 
 
 

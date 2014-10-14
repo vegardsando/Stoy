@@ -78,7 +78,7 @@
 	  margin-bottom: .5em;
 	}
 	h2, .h2, .beta {
-	  .font-size(@h2);
+	  .font-size(@h4);
 	  margin-bottom: .5em;
 	}
 	h3, .h3, .gamma { 
@@ -119,59 +119,24 @@
 	/* FONTS VARIABLES */
 	/**************************/
 
-    /* Medium */
+    /* Regular */
     @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-medium-webfont', normal, normal);
-    }
-
-    /* Medium Italic */
-    @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-mediumoblique-webfont', normal, italic);
-    }
+     .font-face(Raleway , ~'../fonts/raleway-light-webfont', normal, normal);
+    }	
 
     /* Bold */
     @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-bold-webfont', 700, normal);
+     .font-face(Raleway , ~'../fonts/raleway-bold-webfont', 300, normal);
     }
 
-    /* Bold Italic */
+    /* Extra bold */
     @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-boldoblique-webfont', 700, italic);
+     .font-face(Raleway , ~'../fonts/raleway-extrabold-webfont', 700, normal);
     }
 
-    /* Bold */
-    @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-heavy-webfont', 600, normal);
-    }
 
-    /* Bold Italic */
-    @font-face{
-     .font-face(FuturaStd , ~'../fonts/futurastd-heavyoblique-webfont', 600, italic);
-    }
-    
-    /* Open sans regular */
-    @font-face{
-     .font-face(OpenSans , ~'../fonts/OpenSans-Regular', normal, normal);
-    }
 
-    /* Open sans regular Italic */
-    @font-face{
-     .font-face(OpenSans , ~'../fonts/OpenSans-Italic', normal, italic);
-    }    
-
-    /* Open sans regular */
-    @font-face{
-     .font-face(OpenSans , ~'../fonts/OpenSans-Bold', 600, normal);
-    }
-
-    /* Open sans regular Italic */
-    @font-face{
-     .font-face(OpenSans , ~'../fonts/OpenSans-BoldItalic', 600, italic);
-    }
-
-	@futura: 'FuturaStd', serif;
-	@opensans: 'OpenSans';
-	@georgia: 'Georgia', serif;
+	@raleway: 'Raleway', serif;
 
 	/* COLORS */
 	/*************************/
@@ -211,19 +176,17 @@
 	/* HEADING AND TAG COLORS */
 
 	body {
-		font-family: @futura;
+		font-family: @raleway;
 		color: @color_sec1;
 	}
 
 	h1 { 
 		color: @color_pr1;
-		font-weight: 700;
 		.uppercase;
 	}
 
 	h2 { 
 		color: @color_pr1; 
-		font-weight: 700;
 		.uppercase;
 	}
 
@@ -243,14 +206,20 @@
 
 	h6 { 
 		color: @color_sec1;
-		font-family: @futura;
+		font-family: @raleway;
 	}
 
 	p { 
-		font-family: @opensans;
+		font-family: @raleway;
 	}
 
 	b, strong { 
 		font-variant:normal;
-		font-weight: 600;
+		font-weight: 700;
+	}
+
+	.row {
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
