@@ -25,15 +25,10 @@ $_(document).ready(function() {
 	setTimeout(function(){
 		$html.addClass('lastet');
 	},200)
-	
 
-	  var mySwiper = new Swiper('.swiper-container',{
-	    //Your options here:
-	    mode:'horizontal',
-	    speed:1000,
-	    autoplay: 8000,
-	    //etc..	    
-	  });
+	var frontpage_slider = new Slider('.slide-container', {
+		autoplay: true,
+	});
 
 
 /*=======================================================
@@ -45,6 +40,8 @@ $_(document).ready(function() {
 /*=======================================================
 					@function events
 =======================================================*/
+
+
 
 	// Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
 	function setImageSize() {
