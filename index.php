@@ -1,6 +1,6 @@
 <?php global $base; include "header.php"; ?>
 
-	<img class="logo" src="static/img/logo.png">    	
+	<img class="logo" src="static/img/logo.png">
 
 	<section class="swiper-container">
 	  <div class="swiper-wrapper">
@@ -29,7 +29,7 @@
 	        	<p>
 	Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
 	        </div>
-	      </div>		      
+	      </div>
 	  </div>
 	</section>
 
@@ -38,5 +38,82 @@
     		<h2>Utvalgte<strong> jobber</strong></h2>
    		</figure>
     </section>
+
+	<section class="grid">
+
+		<figure class="effect-one">
+			<img src="/static/temp/jobb1.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-two">
+			<img src="/static/temp/jobb2.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-three">
+			<img src="/static/temp/jobb3.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-two">
+			<img src="/static/temp/jobb5.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-three">
+			<img src="/static/temp/jobb4.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-one">
+			<img src="/static/temp/jobb1.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-one">
+			<img src="/static/temp/jobb4.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-one">
+			<img src="/static/temp/jobb2.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+		<figure class="effect-one">
+			<img src="/static/temp/jobb3.jpg">
+			<figcaption>
+				<h2>Jobb 1</h2>
+				<p>Dette er en jobb</p>
+			</figcaption>
+		</figure>
+
+	</section>
+
 
 <?php include "footer.php"; ?>

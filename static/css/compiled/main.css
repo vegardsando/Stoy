@@ -98,31 +98,31 @@ h6,
 /* Regular */
 @font-face {
   font-family: "Raleway";
-  src: url("../fonts/raleway-light-webfont.eot");
-  src: url("../fonts/raleway-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/raleway-light-webfont.woff") format("woff"), url("../fonts/raleway-light-webfont.ttf") format("truetype"), url("../fonts/raleway-light-webfont.svg#Raleway") format("svg");
+  src: url("../../fonts/raleway-light-webfont.eot");
+  src: url("../../fonts/raleway-light-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/raleway-light-webfont.woff") format("woff"), url("../../fonts/raleway-light-webfont.ttf") format("truetype"), url("../../fonts/raleway-light-webfont.svg#Raleway") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 /* Bold */
 @font-face {
   font-family: "Raleway";
-  src: url("../fonts/raleway-bold-webfont.eot");
-  src: url("../fonts/raleway-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/raleway-bold-webfont.woff") format("woff"), url("../fonts/raleway-bold-webfont.ttf") format("truetype"), url("../fonts/raleway-bold-webfont.svg#Raleway") format("svg");
+  src: url("../../fonts/raleway-bold-webfont.eot");
+  src: url("../../fonts/raleway-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/raleway-bold-webfont.woff") format("woff"), url("../../fonts/raleway-bold-webfont.ttf") format("truetype"), url("../../fonts/raleway-bold-webfont.svg#Raleway") format("svg");
   font-weight: 300;
   font-style: normal;
 }
 /* Extra bold */
 @font-face {
   font-family: "Raleway";
-  src: url("../fonts/raleway-extrabold-webfont.eot");
-  src: url("../fonts/raleway-extrabold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/raleway-extrabold-webfont.woff") format("woff"), url("../fonts/raleway-extrabold-webfont.ttf") format("truetype"), url("../fonts/raleway-extrabold-webfont.svg#Raleway") format("svg");
+  src: url("../../fonts/raleway-extrabold-webfont.eot");
+  src: url("../../fonts/raleway-extrabold-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/raleway-extrabold-webfont.woff") format("woff"), url("../../fonts/raleway-extrabold-webfont.ttf") format("truetype"), url("../../fonts/raleway-extrabold-webfont.svg#Raleway") format("svg");
   font-weight: 700;
   font-style: normal;
 }
 /* COLORS */
 /*************************/
 .color_pr1 {
-  background-color: #2b2839;
+  background-color: #392b28;
 }
 .color_pr2 {
   background-color: #92d2ba;
@@ -149,13 +149,11 @@ h6,
 ::selection {
   background: #92d2ba;
   /* Safari */
-
   color: white;
 }
 ::-moz-selection {
   background: #92d2ba;
   /* Firefox */
-
   color: white;
 }
 /* LINK COLORS */
@@ -172,11 +170,11 @@ body {
   color: #f4f0cb;
 }
 h1 {
-  color: #2b2839;
+  color: #392b28;
   text-transform: uppercase;
 }
 h2 {
-  color: #2b2839;
+  color: #392b28;
   text-transform: uppercase;
 }
 h3 {
@@ -184,10 +182,10 @@ h3 {
   font-weight: 700;
 }
 h4 {
-  color: #2b2839;
+  color: #392b28;
 }
 h5 {
-  color: #2b2839;
+  color: #392b28;
   font-weight: 700;
 }
 h6 {
@@ -548,6 +546,57 @@ body {
   -ms-transform: scale(1) translate3d(0, 0, 0);
   transform: scale(1) translate3d(0, 0, 0);
 }
+.grid {
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+  font-size: 0;
+}
+.grid figure {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  overflow: hidden;
+  margin: -0.135em;
+  width: 33.3333%;
+  height: 400px;
+  background: #8F6E67;
+  text-align: center;
+  cursor: pointer;
+}
+.grid figure img {
+  width: calc(150%);
+  zoom: 1;
+  filter: alpha(opacity=70);
+  -webkit-opacity: 0.7;
+  -moz-opacity: 0.7;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.35s;
+  -moz-transition: opacity 0.35s;
+  -o-transition: opacity 0.35s;
+  transition: opacity 0.35s;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  -moz-transform: translate3d(-40px, 0, 0);
+  -o-transform: translate3d(-40px, 0, 0);
+  -ms-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+  position: relative;
+  display: block;
+  min-height: 100%;
+}
+.grid figure figcaption {
+  padding: 2em;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 /*
  * Swiper 2.7.0
  * Mobile touch slider and framework with hardware accelerated transitions
@@ -563,7 +612,7 @@ body {
  * Released on: August 30, 2014
 */
 /* ===============================================================
-Basic Swiper Styles 
+Basic Swiper Styles
 ================================================================*/
 .swiper-container {
   margin: 0 auto;
@@ -575,7 +624,6 @@ Basic Swiper Styles
   -o-backface-visibility: hidden;
   backface-visibility: hidden;
   /* Fix of Webkit flickering */
-
   z-index: 1;
 }
 .swiper-wrapper {
@@ -633,17 +681,14 @@ sizes, pagination, etc.
 ================================================================*/
 .swiper-container {
   /* Specify Swiper's Size: */
-
   /*width:200px;
   height: 100px;*/
-
   height: 100%;
   border: 10px solid white;
   background-color: #1e1815;
 }
 .swiper-slide {
   /* Specify Slides's Size: */
-
   background-size: cover;
   background-position: center center;
   height: 100%;
@@ -665,7 +710,6 @@ sizes, pagination, etc.
 }
 .swiper-slide-active {
   /* Specific active slide styling: */
-
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -703,7 +747,6 @@ Pagination Styles
   border: 0;
   overflow: hidden;
   /* IE 6/7 fallback */
-
   *text-indent: -9999px;
 }
 .ir:before {
@@ -766,10 +809,8 @@ Pagination Styles
 .clearfix:after {
   content: " ";
   /* 1 */
-
   display: table;
   /* 2 */
-
 }
 .clearfix:after {
   clear: both;
@@ -801,7 +842,6 @@ Pagination Styles
     background: transparent !important;
     color: #000 !important;
     /* Black prints faster: h5bp.com/s */
-  
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -816,8 +856,8 @@ Pagination Styles
     content: " (" attr(title) ")";
   }
   /*
-       * Don't show links for images, or javascript/internal links
-       */
+     * Don't show links for images, or javascript/internal links
+     */
   .ir a:after,
   a[href^="javascript:"]:after,
   a[href^="#"]:after {
@@ -831,7 +871,6 @@ Pagination Styles
   thead {
     display: table-header-group;
     /* h5bp.com/t */
-  
   }
   tr,
   img {
@@ -840,7 +879,7 @@ Pagination Styles
   img {
     max-width: 100% !important;
   }
-  @page  {
+  @page {
     margin: 0.5cm;
   }
   p,

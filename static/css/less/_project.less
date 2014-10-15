@@ -7,7 +7,7 @@
 	/* COLOR PALETTE */
 	/*-------------*/
 
-	@color_pr1: #2b2839; // lilla
+	@color_pr1: #392B28; // Brun
 	@color_pr2: #92d2ba; // grønn
 	@color_pr3: #ce4f60; // rød
 	@color_sec1: #f4f0cb; // gul
@@ -16,7 +16,7 @@
 	@color_sec4: #b7c0c5;
 	@color_sec5: #e4e8eb;
 	@color_white: #ffffff;
-	
+
 	@selection: @color_pr2;
 	@selection_lighten: lighten(spin(@selection, 5), 20%);
 
@@ -42,7 +42,7 @@
 	.font-size (@sizeValue) {
 	  @remValue: @sizeValue / @basesize;
 	  @pxValue: (@sizeValue);
-	  font-size: ~"@{pxValue}px"; 
+	  font-size: ~"@{pxValue}px";
 	  font-size: ~"@{remValue}rem";
 	}
 
@@ -50,7 +50,7 @@
 	.line-height (@sizeValue) {
 	  @remValue: @sizeValue / @basesize;
 	  @pxValue: (@sizeValue);
-	  line-height: ~"@{pxValue}px"; 
+	  line-height: ~"@{pxValue}px";
 	  line-height: ~"@{remValue}rem";
 	}
 
@@ -81,7 +81,7 @@
 	  .font-size(@h4);
 	  margin-bottom: .5em;
 	}
-	h3, .h3, .gamma { 
+	h3, .h3, .gamma {
 	  .font-size(@h3);
 	  margin-bottom: .5em;
 	}
@@ -121,17 +121,17 @@
 
     /* Regular */
     @font-face{
-     .font-face(Raleway , ~'../fonts/raleway-light-webfont', normal, normal);
-    }	
+     .font-face(Raleway , ~'../../fonts/raleway-light-webfont', normal, normal);
+    }
 
     /* Bold */
     @font-face{
-     .font-face(Raleway , ~'../fonts/raleway-bold-webfont', 300, normal);
+     .font-face(Raleway , ~'../../fonts/raleway-bold-webfont', 300, normal);
     }
 
     /* Extra bold */
     @font-face{
-     .font-face(Raleway , ~'../fonts/raleway-extrabold-webfont', 700, normal);
+     .font-face(Raleway , ~'../../fonts/raleway-extrabold-webfont', 700, normal);
     }
 
 
@@ -157,13 +157,13 @@
 	.color_sec2 { background-color: @color_sec2; }
 	.color_sec3 { background-color: @color_sec3; }
 	.color_sec4 { background-color: @color_sec4; }
-	.color_sec5 { background-color: @color_sec5; }	
+	.color_sec5 { background-color: @color_sec5; }
 
 	/* SELECTION */
 	::selection {
 		background: @selection; /* Safari */
 		color: white; }
-	 
+
 	::-moz-selection {
 		background: @selection; /* Firefox */
 		color: white; }
@@ -180,40 +180,40 @@
 		color: @color_sec1;
 	}
 
-	h1 { 
+	h1 {
 		color: @color_pr1;
 		.uppercase;
 	}
 
-	h2 { 
-		color: @color_pr1; 
+	h2 {
+		color: @color_pr1;
 		.uppercase;
 	}
 
-	h3 { 
+	h3 {
 		color: @color_sec1;
 		font-weight: 700;
 	}
 
-	h4 { 
+	h4 {
 		color: @color_pr1;
 	}
 
-	h5 { 
+	h5 {
 		color: @color_pr1;
 		font-weight: 700;
 	}
 
-	h6 { 
+	h6 {
 		color: @color_sec1;
 		font-family: @raleway;
 	}
 
-	p { 
+	p {
 		font-family: @raleway;
 	}
 
-	b, strong { 
+	b, strong {
 		font-variant:normal;
 		font-weight: 700;
 	}
