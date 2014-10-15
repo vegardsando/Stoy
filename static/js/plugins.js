@@ -294,17 +294,28 @@ var Slider = function(container, settings){
 	var current = slider.find('.current');
 
 	if (settings.autoplay) {
-		setInterval(function(){
-			current.removeClass('current');
-			current.next().addClass('current');
+
+		current.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){ 
+			console.log('animation has ended');
+			current.next().addClass('current navInNext');
+			current.removeClass('navInNext');
 			current = slider.find('.current');
 
-			if (current.length === 0) {
-				slides.first().addClass('current');
-				current = slider.find('.current');
-			}
+			current.next().addClass('current navInNext');
+			current.removeClass('navInNext');
+
+			current = slider.find('.current');
+
+		});		
+
+		setInterval(function(){
+
+			// Fjern current-klasse, og lytt til når animasjonen er ferdig
+			current.removeClass('current');
+			current.addClass('navOutNext');
 
 		}, 3000)
 	}
+
 
 }
