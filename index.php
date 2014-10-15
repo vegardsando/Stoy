@@ -42,25 +42,25 @@
 	<section class="grid">
 
 		<figure class="effect-one">
-			<img src="/static/temp/jobb1.jpg">
+			<img src="/static/temp/bg.jpg">
 			<figcaption>
-				<h2>Jobb 1</h2>
+				<h2>Lorem <span>ipsum</span></h2>
 				<p>Dette er en jobb</p>
 			</figcaption>
 		</figure>
 
-		<figure class="effect-two">
-			<img src="/static/temp/jobb2.jpg">
+		<figure class="effect-one">
+			<img src="/static/temp/bg2.jpg">
 			<figcaption>
-				<h2>Jobb 1</h2>
+				<h2>Lorem <span>ipsum</span></h2>
 				<p>Dette er en jobb</p>
 			</figcaption>
 		</figure>
 
-		<figure class="effect-three">
-			<img src="/static/temp/jobb3.jpg">
+		<figure class="effect-one">
+			<img src="/static/temp/bg3.jpg">
 			<figcaption>
-				<h2>Jobb 1</h2>
+				<h2>Lorem <span>ipsum</span></h2>
 				<p>Dette er en jobb</p>
 			</figcaption>
 		</figure>

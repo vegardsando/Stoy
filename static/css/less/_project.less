@@ -25,7 +25,7 @@
 
 	@huge: 62;
 	@alpha: 40; 		/* brukes av h1 */
-	@beta: 36;			/* brukes av h2 */
+	@beta: 30;			/* brukes av h2 */
 	@gamma: 24; 		/* brukes av h3 */
 	@delta: 22; 		/* brukes av h4 */
 	@epsilon: 18; 		/* brukes av h5 */
@@ -119,14 +119,19 @@
 	/* FONTS VARIABLES */
 	/**************************/
 
-    /* Regular */
+    /* Light */
     @font-face{
      .font-face(Raleway , ~'../../fonts/raleway-light-webfont', normal, normal);
     }
 
+    /* Regular */
+    @font-face{
+     .font-face(Raleway , ~'../../fonts/raleway-regular-webfont', 300, normal);
+    }
+
     /* Bold */
     @font-face{
-     .font-face(Raleway , ~'../../fonts/raleway-bold-webfont', 300, normal);
+     .font-face(Raleway , ~'../../fonts/raleway-bold-webfont', 500, normal);
     }
 
     /* Extra bold */
