@@ -28,6 +28,7 @@ $_(document).ready(function() {
 
 	var frontpage_slider = new Slider('.slide-container', {
 		autoplay: true,
+		speed: 6000,
 	});
 
 

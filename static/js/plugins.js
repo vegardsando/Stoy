@@ -281,41 +281,56 @@ exports.dispatchClick = dispatchClick;
 },{}]},{},[1])
 
 var Slider = function(container, settings){
-
-	console.log(settings);
-
 	var slider = $(container);
 	var slides = slider.find('.slide');
 	
 	//Sett første slide til current
-	slides.first().addClass('current navInNext');
+	slides.first().addClass('current');
 
 	//Lagre current slide
 	var current = slider.find('.current');
 
 	if (settings.autoplay) {
 
-		current.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){ 
-			console.log('animation has ended');
-			current.next().addClass('current navInNext');
-			current.removeClass('navInNext');
-			current = slider.find('.current');
+		// Finn antall slides
+		var numSlides = slides.length;
+		console.log(numSlides);
 
-			current.next().addClass('current navInNext');
-			current.removeClass('navInNext');
+		// Lag pagination
+		slides.each(function(index, element){
+			var pagination = $(this).find('.pagination');
 
-			current = slider.find('.current');
+			// Sett data-num på sliden
+			$(element).attr('data-num', (index+1));
 
-		});		
+			for (var i = 0; i < numSlides; i++) {
+			    pagination.append('<li data-num="' + (i+1) +'" class="dot"></li>');
+			}		
+		})
+
+		// Sett aktiv pagination til første
+		var activeDot = slides.find('.pagination li[data-num="' + 1 +'"]');
+		activeDot.addClass('active');
 
 		setInterval(function(){
-
-			// Fjern current-klasse, og lytt til når animasjonen er ferdig
+			slides.removeClass('fadeOut');
+			current.addClass('fadeOut');
 			current.removeClass('current');
-			current.addClass('navOutNext');
+			current.next().addClass('current');
+			current = slider.find('.current');
 
-		}, 3000)
+			if (current.length === 0) {
+				current.addClass('fadeOut'),
+				slides.first().addClass('current');
+				current = slider.find('.current');
+			}
+
+			// Sett ny active Dot i pagination
+			activeDot.removeClass('active');
+			activeDot = slides.find('.pagination li[data-num="' + current.attr('data-num') + '"]');
+			activeDot.addClass('active');
+
+		}, settings.speed)
 	}
-
 
 }

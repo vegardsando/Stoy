@@ -211,7 +211,7 @@ strong {
   font-weight: 700;
 }
 .row {
-  max-width: 800px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -571,10 +571,15 @@ body {
   overflow: hidden;
   margin: -0.135em;
   width: 33.3333%;
-  height: 400px;
+  height: 300px;
   background: #8F6E67;
   text-align: center;
   cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .grid figure img {
   width: 150%;
@@ -583,15 +588,6 @@ body {
   -webkit-opacity: 0.7;
   -moz-opacity: 0.7;
   opacity: 0.7;
-  -webkit-transition: opacity 0.35s;
-  -moz-transition: opacity 0.35s;
-  -o-transition: opacity 0.35s;
-  transition: opacity 0.35s;
-  -webkit-transform: translate3d(-40px, 0, 0);
-  -moz-transform: translate3d(-40px, 0, 0);
-  -o-transform: translate3d(-40px, 0, 0);
-  -ms-transform: translate3d(-40px, 0, 0);
-  transform: translate3d(-40px, 0, 0);
   position: relative;
   display: block;
   min-height: 100%;
@@ -614,11 +610,11 @@ body {
   height: 100%;
 }
 .grid figure figcaption h2 {
-  position: absolute;
+  position: relative;
   word-spacing: -0.15em;
   font-weight: 300;
-  font-size: 30px;
-  font-size: 1.875rem;
+  font-size: 28px;
+  font-size: 1.75rem;
   color: white;
   -webkit-transition: -webkit-transform 0.35s, opacity 0.35s;
   -moz-transition: -moz-transform 0.35s, opacity 0.35s;
@@ -635,16 +631,25 @@ body {
   transition: -webkit-transform 0.35s,-moz-transform 0.35s,-o-transform 0.35s,transform 0.35s, opacity 0.35s;
 }
 .grid figure figcaption p {
-  position: absolute;
+  position: relative;
+  left: 0;
+  right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 14px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 300;
+  letter-spacing: 1px;
   -webkit-transition: -webkit-transform 0.35s, opacity 0.35s;
   -moz-transition: -moz-transform 0.35s, opacity 0.35s;
   -o-transition: -o-transform 0.35s, opacity 0.35s;
   transition: -webkit-transform 0.35s,-moz-transform 0.35s,-o-transform 0.35s,transform 0.35s, opacity 0.35s;
 }
+.grid figure.effect-one {
+  text-align: right;
+}
 .grid figure.effect-one figcaption h2 {
+  position: absolute;
   top: 30px;
   right: 30px;
   left: 30px;
@@ -674,6 +679,8 @@ body {
   bottom: 0;
 }
 .grid figure.effect-one figcaption p {
+  text-align: right;
+  position: absolute;
   bottom: 30px;
   -webkit-transform: translate3d(0, 20px, 0);
   -moz-transform: translate3d(0, 20px, 0);
@@ -686,14 +693,14 @@ body {
   -moz-opacity: 0;
   opacity: 0;
 }
-.grid figure.effect-one figcaption:hover h2 {
+.grid figure.effect-one:hover figcaption h2 {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.grid figure.effect-one figcaption:hover h2:after {
+.grid figure.effect-one:hover figcaption h2:after {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -705,7 +712,166 @@ body {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.grid figure.effect-one figcaption:hover p {
+.grid figure.effect-one:hover figcaption p {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-two {
+  text-align: right;
+  -webkit-transition: background 1s ease;
+  -moz-transition: background 1s ease;
+  -o-transition: background 1s ease;
+  transition: background 1s ease;
+}
+.grid figure.effect-two img {
+  -webkit-transition: -webkit-transform 0.35s ease;
+  -moz-transition: -moz-transform 0.35s ease;
+  -o-transition: -o-transform 0.35s ease;
+  transition: -webkit-transform 0.35s ease,-moz-transform 0.35s ease,-o-transform 0.35s ease,transform 0.35s ease;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.grid figure.effect-two figcaption h2 {
+  -webkit-transform: translate3d(0, 20px, 0);
+  -moz-transform: translate3d(0, 20px, 0);
+  -o-transform: translate3d(0, 20px, 0);
+  -ms-transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 20px, 0);
+  text-align: center;
+  margin-top: 1em;
+}
+.grid figure.effect-two figcaption p {
+  text-align: center;
+  padding: 3em;
+  border: 1px solid white;
+  -webkit-transform: translate3d(0, 20px, 0);
+  -moz-transform: translate3d(0, 20px, 0);
+  -o-transform: translate3d(0, 20px, 0);
+  -ms-transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 20px, 0);
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.grid figure.effect-two:hover img {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+.grid figure.effect-two:hover figcaption h2 {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-two:hover figcaption h2:after {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-two:hover figcaption p {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-three {
+  text-align: right;
+  -webkit-transition: background 1s ease;
+  -moz-transition: background 1s ease;
+  -o-transition: background 1s ease;
+  transition: background 1s ease;
+}
+.grid figure.effect-three img {
+  -webkit-transition: -webkit-transform 0.35s ease;
+  -moz-transition: -moz-transform 0.35s ease;
+  -o-transition: -o-transform 0.35s ease;
+  transition: -webkit-transform 0.35s ease,-moz-transform 0.35s ease,-o-transform 0.35s ease,transform 0.35s ease;
+  -webkit-transform: scale(1) translate3d(0, 0, 0);
+  -moz-transform: scale(1) translate3d(0, 0, 0);
+  -o-transform: scale(1) translate3d(0, 0, 0);
+  -ms-transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
+}
+.grid figure.effect-three figcaption h2 {
+  position: absolute;
+  text-align: right;
+  bottom: 0;
+  right: 20px;
+}
+.grid figure.effect-three figcaption p {
+  text-align: left;
+  border-right: 1px solid white;
+  padding: 0;
+  padding-right: 10px;
+  width: 50%;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  -moz-transform: translate3d(-40px, 0, 0);
+  -o-transform: translate3d(-40px, 0, 0);
+  -ms-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.grid figure.effect-three:hover img {
+  -webkit-transform: scale(1.1) translate3d(-10px, 10px, 0);
+  -moz-transform: scale(1.1) translate3d(-10px, 10px, 0);
+  -o-transform: scale(1.1) translate3d(-10px, 10px, 0);
+  -ms-transform: scale(1.1) translate3d(-10px, 10px, 0);
+  transform: scale(1.1) translate3d(-10px, 10px, 0);
+}
+.grid figure.effect-three:hover figcaption h2 {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-three:hover figcaption h2:after {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid figure.effect-three:hover figcaption p {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -749,105 +915,150 @@ sizes, pagination, etc.
   -webkit-opacity: 0;
   -moz-opacity: 0;
   opacity: 0;
+  -webkit-transition: opacity 1.5s ease-in-out, -webkit-transform 1.5s ease-in-out;
+  -moz-transition: opacity 1.5s ease-in-out, -moz-transform 1.5s ease-in-out;
+  -o-transition: opacity 1.5s ease-in-out, -o-transform 1.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out,-webkit-transform 1.5s ease-in-out,-moz-transform 1.5s ease-in-out,-o-transform 1.5s ease-in-out,transform 1.5s ease-in-out;
+  -webkit-transform: scale(1.05) translate3d(0, 10px, 0);
+  -moz-transform: scale(1.05) translate3d(0, 10px, 0);
+  -o-transform: scale(1.05) translate3d(0, 10px, 0);
+  -ms-transform: scale(1.05) translate3d(0, 10px, 0);
+  transform: scale(1.05) translate3d(0, 10px, 0);
+}
+.slide:after {
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #8F6E67;
+  zoom: 1;
+  filter: alpha(opacity=20);
+  -webkit-opacity: 0.2;
+  -moz-opacity: 0.2;
+  opacity: 0.2;
 }
 .slide.current {
+  pointer-events: auto;
+  -webkit-transition: opacity 1.5s ease-in-out, -webkit-transform 1.5s ease-in-out;
+  -moz-transition: opacity 1.5s ease-in-out, -moz-transform 1.5s ease-in-out;
+  -o-transition: opacity 1.5s ease-in-out, -o-transform 1.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out,-webkit-transform 1.5s ease-in-out,-moz-transform 1.5s ease-in-out,-o-transform 1.5s ease-in-out,transform 1.5s ease-in-out;
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
-  pointer-events: auto;
+  -webkit-transform: scale(1) translate3d(0, 0, 0);
+  -moz-transform: scale(1) translate3d(0, 0, 0);
+  -o-transform: scale(1) translate3d(0, 0, 0);
+  -ms-transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
+}
+.slide.fadeOut {
+  -webkit-transition: opacity 1.5s cubic-bezier(0.7, 0, 0.3, 1), -webkit-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+  -moz-transition: opacity 1.5s cubic-bezier(0.7, 0, 0.3, 1), -moz-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+  -o-transition: opacity 1.5s cubic-bezier(0.7, 0, 0.3, 1), -o-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+  transition: opacity 1.5s cubic-bezier(0.7, 0, 0.3, 1),-webkit-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1),-moz-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1),-o-transform 1.5s cubic-bezier(0.7, 0, 0.3, 1),transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.slide ul.pagination {
+  padding: 0;
+  margin: 0;
+}
+.slide ul.pagination li.dot {
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: white;
+  -webkit-transition: -webkit-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s, opacity 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s;
+  -moz-transition: -moz-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s, opacity 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s;
+  -o-transition: -o-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s, opacity 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s;
+  transition: -webkit-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s,-moz-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s,-o-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s,transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s, opacity 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s;
+  zoom: 1;
+  filter: alpha(opacity=80);
+  -webkit-opacity: 0.8;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  -webkit-transform: scale(0.8) translate3d(0, 0, 0);
+  -moz-transform: scale(0.8) translate3d(0, 0, 0);
+  -o-transform: scale(0.8) translate3d(0, 0, 0);
+  -ms-transform: scale(0.8) translate3d(0, 0, 0);
+  transform: scale(0.8) translate3d(0, 0, 0);
+}
+.slide ul.pagination li.dot.active {
+  -webkit-transform: scale(1) translate3d(0, -3px, 0);
+  -moz-transform: scale(1) translate3d(0, -3px, 0);
+  -o-transform: scale(1) translate3d(0, -3px, 0);
+  -ms-transform: scale(1) translate3d(0, -3px, 0);
+  transform: scale(1) translate3d(0, -3px, 0);
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
 }
 /*****************************************/
 /* Soft Scale */
 /*****************************************/
 .navOutNext {
-  -webkit-animation: scaleUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
-  animation: scaleUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-animation: scaleUp 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -moz-animation: scaleUp 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -o-animation: scaleUp 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  animation: scaleUp 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
 }
 .navInNext {
   -webkit-animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -moz-animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -o-animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
   animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
 }
 .navOutPrev {
   -webkit-animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -moz-animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -o-animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
   animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
 }
 .navInPrev {
   -webkit-animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -moz-animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+  -o-animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
   animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
 }
-@-webkit-keyframes scaleUp {
-  /* Fixes Chrome issue 35.0.1916.114 (easing breaks) */
-  to {
-    -webkit-transform: scale(1.2);
-    opacity: 0;
-  }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes scaleUp{ from{ } to{ -webkit-transform: scale(1.1); opacity: 0 }}
+@-moz-keyframes scaleUp{ from{ } to{ -moz-transform: scale(1.1); opacity: 0 }}
+@-o-keyframes scaleUp{ from{ } to{ -o-transform: scale(1.1); opacity: 0 }}
+@keyframes scaleUp{ from{ } to{-webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1); opacity: 0 };
 }
-@keyframes scaleUp {
-  /* Fixes Chrome issue 35.0.1916.114 (easing breaks) */
-  to {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-    opacity: 0;
-  }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes scaleDownUp{ from{ -webkit-transform: scale(0.9); opacity: 0} to{ -webkit-transform: scale(1); opacity: 1 }}
+@-moz-keyframes scaleDownUp{ from{ -moz-transform: scale(0.9); opacity: 0} to{ -moz-transform: scale(1); opacity: 1 }}
+@-o-keyframes scaleDownUp{ from{ -o-transform: scale(0.9); opacity: 0} to{ -o-transform: scale(1); opacity: 1 }}
+@keyframes scaleDownUp{ from{-webkit-transform: scale(0.9);-moz-transform: scale(0.9);-ms-transform: scale(0.9);transform: scale(0.9); opacity: 0} to{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1); opacity: 1 };
 }
-@-webkit-keyframes scaleDownUp {
-  from {
-    opacity: 0;
-    -webkit-transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: scale(1);
-  }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes scaleDown{ from{ } to{ -webkit-transform: scale(0.9); opacity: 0 }}
+@-moz-keyframes scaleDown{ from{ } to{ -moz-transform: scale(0.9); opacity: 0 }}
+@-o-keyframes scaleDown{ from{ } to{ -o-transform: scale(0.9); opacity: 0 }}
+@keyframes scaleDown{ from{ } to{-webkit-transform: scale(0.9);-moz-transform: scale(0.9);-ms-transform: scale(0.9);transform: scale(0.9); opacity: 0 };
 }
-@keyframes scaleDownUp {
-  from {
-    opacity: 0;
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-@-webkit-keyframes scaleDown {
-  /* Fixes Chrome issue 35.0.1916.114 (easing breaks) */
-  to {
-    opacity: 0;
-    -webkit-transform: scale(0.9);
-  }
-}
-@keyframes scaleDown {
-  /* Fixes Chrome issue 35.0.1916.114 (easing breaks) */
-  to {
-    opacity: 0;
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-  }
-}
-@-webkit-keyframes scaleUpDown {
-  from {
-    -webkit-transform: scale(1.2);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: scale(1);
-  }
-}
-@keyframes scaleUpDown {
-  from {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes scaleUpDown{ from{ -webkit-transform: scale(1.1); opacity: 0} to{ -webkit-transform: scale(1); opacity: 1 }}
+@-moz-keyframes scaleUpDown{ from{ -moz-transform: scale(1.1); opacity: 0} to{ -moz-transform: scale(1); opacity: 1 }}
+@-o-keyframes scaleUpDown{ from{ -o-transform: scale(1.1); opacity: 0} to{ -o-transform: scale(1); opacity: 1 }}
+@keyframes scaleUpDown{ from{-webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1); opacity: 0} to{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1); opacity: 1 };
 }
 /* ==========================================================================
    Helper classes
