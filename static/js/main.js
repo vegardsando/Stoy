@@ -36,6 +36,16 @@ $_(document).ready(function() {
 				  @Click/hover events
 =======================================================*/
 
+	$( ".studio, .foley" ).mouseover(function() {
+		//$_(this).removeClass('not-hover');
+		//$_(this).siblings().addClass('not-hover');
+	});
+
+	$( ".studio, .foley" ).mouseout(function() {
+		//$_(this).removeClass('not-hover');
+		//$_(this).siblings().removeClass('not-hover');
+	});
+
 
 
 /*=======================================================
