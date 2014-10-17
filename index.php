@@ -5,7 +5,7 @@
 	<section class="slide-container">
 
       <!--First Slide-->
-      <div class="slide current setsrc text-right" data-desktop="static/temp/bg3.jpg"
+      <div class="slide current setsrc text-right" data-desktop="/static/temp/test4.gif"
 						data-tablet="static/temp/bg3.jpg"
 						data-phone="static/temp/bg3.jpg">
         <div class="slide-text">
@@ -123,13 +123,13 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
    		</figure>
    	</section>
 
-   		<figure class="divider down"></figure>
+   	<figure class="divider down"></figure>
 
    	<section id="frontpage_studio-foley">
 
    		<figure class="foley">
    			<div class="sizer-div">
-			    <img src="/static/temp/mic.jpg">
+			    <img src="/static/temp/test2.gif">
    			</div>
 
 		    <div class="text">
