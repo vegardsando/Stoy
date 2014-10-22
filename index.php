@@ -5,14 +5,14 @@
 	<section class="slide-container">
 
       <!--First Slide-->
-      <div class="slide current setsrc text-right" data-desktop="/static/temp/test4.gif"
+      <div class="slide current setsrc text-right" data-desktop="/static/temp/bg3.jpg"
 						data-tablet="static/temp/bg3.jpg"
 						data-phone="static/temp/bg3.jpg">
         <div class="slide-text">
         	<ul class="pagination"></ul>
         	<p>
 Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
-        
+
         </div>
       </div>
       <div class="slide setsrc text-left" data-desktop="static/temp/bg.jpg"
@@ -31,7 +31,7 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
         	<ul class="pagination"></ul>
         	<p>Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
         </div>
-      </div>		      
+      </div>
 
 
 	</section>
@@ -101,7 +101,7 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
 					<p>Milo went to the woods. He took a fun ride and never came back.</p>
 				</figcaption>
 			</div>
-		</figure>			
+		</figure>
 
 		<figure class="effect-two">
 			<img class="sizer" src="http://placehold.it/350x250">
@@ -112,7 +112,7 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
 				</figcaption>
 			</div>
-		</figure>							
+		</figure>
 
 
 	</section>
@@ -156,7 +156,7 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
 	   			</span>
    			</div>
 
-   		</figure> 	
+   		</figure>
 
    	</section>
 
@@ -166,7 +166,7 @@ Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. V
    		</figure>
    	</section>
 
-   	<figure class="divider"></figure>   	
+   	<figure class="divider"></figure>
 
 
 <?php include "footer.php"; ?>
