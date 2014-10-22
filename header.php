@@ -34,7 +34,7 @@ include_once 'static/php/header_top.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<?php _reloadr(); //false for å deaktivere reloadr ?>
+		<?php _reloadr(false); //false for å deaktivere reloadr ?>
 		<?php _minimee('{exp:minimee:css queue="screen"}'); ?>
         <link rel="stylesheet" href="static/css/normalize.css">
         <link rel="stylesheet" href="static/css/compiled/main.css<?php _dev_time() ?>">
@@ -54,6 +54,7 @@ include_once 'static/php/header_top.php';
         <header id="main-header">
 
             <nav class="nav_main">
+                 <img class="logo" src="static/img/logo.png">
                 <ul>
                     <li class="active">
                         <a>Hjem</a>
@@ -68,9 +69,7 @@ include_once 'static/php/header_top.php';
                         <a>Kontakt</a>
                     </li>                                                            
                 </ul>
-            </nav>        
-
-            <img class="logo" src="static/img/logo.png">
+            </nav>
 
             <section class="slide-container">
 

@@ -32,7 +32,6 @@
 		<?php _minimee('{exp:minimee:js queue="bottom_js"}'); ?>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
-		<script src="/static/js/animateCallback.js"></script>
         <script src="/static/js/plugins.js"></script>
         <script src="/static/js/main.js<?php _dev_time() ?>"></script>
         <?php _minimee('{/exp:minimee:js}'); ?>

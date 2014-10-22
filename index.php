@@ -1,13 +1,12 @@
 <?php global $base; include "header.php"; ?>
 
-
     <section class="row">
     	<figure class="emblem-heading">
     		<h2>Utvalgte<strong> jobber</strong></h2>
    		</figure>
    	</section>
 
-   	<figure class="divider"></figure>
+   	<figure class="divider down"></figure>
 
 	<section class="grid">
 
@@ -22,7 +21,7 @@
 			</div>
 		</figure>
 
-		<figure class="effect-two">
+		<figure class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg8.jpg">
@@ -33,7 +32,7 @@
 			</div>
 		</figure>
 
-		<figure class="effect-three">
+		<figure class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg7.jpg">
@@ -44,7 +43,7 @@
 			</div>
 		</figure>
 
-		<figure class="effect-three">
+		<figure class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg4.jpg">
@@ -64,9 +63,9 @@
 					<p>Milo went to the woods. He took a fun ride and never came back.</p>
 				</figcaption>
 			</div>
-		</figure>			
+		</figure>
 
-		<figure class="effect-two">
+		<figure class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg6.jpg">
@@ -75,8 +74,7 @@
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
 				</figcaption>
 			</div>
-		</figure>							
-
+		</figure>
 
 	</section>
 
@@ -119,9 +117,35 @@
 	   			</span>
    			</div>
 
-   		</figure> 	
+   		</figure>
 
    	</section>
+
+    <section class="row">
+    	<figure class="emblem-heading">
+    		<h2>Noen av våre<strong> kunder</strong></h2>
+   		</figure>
+   	</section>	 
+
+   	<section id="frontpage_kunder">
+   		<div class="row">
+			<a href="#">
+				<img src="/static/temp/logo_helmet.png">
+			</a>
+			<a href="#">
+				<img src="/static/temp/logo_nrk.png">
+			</a>
+			<a href="#">
+				<img src="/static/temp/logo_ekkofilm.png">
+			</a>
+			<a href="#">
+				<img src="/static/temp/logo_news.png">
+			</a>
+			<a href="#">
+				<img src="/static/temp/logo_spaett.png">
+			</a>												
+		</div>
+   	</section>  	
 
     <section class="row">
     	<figure class="emblem-heading">
@@ -129,7 +153,7 @@
    		</figure>
    	</section>
 
-   	<figure class="divider"></figure>   	
+   	<figure class="divider"></figure>
 
 
 <?php include "footer.php"; ?>

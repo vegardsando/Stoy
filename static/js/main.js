@@ -18,29 +18,21 @@ $_(document).ready(function() {
 
 	/* Elements */
 	$header = $_('#main-header');
-	var maxScroll = $header.outerHeight() - $_('.emblem-heading').outerHeight();
-	var fixedmargin = $header.outerHeight() + $_('.emblem-heading').outerHeight() - 20;
+	var maxScroll = 200;
 	
 	detect_size();
   		
 	window.onresize = function(event) {
 		detect_size();
-	};
-
-	var newObject = {};
-
-	newObject.fornavn = 'Hello';
-	newObject.dings = 'yalla';
-
-	console.log(newObject);
+	};	
 	
 	setTimeout(function(){
 		$html.addClass('lastet');
-	},200)
+	},1000)
 
 	var frontpage_slider = new Slider('.slide-container', {
 		autoplay: true,
-		speed: 8000,
+		speed: 5000,
 	});	
 
 
@@ -61,15 +53,7 @@ $_(document).ready(function() {
 	$document.on('scroll', function(){
 		var scrollTop = $window.scrollTop();
 
-		 if (scrollTop > maxScroll) {
-		 	$body.addClass('fixed');
-		 	$body.css('margin-top', fixedmargin + 'px');
-		 	//Slider.stopPlaying();
-		 } else {
-		 	$body.removeClass('fixed');
-		 	$body.css('margin-top', '0px');
-		 	//Slider.startPlaying();
-		 }
+
 
 	})
 
