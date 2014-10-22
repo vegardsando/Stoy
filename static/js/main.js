@@ -15,12 +15,24 @@ $_(document).ready(function() {
 	$window       = $_(window);
 	$html         = $_(document.documentElement);
 	$document	  = $_(document);
+
+	/* Elements */
+	$header = $_('#main-header');
+	var maxScroll = $header.outerHeight() - $_('.emblem-heading').outerHeight();
+	var fixedmargin = $header.outerHeight() + $_('.emblem-heading').outerHeight() - 20;
 	
 	detect_size();
   		
 	window.onresize = function(event) {
 		detect_size();
 	};
+
+	var newObject = {};
+
+	newObject.fornavn = 'Hello';
+	newObject.dings = 'yalla';
+
+	console.log(newObject);
 	
 	setTimeout(function(){
 		$html.addClass('lastet');
@@ -28,8 +40,8 @@ $_(document).ready(function() {
 
 	var frontpage_slider = new Slider('.slide-container', {
 		autoplay: true,
-		speed: 6000,
-	});
+		speed: 8000,
+	});	
 
 
 /*=======================================================
@@ -45,6 +57,21 @@ $_(document).ready(function() {
 		//$_(this).removeClass('not-hover');
 		//$_(this).siblings().removeClass('not-hover');
 	});
+
+	$document.on('scroll', function(){
+		var scrollTop = $window.scrollTop();
+
+		 if (scrollTop > maxScroll) {
+		 	$body.addClass('fixed');
+		 	$body.css('margin-top', fixedmargin + 'px');
+		 	//Slider.stopPlaying();
+		 } else {
+		 	$body.removeClass('fixed');
+		 	$body.css('margin-top', '0px');
+		 	//Slider.startPlaying();
+		 }
+
+	})
 
 
 

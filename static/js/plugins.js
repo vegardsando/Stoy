@@ -283,54 +283,59 @@ exports.dispatchClick = dispatchClick;
 var Slider = function(container, settings){
 	var slider = $(container);
 	var slides = slider.find('.slide');
-	
+
+	var isPlaying = false;
+
 	//Sett første slide til current
 	slides.first().addClass('current');
 
 	//Lagre current slide
 	var current = slider.find('.current');
 
-	if (settings.autoplay) {
+	// Sett aktiv pagination til første
+	var activeDot = slides.find('.pagination li[data-num="' + 1 +'"]');
+	activeDot.addClass('active');
 
-		// Finn antall slides
-		var numSlides = slides.length;
-		console.log(numSlides);
+	var numSlides = slides.length;
+	console.log(numSlides);
 
-		// Lag pagination
-		slides.each(function(index, element){
-			var pagination = $(this).find('.pagination');
-
-			// Sett data-num på sliden
-			$(element).attr('data-num', (index+1));
-
-			for (var i = 0; i < numSlides; i++) {
-			    pagination.append('<li data-num="' + (i+1) +'" class="dot"></li>');
-			}		
-		})
-
-		// Sett aktiv pagination til første
-		var activeDot = slides.find('.pagination li[data-num="' + 1 +'"]');
-		activeDot.addClass('active');
-
-		setInterval(function(){
-			slides.removeClass('fadeOut');
-			current.addClass('fadeOut');
-			current.removeClass('current');
-			current.next().addClass('current');
-			current = slider.find('.current');
-
-			if (current.length === 0) {
-				current.addClass('fadeOut'),
-				slides.first().addClass('current');
-				current = slider.find('.current');
-			}
-
-			// Sett ny active Dot i pagination
-			activeDot.removeClass('active');
-			activeDot = slides.find('.pagination li[data-num="' + current.attr('data-num') + '"]');
-			activeDot.addClass('active');
-
-		}, settings.speed)
+	Slider.stopPlaying = function(){
+		clearInterval(interval);
+		isPlaying = false;
 	}
+
+	Slider.startPlaying = function(){
+		console.log('startPlaying');
+		if (!isPlaying) {
+			interval = setInterval(function(){slideShow()}, settings.speed);
+			isPlaying = true;
+		}
+	}
+
+	function slideShow (){
+		slides.removeClass('fadeOut');
+		current.addClass('fadeOut');
+		current.removeClass('current');
+		current.next().addClass('current');
+		current = slider.find('.current');
+
+		if (current.length === 0) {
+			current.addClass('fadeOut'),
+			slides.first().addClass('current');
+			current = slider.find('.current');
+		}
+
+		// Sett ny active Dot i pagination
+		activeDot.removeClass('active');
+		activeDot = slides.find('.pagination li[data-num="' + current.attr('data-num') + '"]');
+		activeDot.addClass('active');
+	}
+
+	if (settings.autoplay) {
+		console.log('autoplay on');
+		isPlaying = true;
+		var interval = setInterval(function(){slideShow()}, settings.speed);
+		Slider.startPlaying();
+	}	
 
 }

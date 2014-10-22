@@ -522,7 +522,7 @@ body {
   left: 0;
   width: 100%;
   height: 60px;
-  top: -35px;
+  bottom: -45px;
   background: white;
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
@@ -541,7 +541,7 @@ body {
 }
 .emblem-heading {
   text-align: center;
-  margin-top: 0;
+  margin-top: 3em;
   margin-bottom: 3em;
 }
 .emblem-heading h2 {
@@ -582,6 +582,54 @@ body {
   -o-transform: scale(1) translate3d(0, 0, 0);
   -ms-transform: scale(1) translate3d(0, 0, 0);
   transform: scale(1) translate3d(0, 0, 0);
+}
+#main-header {
+  height: 100%;
+  width: 100%;
+}
+#main-header .slide-container {
+  -webkit-transition: border-top 0.1s, border 0.75s, height 0.75s;
+  -moz-transition: border-top 0.1s, border 0.75s, height 0.75s;
+  -o-transition: border-top 0.1s, border 0.75s, height 0.75s;
+  transition: border-top 0.1s, border 0.75s, height 0.75s;
+}
+body.fixed {
+  margin-top: 70px;
+}
+body.fixed #main-header {
+  height: 70px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+body.fixed #main-header .slide-container {
+  border: 0px solid white;
+}
+body.fixed #main-header .divider:before {
+  display: none;
+}
+body.fixed #main-header .slide {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -o-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+body.fixed #main-header .slide .slide-text {
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+body.fixed #main-header .nav_main {
+  top: 7px;
+}
+body.fixed #main-header .logo {
+  top: 10px;
+  height: 50px;
+  width: 67px;
+  left: 30px;
 }
 #frontpage_studio-foley {
   font-size: 0px;
@@ -1149,6 +1197,7 @@ sizes, pagination, etc.
 
   height: 100%;
   border: 10px solid white;
+  border-bottom: 0;
   background-color: #1e1815;
   position: relative;
   overflow: hidden;
@@ -1178,6 +1227,11 @@ sizes, pagination, etc.
   -o-transform: scale(1.05) translate3d(0, 10px, 0);
   -ms-transform: scale(1.05) translate3d(0, 10px, 0);
   transform: scale(1.05) translate3d(0, 10px, 0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .slide:after {
   content: '';

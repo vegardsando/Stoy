@@ -284,7 +284,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 60px;
-    top: -35px;
+    bottom: -45px;
     background: white;
     .rotate(1);
     z-index: 3;
@@ -302,7 +302,7 @@ html, body {
 
 .emblem-heading {
   text-align: center;
-  margin-top: 0;
+  margin-top: 3em;
   margin-bottom: 3em;
 
   h2 {
@@ -332,6 +332,56 @@ html, body {
   .logo {
     .opacity(1);
     .transform(scale(1), translate3d(0,0,0));
+  }
+}
+
+
+#main-header {
+  height: 100%;
+  width: 100%;
+  //.transition(border .75s);
+
+  .slide-container {
+    .transition(border-top .1s, border .75s, height .75s);
+  }
+
+}
+
+body.fixed {
+  margin-top: 70px;
+
+  #main-header {
+    height: 70px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    .slide-container {
+      border: 0px solid white;
+    }
+
+    .divider:before {
+      display: none;
+    }
+
+    .slide {
+      .transform(none);
+
+      .slide-text {
+        .opacity(0);
+      }
+    }
+
+    .nav_main {
+      top: 7px;
+    }
+
+    .logo {
+      top: 10px;
+      height: 50px;
+      width: 67px;
+      left: 30px;
+    }
   }
 }
 
@@ -749,6 +799,7 @@ sizes, pagination, etc.
   height: 100px;*/
   height: 100%;
   border: 10px solid white;
+  border-bottom: 0;
   background-color: #1e1815;
   position: relative;
   overflow: hidden;
@@ -766,6 +817,7 @@ sizes, pagination, etc.
   .opacity(0);
   .transition(opacity 1.5s ease-in-out, transform 1.5s ease-in-out);
   .transform(scale(1.05), translate3d(0,10px,0));
+  .backface-visibility(hidden);
 
   &:after {
     content: '';
