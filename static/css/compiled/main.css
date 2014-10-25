@@ -1235,8 +1235,9 @@ body {
   text-align: center;
   margin-right: 20px;
   vertical-align: top;
+  color: white;
 }
-#frontpage_kontakt .frontpage_ansatte .col img {
+#frontpage_kontakt .frontpage_ansatte .col > img {
   border-radius: 50%;
   width: 80%;
   border: 5px solid white;
@@ -1266,6 +1267,7 @@ body {
   -o-transform: scale(0) translate3d(0, 100px, 0);
   -ms-transform: scale(0) translate3d(0, 100px, 0);
   transform: scale(0) translate3d(0, 100px, 0);
+  margin-top: 15px;
 }
 #frontpage_kontakt .frontpage_ansatte .col h3 {
   font-weight: 500;
@@ -1273,7 +1275,7 @@ body {
   font-size: 1.3125rem;
   text-transform: uppercase;
 }
-#frontpage_kontakt .frontpage_ansatte .col:hover img {
+#frontpage_kontakt .frontpage_ansatte .col:hover > img {
   -webkit-transform: scale(1) rotate(5deg);
   -moz-transform: scale(1) rotate(5deg);
   -o-transform: scale(1) rotate(5deg);

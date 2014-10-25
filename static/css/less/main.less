@@ -801,8 +801,9 @@ html, body {
       text-align: center;
       margin-right: 20px;
       vertical-align: top;
+      color: white;
 
-      img {
+      >img {
         border-radius: 50%;
         width: 80%;
         border: 5px solid white;
@@ -815,6 +816,7 @@ html, body {
         .transition(opacity .45s, transform .45s);
         .opacity(0);
         .transform(scale(0), translate3d(0,100px,0));
+        margin-top: 15px;
       }
 
       h3 {
@@ -824,7 +826,7 @@ html, body {
       }
 
       &:hover {
-        img {
+        >img {
            .transform(scale(1), rotate(5));
         }
 

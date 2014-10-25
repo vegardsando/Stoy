@@ -200,7 +200,15 @@
 					<p>Producer/Songwriter</p>
 					<p>Tlf: 1234567</p>
 					<div class="text_extended">
-						<p>Facebook</p>
+						<a href="">
+							<img src="/static/img/icon_twitter.svg">
+						<a>
+						<a href="">
+							<img src="/static/img/icon_facebook.svg">
+						<a>
+						<a href="">
+							<img src="/static/img/icon_linkedin.svg">
+						<a>								
 					</div>
 				</div>
 				<div class="col">
