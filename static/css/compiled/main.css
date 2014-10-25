@@ -133,10 +133,10 @@ h6,
   background-color: #392b28;
 }
 .color_pr2 {
-  background-color: #92d2ba;
+  background-color: #5b5657;
 }
 .color_pr3 {
-  background-color: #ce4f60;
+  background-color: #756c59;
 }
 .color_sec1 {
   background-color: #f4f0cb;
@@ -155,24 +155,24 @@ h6,
 }
 /* SELECTION */
 ::selection {
-  background: #92d2ba;
+  background: #5b5657;
   /* Safari */
 
   color: white;
 }
 ::-moz-selection {
-  background: #92d2ba;
+  background: #5b5657;
   /* Firefox */
 
   color: white;
 }
 /* LINK COLORS */
 a {
-  color: #92d2ba;
+  color: #5b5657;
   text-decoration: none;
 }
 a:hover {
-  color: #daf0ea;
+  color: #8f8889;
 }
 /* HEADING AND TAG COLORS */
 body {
@@ -733,6 +733,23 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+#frontpage_studio-foley .studio .text .btn,
+#frontpage_studio-foley .foley .text .btn {
+  -webkit-transition: opacity 0.75s, -webkit-transform 0.75s;
+  -moz-transition: opacity 0.75s, -moz-transform 0.75s;
+  -o-transition: opacity 0.75s, -o-transform 0.75s;
+  transition: opacity 0.75s,-webkit-transform 0.75s,-moz-transform 0.75s,-o-transform 0.75s,transform 0.75s;
+  -webkit-transform: translate3d(0, 100px, 0);
+  -moz-transform: translate3d(0, 100px, 0);
+  -o-transform: translate3d(0, 100px, 0);
+  -ms-transform: translate3d(0, 100px, 0);
+  transform: translate3d(0, 100px, 0);
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
 #frontpage_studio-foley .studio:hover .text,
 #frontpage_studio-foley .foley:hover .text {
   -webkit-transform: translate3d(0, 0, 0);
@@ -755,7 +772,9 @@ body {
   transform: translate3d(0, 0, 0);
 }
 #frontpage_studio-foley .studio:hover .text p,
-#frontpage_studio-foley .foley:hover .text p {
+#frontpage_studio-foley .foley:hover .text p,
+#frontpage_studio-foley .studio:hover .text .btn,
+#frontpage_studio-foley .foley:hover .text .btn {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -822,7 +841,7 @@ body {
   transform: skew(-16deg) translate3d(0, 0, 0);
 }
 #frontpage_studio-foley .studio .text {
-  right: -5%;
+  right: -8%;
 }
 #frontpage_kunder .row {
   text-align: center;
@@ -1198,6 +1217,142 @@ body {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+#frontpage_kontakt {
+  background-image: url('/static/temp/contact.jpg');
+  background-size: cover;
+  padding-top: 100px;
+  min-height: 600px;
+}
+#frontpage_kontakt .frontpage_ansatte {
+  width: 72%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px;
+}
+#frontpage_kontakt .frontpage_ansatte .col {
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  margin-right: 20px;
+  vertical-align: top;
+}
+#frontpage_kontakt .frontpage_ansatte .col img {
+  border-radius: 50%;
+  width: 80%;
+  border: 5px solid white;
+  margin-bottom: 10px;
+  -webkit-transition: -webkit-transform 0.75s ease;
+  -moz-transition: -moz-transform 0.75s ease;
+  -o-transition: -o-transform 0.75s ease;
+  transition: -webkit-transform 0.75s ease,-moz-transform 0.75s ease,-o-transform 0.75s ease,transform 0.75s ease;
+  -webkit-transform: scale(0.9) rotate(0deg);
+  -moz-transform: scale(0.9) rotate(0deg);
+  -o-transform: scale(0.9) rotate(0deg);
+  -ms-transform: scale(0.9) rotate(0deg);
+  transform: scale(0.9) rotate(0deg);
+}
+#frontpage_kontakt .frontpage_ansatte .col .text_extended {
+  -webkit-transition: opacity 0.45s, -webkit-transform 0.45s;
+  -moz-transition: opacity 0.45s, -moz-transform 0.45s;
+  -o-transition: opacity 0.45s, -o-transform 0.45s;
+  transition: opacity 0.45s,-webkit-transform 0.45s,-moz-transform 0.45s,-o-transform 0.45s,transform 0.45s;
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-transform: scale(0) translate3d(0, 100px, 0);
+  -moz-transform: scale(0) translate3d(0, 100px, 0);
+  -o-transform: scale(0) translate3d(0, 100px, 0);
+  -ms-transform: scale(0) translate3d(0, 100px, 0);
+  transform: scale(0) translate3d(0, 100px, 0);
+}
+#frontpage_kontakt .frontpage_ansatte .col h3 {
+  font-weight: 500;
+  font-size: 21px;
+  font-size: 1.3125rem;
+  text-transform: uppercase;
+}
+#frontpage_kontakt .frontpage_ansatte .col:hover img {
+  -webkit-transform: scale(1) rotate(5deg);
+  -moz-transform: scale(1) rotate(5deg);
+  -o-transform: scale(1) rotate(5deg);
+  -ms-transform: scale(1) rotate(5deg);
+  transform: scale(1) rotate(5deg);
+}
+#frontpage_kontakt .frontpage_ansatte .col:hover .text_extended {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: scale(1) translate3d(0, 0, 0);
+  -moz-transform: scale(1) translate3d(0, 0, 0);
+  -o-transform: scale(1) translate3d(0, 0, 0);
+  -ms-transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1) translate3d(0, 0, 0);
+}
+#frontpage_kontakt .reformed-form {
+  width: 15%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5%;
+  margin-top: 30px;
+}
+#frontpage_kontakt .reformed-form .btn {
+  text-align: center;
+}
+.reformed-form .pos-rel {
+  position: relative;
+}
+.reformed-form .pos-rel input {
+  background-color: transparent;
+  border: 2px solid white;
+  padding: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  -webkit-transition: margin-top 0.35s ease-in-out;
+  -moz-transition: margin-top 0.35s ease-in-out;
+  -o-transition: margin-top 0.35s ease-in-out;
+  transition: margin-top 0.35s ease-in-out;
+  color: white;
+  font-weight: 500;
+}
+.reformed-form .pos-rel input.focus {
+  margin-top: 20px;
+}
+.reformed-form .pos-rel label {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  -moz-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  -o-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.reformed-form .pos-rel label.focus {
+  top: -5px;
+  font-size: 14px;
+  font-size: 0.875rem;
+}
+.reformed-form .pos-rel label.has-val {
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+.reformed-form .pos-rel input:focus {
+  label: top: 0px;
+}
 /* ===============================================================
 Your custom styles, here you need to specify container's and slide's
 sizes, pagination, etc.
@@ -1288,15 +1443,26 @@ sizes, pagination, etc.
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
-.slide ul.pagination {
+ul.pagination {
   padding: 0;
   margin: 0;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: .8%;
+  bottom: 0;
+  width: 10px;
 }
-.slide ul.pagination li.dot {
+ul.pagination li.dot {
   display: inline-block;
-  height: 8px;
-  width: 8px;
-  margin-right: 5px;
+  vertical-align: middle;
+  height: 10px;
+  width: 10px;
+  margin-bottom: 5px;
   border-radius: 50%;
   background: white;
   -webkit-transition: -webkit-transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s, opacity 1s cubic-bezier(0.7, 0, 0.3, 1) 0.3s;
@@ -1314,18 +1480,108 @@ sizes, pagination, etc.
   -ms-transform: scale(0.8) translate3d(0, 0, 0);
   transform: scale(0.8) translate3d(0, 0, 0);
 }
-.slide ul.pagination li.dot.active {
-  -webkit-transform: scale(1) translate3d(0, -3px, 0);
-  -moz-transform: scale(1) translate3d(0, -3px, 0);
-  -o-transform: scale(1) translate3d(0, -3px, 0);
-  -ms-transform: scale(1) translate3d(0, -3px, 0);
-  transform: scale(1) translate3d(0, -3px, 0);
+ul.pagination li.dot.active {
+  -webkit-transform: scale(1) translate3d(3px, 0, 0);
+  -moz-transform: scale(1) translate3d(3px, 0, 0);
+  -o-transform: scale(1) translate3d(3px, 0, 0);
+  -ms-transform: scale(1) translate3d(3px, 0, 0);
+  transform: scale(1) translate3d(3px, 0, 0);
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
 }
+ul.pagination li.dot:hover {
+  cursor: pointer;
+}
+/*****************************************/
+/* Buttons */
+/*****************************************/
+.btn {
+  width: 100px;
+  display: block;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 16px;
+  line-height: 1rem;
+  -webkit-transition: -webkit-transform 0.35s ease, opacity 0.35s ease;
+  -moz-transition: -moz-transform 0.35s ease, opacity 0.35s ease;
+  -o-transition: -o-transform 0.35s ease, opacity 0.35s ease;
+  transition: -webkit-transform 0.35s ease,-moz-transform 0.35s ease,-o-transform 0.35s ease,transform 0.35s ease, opacity 0.35s ease;
+  background-color: white;
+  border: none;
+}
+.btn a {
+  display: block;
+  padding: 5px;
+  color: #756c59;
+  font-family: 'Raleway', serif;
+  font-weight: 500;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+}
+.btn.transparent {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+.btn.transparent a {
+  -webkit-transition: background-color 0.35s ease;
+  -moz-transition: background-color 0.35s ease;
+  -o-transition: background-color 0.35s ease;
+  transition: background-color 0.35s ease;
+  background-color: transparent;
+  position: relative;
+  color: white;
+}
+.btn.transparent a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid white;
+  -webkit-transition: -webkit-transform 0.55s ease, opacity 0.55s ease;
+  -moz-transition: -moz-transform 0.55s ease, opacity 0.55s ease;
+  -o-transition: -o-transform 0.55s ease, opacity 0.55s ease;
+  transition: -webkit-transform 0.55s ease,-moz-transform 0.55s ease,-o-transform 0.55s ease,transform 0.55s ease, opacity 0.55s ease;
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+.btn.transparent a:hover {
+  background-color: white;
+  color: #756c59;
+}
+.btn.transparent a:hover:before {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  zoom: 1;
+  filter: alpha(opacity=0);
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+}
+/*****************************************/
+/* Key frames */
+/*****************************************/
 /*****************************************/
 /* Soft Scale */
 /*****************************************/
@@ -1380,6 +1636,10 @@ lesshat-selector {
 @-moz-keyframes scaleUpDown{ from{ -moz-transform: scale(1.1); opacity: 0} to{ -moz-transform: scale(1); opacity: 1 }}
 @-o-keyframes scaleUpDown{ from{ -o-transform: scale(1.1); opacity: 0} to{ -o-transform: scale(1); opacity: 1 }}
 @keyframes scaleUpDown{ from{-webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1); opacity: 0} to{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1); opacity: 1 };
+}
+.nicescroll-rails div {
+  background-color: #afafaf !important;
+  width: 8px!important;
 }
 /* ==========================================================================
    Helper classes

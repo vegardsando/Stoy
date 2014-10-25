@@ -50,13 +50,29 @@ $_(document).ready(function() {
 		//$_(this).siblings().removeClass('not-hover');
 	});
 
-	$document.on('scroll', function(){
-		var scrollTop = $window.scrollTop();
+	// FORM INPUT FOCUS
+	$( ".reformed-form input, .reformed-form label" ).focus(function() {
+		// Fjern alle aktive focus-klasser
+		$_('.reformed-form label, .reformed-form input').removeClass('focus');
+		$_(this).addClass('focus').next().addClass('focus');
 
+		if ($_(this).val()) {
+			$_(this).next().removeClass('has-val');
+		}
 
+	});
 
-	})
+	$( ".reformed-form input" ).blur(function() {
+		// Hvis det er verdi i denne, legg på hide label-class
 
+		if ($_(this).val()) {
+			$_(this).next().addClass('has-val');
+		} else {
+			$_(this).next().removeClass('has-val');
+		}
+
+		$_('.reformed-form label, .reformed-form input').removeClass('focus');	
+	});		
 
 
 /*=======================================================

@@ -34,7 +34,7 @@ include_once 'static/php/header_top.php';
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<?php _reloadr(false); //false for å deaktivere reloadr ?>
+		<?php _reloadr(); //false for å deaktivere reloadr ?>
 		<?php _minimee('{exp:minimee:css queue="screen"}'); ?>
         <link rel="stylesheet" href="static/css/normalize.css">
         <link rel="stylesheet" href="static/css/compiled/main.css<?php _dev_time() ?>">
@@ -71,40 +71,4 @@ include_once 'static/php/header_top.php';
                 </ul>
             </nav>
 
-            <section class="slide-container">
-
-              <!--First Slide-->
-              <div class="slide current setsrc text-right" data-desktop="/static/temp/bg3.jpg"
-                                data-tablet="static/temp/bg3.jpg"
-                                data-phone="static/temp/bg3.jpg">
-                <div class="slide-text">
-                    <ul class="pagination"></ul>
-                    <p>
-        Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
-                
-                </div>
-              </div>
-              <div class="slide setsrc text-left" data-desktop="static/temp/bg.jpg"
-                                data-tablet="static/temp/bg.jpg"
-                                data-phone="static/temp/bg.jpg">
-                <div class="slide-text">
-                    <ul class="pagination"></ul>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at ipsum nibh. Vivamus a blandit leo, non rhoncus felis. Vestibulum ante erat, ullamcorper ac sem non, commodo auctor massa. Maecenas a eleifend nunc. Curabitur quis sapien volutpat, semper mauris nec, efficitur nisi. Pellentesque sit amet tellus ac dui varius tristique. Aenean sodales mauris non facilisis interdum.</p>
-                </div>
-              </div>
-
-              <div class="slide setsrc text-left" data-desktop="static/temp/bg2.jpg"
-                                data-tablet="static/temp/bg2.jpg"
-                                data-phone="static/temp/bg2.jpg">
-                <div class="slide-text">
-                    <ul class="pagination"></ul>
-                    <p>Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
-                </div>
-              </div>              
-
-
-            </section>
-
-            <figure class="divider down"></figure>
-
-        </header>    
+ 
