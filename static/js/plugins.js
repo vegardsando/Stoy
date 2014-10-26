@@ -245,10 +245,13 @@ var Slider = function(container, settings){
 	var slider = $(container);
 	var slides = slider.find('.slide');
 
+	if (!slider.length) {
+		return false;
+	}	
+
 	var isPlaying = false;
 
 	//Sett høyden på sliden
-	console.log($window.outerHeight());
 	$_('#main-header').height($window.outerHeight());
 
 	//Sett første slide til current

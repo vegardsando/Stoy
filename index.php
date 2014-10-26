@@ -1,6 +1,6 @@
 <?php global $base; include "header.php"; ?>
 
-	   <section class="slide-container">
+	   <section id="frontpage-slide-container" class="slide-container">
 
 	      <!--First Slide-->
 	      <div class="slide current setsrc text-right" data-desktop="/static/temp/bg3.jpg"
