@@ -286,23 +286,27 @@ var Slider = function(container, settings){
 	}
 
 	function slideShow (){
-		slides.removeClass('fadeOut');
-		current.addClass('fadeOut');
-		current.removeClass('current');
-		current.next('.slide').addClass('current');
-		current = slider.find('.current');
 
-		if (current.length === 0) {
-			current.addClass('fadeOut'),
-			slides.first().addClass('current');
+		window.requestAnimationFrame(function(){
+			slides.removeClass('fadeOut');
+			current.addClass('fadeOut');
+			current.removeClass('current');
+			current.next('.slide').addClass('current');
 			current = slider.find('.current');
-		}
 
-		// Sett ny active Dot i pagination
-		activeDot.removeClass('active');
+			if (current.length === 0) {
+				current.addClass('fadeOut'),
+				slides.first().addClass('current');
+				current = slider.find('.current');
+			}
 
-		activeDot = slider.find('.pagination li[data-id="' + current.attr('data-id') + '"]');
-		activeDot.addClass('active');
+			// Sett ny active Dot i pagination
+			activeDot.removeClass('active');
+
+			activeDot = slider.find('.pagination li[data-id="' + current.attr('data-id') + '"]');
+			activeDot.addClass('active');			
+		})		
+
 	}
 
 	$_('.pagination li').on('click', function(){

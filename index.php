@@ -132,7 +132,7 @@
 		    <div class="text">
 	   			<h2>Lyd og <span>foley</span></h2>
 	   			<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.</p>
-	   			<span class="btn transparent">
+	   			<span class="btn">
 					<a href="#">Les mer</a>
 	   			</span>
    			</div>
@@ -148,7 +148,7 @@
 		    <div class="text">
 	   			<h2>Studio</h2>
 	   			<p>At vero eos et accusamus et iusto odio dignissimos mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-	   			<span class="btn transparent">
+	   			<span class="btn">
 					<a href="#">Les mer</a>
 	   			</span>
    			</div>
@@ -202,13 +202,13 @@
 					<div class="text_extended">
 						<a href="">
 							<img src="/static/img/icon_twitter.svg">
-						<a>
+						</a>
 						<a href="">
 							<img src="/static/img/icon_facebook.svg">
-						<a>
+						</a>
 						<a href="">
 							<img src="/static/img/icon_linkedin.svg">
-						<a>								
+						</a>								
 					</div>
 				</div>
 				<div class="col">
@@ -217,7 +217,15 @@
 					<p>Producer/Songwriter</p>
 					<p>Tlf: 1234567</p>
 					<div class="text_extended">
-						<p>LinkedIn</p>
+						<a href="">
+							<img src="/static/img/icon_twitter.svg">
+						</a>
+						<a href="">
+							<img src="/static/img/icon_facebook.svg">
+						</a>
+						<a href="">
+							<img src="/static/img/icon_linkedin.svg">
+						</a>
 					</div>
 				</div>
 				<div class="col">
@@ -226,7 +234,15 @@
 					<p>Producer/Songwriter</p>
 					<p>Tlf: 1234567</p>
 					<div class="text_extended">
-						<p>Twitter</p>
+						<a href="">
+							<img src="/static/img/icon_twitter.svg">
+						</a>
+						<a href="">
+							<img src="/static/img/icon_facebook.svg">
+						</a>
+						<a href="">
+							<img src="/static/img/icon_linkedin.svg">
+						</a>
 					</div>
 				</div>								
 			</div>
@@ -254,7 +270,10 @@
 					</div>
 	
 					<div class="btn_wrap">
-						<button type="submit" class="btn border-red pos-right font-red arrow-right send submit"><a>Send</a></button>						<input type="file" name="last_opp_cv[0]" value="" id="freeform_last_opp_cv0" class="hidden input_upload">
+						<button type="submit" class="btn">
+							<a href="#">Send</a>
+						</button>
+						<input type="file" name="last_opp_cv[0]" value="" id="freeform_last_opp_cv0" class="hidden input_upload">
 						<input type="submit" name="submit" value="Submit" class="hidden input_submit">
 					</div>
 				</form>

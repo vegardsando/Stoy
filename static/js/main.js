@@ -81,22 +81,27 @@ $_(document).ready(function() {
 =======================================================*/
 
 	$document.on('scroll', function(){
-		var scrollTop = $window.scrollTop();
 
-		 if (scrollTop > maxScroll) {
-
-		 	if (!$nav_main.hasClass('fixed')) {
-			 	$nav_main.addClass('fixed');
-		 	}
-
-		 	//Slider.stopPlaying();
-		 } else {
-		 	$nav_main.removeClass('fixed');
-		 	//Slider.startPlaying();
-		 }
-
+		window.requestAnimationFrame(function(){
+			fixedheader_check();
+		});
 
 	})
+
+	function fixedheader_check() {
+		var scrollTop = $window.scrollTop();
+		if (scrollTop > maxScroll) {
+
+			if (!$nav_main.hasClass('fixed')) {
+		 	$nav_main.addClass('fixed');
+			}
+
+			//Slider.stopPlaying();
+		} else {
+			$nav_main.removeClass('fixed');
+			//Slider.startPlaying();
+		}		
+	}	
 
 	// Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
 	function setImageSize() {

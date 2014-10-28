@@ -212,6 +212,12 @@ html, body {
     .translate3d(0,50px,0);
   }
 
+  &.underside {
+    &:after {
+      .opacity(1);
+    }
+  }
+
 
   &.fixed {
     position: fixed;
@@ -428,10 +434,11 @@ html, body {
       width: 100%;
       right: -25%;
       .transition(transform .55s);
-      .translate3d(0,50px,0);      
+      .translate3d(0,50px,0);
+      color: white;
 
         h2 {
-          margin-top: 20%;
+          margin-top: 25%;
           position: relative;          
           top: 0;
           left: 20px;
@@ -945,17 +952,19 @@ html, body {
 
     label {
         position: absolute;
-        top: 6px;
+        top: 9px;
         left: 8px;
         color: white;
-        font-weight: 500;
+        font-weight: 300;
+        .font-size(12);
         .uppercase;
-        .transition(top .35s, left .35s, font-size .35s ease-in-out, opacity .55s ease-in-out);
+        .transition(top .35s, left .35s, font-size .35s ease-in-out, font-weight .35s ease-in-out, opacity .55s ease-in-out);
         .opacity(1);
 
         &.focus {
           top: -5px;
           .font-size(14);
+          font-weight: 500;
         }
 
         &.has-val {

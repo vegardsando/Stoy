@@ -185,7 +185,7 @@ a:hover {
 /* HEADING AND TAG COLORS */
 body {
   font-family: 'Raleway', serif;
-  color: #f4f0cb;
+  color: #392b28;
 }
 h1 {
   color: #392b28;
@@ -457,6 +457,13 @@ body {
   -ms-transform: translate3d(0, 50px, 0);
   transform: translate3d(0, 50px, 0);
 }
+.nav_main.underside:after {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
 .nav_main.fixed {
   position: fixed;
   height: 70px;
@@ -724,10 +731,11 @@ body {
   -o-transform: translate3d(0, 50px, 0);
   -ms-transform: translate3d(0, 50px, 0);
   transform: translate3d(0, 50px, 0);
+  color: white;
 }
 #frontpage_studio-foley .studio .text h2,
 #frontpage_studio-foley .foley .text h2 {
-  margin-top: 20%;
+  margin-top: 25%;
   position: relative;
   top: 0;
   left: 20px;
@@ -1408,15 +1416,17 @@ body {
 }
 .reformed-form .pos-rel label {
   position: absolute;
-  top: 6px;
+  top: 9px;
   left: 8px;
   color: white;
-  font-weight: 500;
+  font-weight: 300;
+  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  -webkit-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
-  -moz-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
-  -o-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
-  transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  -webkit-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, font-weight 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  -moz-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, font-weight 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  -o-transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, font-weight 0.35s ease-in-out, opacity 0.55s ease-in-out;
+  transition: top 0.35s, left 0.35s, font-size 0.35s ease-in-out, font-weight 0.35s ease-in-out, opacity 0.55s ease-in-out;
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -1427,6 +1437,7 @@ body {
   top: -5px;
   font-size: 14px;
   font-size: 0.875rem;
+  font-weight: 500;
 }
 .reformed-form .pos-rel label.has-val {
   zoom: 1;

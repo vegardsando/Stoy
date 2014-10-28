@@ -1,4 +1,4 @@
-<?php $underside = 'underside'; ?>
+<?php $underside = 'fixed underside'; ?>
 <?php global $base; include "header.php"; ?>
 
 
