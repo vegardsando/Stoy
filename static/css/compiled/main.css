@@ -1075,12 +1075,13 @@ body {
   transition: -webkit-transform 0.35s,-moz-transform 0.35s,-o-transform 0.35s,transform 0.35s, opacity 0.35s;
 }
 .grid article figcaption .icon_play {
-  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 25%;
+  margin-top: -6%;
+  margin-left: -10%;
   -webkit-transition: -webkit-transform 0.55s, opacity 0.55s;
   -moz-transition: -moz-transform 0.55s, opacity 0.55s;
   -o-transition: -o-transform 0.55s, opacity 0.55s;
@@ -1095,10 +1096,25 @@ body {
   -webkit-opacity: 0;
   -moz-opacity: 0;
   opacity: 0;
-  background-image: url('/static/img/icon_play.svg');
-  background-position: center 55%;
-  background-size: 80px;
-  background-repeat: no-repeat;
+}
+.grid article figcaption .icon_play polygon {
+  -webkit-transition: fill 0.45s, -webkit-transform 0.55s;
+  -moz-transition: fill 0.45s, -moz-transform 0.55s;
+  -o-transition: fill 0.45s, -o-transform 0.55s;
+  transition: fill 0.45s,-webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.grid article figcaption .icon_play:hover polygon {
+  fill: white;
+  -webkit-transform: translate3d(0, -10px, 0);
+  -moz-transform: translate3d(0, -10px, 0);
+  -o-transform: translate3d(0, -10px, 0);
+  -ms-transform: translate3d(0, -10px, 0);
+  transform: translate3d(0, -10px, 0);
 }
 .grid article.video_active .video {
   zoom: 1;
@@ -1237,6 +1253,9 @@ body {
   -moz-opacity: 0;
   opacity: 0;
 }
+.grid article.effect-two figcaption .icon_play {
+  top: 79%;
+}
 .grid article.effect-two:hover img {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -1263,7 +1282,8 @@ body {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.grid article.effect-two:hover figcaption p {
+.grid article.effect-two:hover figcaption p,
+.grid article.effect-two:hover figcaption .icon_play {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -1342,7 +1362,8 @@ body {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.grid article.effect-three:hover figcaption p {
+.grid article.effect-three:hover figcaption p,
+.grid article.effect-three:hover figcaption .icon_play {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;

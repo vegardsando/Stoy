@@ -46,7 +46,7 @@
 
 	<section class="grid">
 
-		<article class="effect-one">
+		<article class="effect-two">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg.jpg">
@@ -56,7 +56,9 @@
 				<figcaption>
 					<h2>Lorem <span>ipsum</span></h2>
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
-					<span class="icon_play"></span>
+					<span class="icon_play">
+						<?php include "/static/img/icon_play.svg" ?>
+					</span>
 				</figcaption>
 			</div>
 		</article>
@@ -71,18 +73,23 @@
 				<figcaption>
 					<h2>Lorem <span>ipsum</span></h2>
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
-					<span class="icon_play"></span>
+					<span class="icon_play">
+						<?php include "/static/img/icon_play.svg" ?>
+					</span>
 				</figcaption>
 			</div>
 		</article>
 
-		<article class="effect-one">
+		<article class="effect-three">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg7.jpg">
 				<figcaption>
 					<h2>Lorem <span>ipsum</span></h2>
 					<p>Milo went to the woods. He took a fun ride and never came back.</p>
+					<span class="icon_play">
+						<?php include "/static/img/icon_play.svg" ?>
+					</span>					
 				</figcaption>
 			</div>
 		</article>
