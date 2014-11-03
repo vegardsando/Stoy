@@ -280,8 +280,11 @@ var Slider = function(container, settings){
 	Slider.startPlaying = function(){
 		console.log('startPlaying');
 		if (!isPlaying) {
-			interval = setInterval(function(){slideShow()}, settings.speed);
-			isPlaying = true;
+			requestAnimationFrame(function(){
+				interval = setInterval(function(){slideShow()}, settings.speed);
+				isPlaying = true;				
+			})
+
 		}
 	}
 
@@ -300,7 +303,7 @@ var Slider = function(container, settings){
 				current = slider.find('.current');
 			}
 
-			// Sett ny active Dot i pagination
+			// Sett ny active Dot i paginationsdf
 			activeDot.removeClass('active');
 
 			activeDot = slider.find('.pagination li[data-id="' + current.attr('data-id') + '"]');

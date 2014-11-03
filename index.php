@@ -12,7 +12,7 @@
 	        
 	        </div>
 	      </div>
-	      <div class="slide setsrc text-left" data-desktop="static/temp/bg.jpg"
+	      <div class="slide setsrc text-left" data-desktop="static/temp/artsdb.jpg"
 	                        data-tablet="static/temp/bg.jpg"
 	                        data-phone="static/temp/bg.jpg" data-id='2'>
 	        <div class="slide-text">
@@ -20,7 +20,7 @@
 	        </div>
 	      </div>
 
-	      <div class="slide setsrc text-left" data-desktop="static/temp/bg2.jpg"
+	      <div class="slide setsrc text-left" data-desktop="static/temp/bg4.jpg"
 	                        data-tablet="static/temp/bg2.jpg"
 	                        data-phone="static/temp/bg2.jpg" data-id='3'>
 	        <div class="slide-text">
@@ -46,29 +46,37 @@
 
 	<section class="grid">
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg.jpg">
+				<div class="video">
+					<iframe src="//player.vimeo.com/video/39739082" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>					
 				<figcaption>
 					<h2>Lorem <span>ipsum</span></h2>
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
+					<span class="icon_play"></span>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg8.jpg">
+				<div class="video">
+					<iframe src="//player.vimeo.com/video/110128159" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</div>					
 				<figcaption>
 					<h2>Lorem <span>ipsum</span></h2>
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
+					<span class="icon_play"></span>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg7.jpg">
@@ -77,9 +85,9 @@
 					<p>Milo went to the woods. He took a fun ride and never came back.</p>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg4.jpg">
@@ -88,9 +96,9 @@
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg5.jpg">
@@ -99,9 +107,9 @@
 					<p>Milo went to the woods. He took a fun ride and never came back.</p>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
-		<figure class="effect-one">
+		<article class="effect-one">
 			<img class="sizer" src="http://placehold.it/350x250">
 			<div class="sizer-div">
 				<img src="/static/temp/bg6.jpg">
@@ -110,7 +118,7 @@
 					<p>Roxy was my best friend. She'd cross any border for me.</p>
 				</figcaption>
 			</div>
-		</figure>
+		</article>
 
 	</section>
 

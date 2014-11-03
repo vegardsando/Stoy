@@ -29,12 +29,15 @@ $_(document).ready(function() {
 	
 	setTimeout(function(){
 		$html.addClass('lastet');
+		$(".grid article").fitVids();
 	},1000)
 
 	var frontpage_slider = new Slider('#frontpage-slide-container', {
 		autoplay: true,
 		speed: 5000,
 	});
+
+	
 
 
 /*=======================================================
@@ -73,7 +76,23 @@ $_(document).ready(function() {
 		}
 
 		$_('.reformed-form label, .reformed-form input').removeClass('focus');	
-	});		
+	});
+
+	// Forside - vimeo-videoer
+	$( ".grid article" ).on('click', function() {
+		
+		// Sett alle vimeo-videoer på pause
+		var iframe = $_('iframe');
+		iframe.each(function(index){
+			var player = $f($_(this)[0]);
+			player.api('pause');
+		})
+
+		// Fjern alle video_active på andre elementer
+		$_('.video_active').removeClass('video_active');
+		$_(this).addClass('video_active');
+
+	});	
 
 
 /*=======================================================

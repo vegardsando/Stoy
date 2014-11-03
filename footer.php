@@ -6,7 +6,7 @@
 		<script>
 		  $LAB
 		  //.script("/static/js/vendor/modernizr-custom-2.7.1.min.js")
-		  //.script("//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+		  //.script("/static/js/vendor/jquery.fitvids.js")
 		  .script("<?php _minimee('{exp:minimee:display js="added" display="url"}'); ?>")
 		  .script("<?php _minimee('{exp:minimee:display js="bottom_js" display="url"}'); ?>")
 		  .wait(function(){
@@ -31,6 +31,8 @@
 		
 		<?php _minimee('{exp:minimee:js queue="bottom_js"}'); ?>
         <script src="/static/js/plugins.js"></script>
+        <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+        <script src="static/js/vendor/jquery.fitvids.js"></script>
         <script src="/static/js/main.js<?php _dev_time() ?>"></script>
         <?php _minimee('{/exp:minimee:js}'); ?>
         
