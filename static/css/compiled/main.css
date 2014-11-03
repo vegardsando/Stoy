@@ -1078,10 +1078,10 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 25%;
-  height: 25%;
-  margin-top: -6%;
-  margin-left: -10%;
+  width: 20%;
+  height: 20%;
+  margin-top: -5%;
+  margin-left: -9%;
   -webkit-transition: -webkit-transform 0.55s, opacity 0.55s;
   -moz-transition: -moz-transform 0.55s, opacity 0.55s;
   -o-transition: -o-transform 0.55s, opacity 0.55s;
