@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dispatchClick(pos);
                 clicked = false;
             }
-        },500);
+        },100);
     }, false);
 
     // capture all clicks and store x, y coords for later
@@ -244,15 +244,16 @@ exports.dispatchClick = dispatchClick;
 var Slider = function(container, settings){
 	var slider = $(container);
 	var slides = slider.find('.slide');
+    var numSlides = slides.length;
 
 	if (!slider.length) {
 		return false;
-	}	
+	}
 
 	var isPlaying = false;
 
 	//Sett høyden på sliden
-	$_('#main-header').height($window.outerHeight());
+	//$_('#main-header').height($window.outerHeight());
 
 	//Sett første slide til current
 	slides.first().addClass('current');
@@ -260,17 +261,20 @@ var Slider = function(container, settings){
 	//Lagre current slide
 	var current = slider.find('.current');
 
-	// Lag pagination
-	var paginator = slider.find('.pagination');
-	slides.each(function(index){
-		index += 1;
-		paginator.append('<li data-id="' + index +'" class="dot"></li>');
-	})
+    console.log(numSlides);
 
-	var activeDot = paginator.find('li').first();
-	activeDot.addClass('active');
+    // Lag pagination
+    if (numSlides > 1) {
+        var paginator = slider.find('.pagination');
+        slides.each(function(index){
+            index += 1;
+            paginator.append('<li data-id="' + index +'" class="dot"></li>');
+        })
 
-	var numSlides = slides.length;
+        var activeDot = paginator.find('li').first();
+        activeDot.addClass('active');
+    }
+
 
 	Slider.stopPlaying = function(){
 		clearInterval(interval);
@@ -282,9 +286,8 @@ var Slider = function(container, settings){
 		if (!isPlaying) {
 			requestAnimationFrame(function(){
 				interval = setInterval(function(){slideShow()}, settings.speed);
-				isPlaying = true;				
+				isPlaying = true;
 			})
-
 		}
 	}
 
@@ -307,8 +310,8 @@ var Slider = function(container, settings){
 			activeDot.removeClass('active');
 
 			activeDot = slider.find('.pagination li[data-id="' + current.attr('data-id') + '"]');
-			activeDot.addClass('active');			
-		})		
+			activeDot.addClass('active');
+		})
 
 	}
 
@@ -318,16 +321,16 @@ var Slider = function(container, settings){
 		current.removeClass('current');
 		current = slider.find('.slide[data-id="' + $_(this).attr('data-id') + '"]');
 		current.addClass('current');
-		
+
 		// Sett ny active Dot i pagination
 		activeDot.removeClass('active');
 		activeDot = slider.find('.pagination li[data-id="' + current.attr('data-id') + '"]');
 		activeDot.addClass('active');
 
 		Slider.stopPlaying();
-	})	
+	})
 
-	if (settings.autoplay) {
+	if (settings.autoplay && numSlides > 1) {
 		console.log('autoplay on');
 		isPlaying = true;
 		var interval = setInterval(function(){slideShow()}, settings.speed);

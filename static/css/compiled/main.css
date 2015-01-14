@@ -165,13 +165,11 @@ h6,
 ::selection {
   background: #5b5657;
   /* Safari */
-
   color: white;
 }
 ::-moz-selection {
   background: #5b5657;
   /* Firefox */
-
   color: white;
 }
 /* LINK COLORS */
@@ -225,13 +223,13 @@ strong {
 }
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 /*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
+* What follows is the result of much research on cross-browser styling.
+* Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+* Kroc Camen, and the H5BP dev community and team.
+*/
 /* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
+Base styles: opinionated defaults
+========================================================================== */
 html,
 button,
 input,
@@ -244,10 +242,10 @@ html {
   line-height: 1.4;
 }
 /*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
+* Remove text-shadow in selection highlight: h5bp.com/i
+* These selection rule sets have to be separate.
+* Customize the background color to match your design.
+*/
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -257,8 +255,8 @@ html {
   text-shadow: none;
 }
 /*
- * A better looking default horizontal rule
- */
+* A better looking default horizontal rule
+*/
 hr {
   display: block;
   height: 1px;
@@ -268,9 +266,9 @@ hr {
   padding: 0;
 }
 /*
- * Remove the gap between images, videos, audio and canvas and the bottom of
- * their containers: h5bp.com/i/440
- */
+* Remove the gap between images, videos, audio and canvas and the bottom of
+* their containers: h5bp.com/i/440
+*/
 audio,
 canvas,
 img,
@@ -278,22 +276,22 @@ video {
   vertical-align: middle;
 }
 /*
- * Remove default fieldset styles.
- */
+* Remove default fieldset styles.
+*/
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 /*
- * Allow only vertical resizing of textareas.
- */
+* Allow only vertical resizing of textareas.
+*/
 textarea {
   resize: vertical;
 }
 /* ==========================================================================
-   Browse Happy prompt
-   ========================================================================== */
+Browse Happy prompt
+========================================================================== */
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -301,8 +299,8 @@ textarea {
   padding: 0.2em 0;
 }
 /* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+Author's custom styles
+========================================================================== */
 /* Mustasj fixes */
 *,
 *:before,
@@ -399,6 +397,18 @@ div#important_msg span {
 html,
 body {
   height: 100%;
+}
+body {
+  -webkit-transition: -webkit-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s, opacity 1s cubic-bezier(.36, 0, .07, 1);
+  -moz-transition: -moz-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s, opacity 1s cubic-bezier(.36, 0, .07, 1);
+  -o-transition: -o-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s, opacity 1s cubic-bezier(.36, 0, .07, 1);
+  transition: -webkit-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s,-moz-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s,-o-transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s,transform 1s cubic-bezier(.36, 0, .07, 1) 0.2s, opacity 1s cubic-bezier(.36, 0, .07, 1);
+  -webkit-transform: translate3d(0, -80px, 0);
+  -moz-transform: translate3d(0, -80px, 0);
+  -o-transform: translate3d(0, -80px, 0);
+  -ms-transform: translate3d(0, -80px, 0);
+  transform: translate3d(0, -80px, 0);
+  opacity: 0;
 }
 #frontpage {
   height: 100%;
@@ -568,6 +578,7 @@ body {
   bottom: 30%;
   width: 30%;
   text-align: center;
+  z-index: 1;
 }
 .text-left .slide-text {
   left: 10%;
@@ -652,15 +663,38 @@ body {
   -ms-transform: scale(1) translate3d(0, 0, 0);
   transform: scale(1) translate3d(0, 0, 0);
 }
+.lastet #main-header {
+  height: 60vh;
+}
+.lastet body {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
 #main-header {
-  height: 100%;
+  height: 65vh;
   width: 100%;
 }
-#main-header .slide-container {
-  -webkit-transition: border-top 0.1s, border 0.75s, height 0.75s;
-  -moz-transition: border-top 0.1s, border 0.75s, height 0.75s;
-  -o-transition: border-top 0.1s, border 0.75s, height 0.75s;
-  transition: border-top 0.1s, border 0.75s, height 0.75s;
+#main-header h1 {
+  color: white;
+  font-size: bold;
+}
+#main-header p {
+  font-size: 18px;
+}
+#main-header .divider:after {
+  -webkit-transform: rotate(1deg);
+  -moz-transform: rotate(1deg);
+  -o-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  transform: rotate(1deg);
+}
+footer hr {
+  width: 1200px;
+  margin: 0 auto;
 }
 #frontpage_studio-foley {
   font-size: 0px;
@@ -694,10 +728,10 @@ body {
 }
 #frontpage_studio-foley .studio .sizer-div img,
 #frontpage_studio-foley .foley .sizer-div img {
-  -webkit-transition: -webkit-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  -moz-transition: -moz-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  -o-transition: -o-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  transition: -webkit-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),-moz-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),-o-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-transition: -webkit-transform 0.55s;
+  -moz-transition: -moz-transform 0.55s;
+  -o-transition: -o-transform 0.55s;
+  transition: -webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
   -webkit-transform: skew(16deg) scale(1.1);
   -moz-transform: skew(16deg) scale(1.1);
   -o-transform: skew(16deg) scale(1.1);
@@ -722,10 +756,10 @@ body {
   bottom: 0;
   width: 100%;
   right: -25%;
-  -webkit-transition: -webkit-transform 0.55s;
-  -moz-transition: -moz-transform 0.55s;
-  -o-transition: -o-transform 0.55s;
-  transition: -webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
+  -webkit-transition: -webkit-transform 0.45s;
+  -moz-transition: -moz-transform 0.45s;
+  -o-transition: -o-transform 0.45s;
+  transition: -webkit-transform 0.45s,-moz-transform 0.45s,-o-transform 0.45s,transform 0.45s;
   -webkit-transform: translate3d(0, 50px, 0);
   -moz-transform: translate3d(0, 50px, 0);
   -o-transform: translate3d(0, 50px, 0);
@@ -756,12 +790,12 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 3px;
+  height: 4px;
   background-color: white;
-  -webkit-transition: -webkit-transform 0.55s, opacity 0.55s;
-  -moz-transition: -moz-transform 0.55s, opacity 0.55s;
-  -o-transition: -o-transform 0.55s, opacity 0.55s;
-  transition: -webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s, opacity 0.55s;
+  -webkit-transition: -webkit-transform 0.45s, opacity 0.45s;
+  -moz-transition: -moz-transform 0.45s, opacity 0.45s;
+  -o-transition: -o-transform 0.45s, opacity 0.45s;
+  transition: -webkit-transform 0.45s,-moz-transform 0.45s,-o-transform 0.45s,transform 0.45s, opacity 0.45s;
   zoom: 1;
   filter: alpha(opacity=0);
   -webkit-opacity: 0;
@@ -779,10 +813,10 @@ body {
 }
 #frontpage_studio-foley .studio .text p,
 #frontpage_studio-foley .foley .text p {
-  -webkit-transition: opacity 0.55s, -webkit-transform 0.55s;
-  -moz-transition: opacity 0.55s, -moz-transform 0.55s;
-  -o-transition: opacity 0.55s, -o-transform 0.55s;
-  transition: opacity 0.55s,-webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
+  -webkit-transition: opacity 0.45s, -webkit-transform 0.45s;
+  -moz-transition: opacity 0.45s, -moz-transform 0.45s;
+  -o-transition: opacity 0.45s, -o-transform 0.45s;
+  transition: opacity 0.45s,-webkit-transform 0.45s,-moz-transform 0.45s,-o-transform 0.45s,transform 0.45s;
   -webkit-transform: translate3d(0, 50px, 0);
   -moz-transform: translate3d(0, 50px, 0);
   -o-transform: translate3d(0, 50px, 0);
@@ -804,10 +838,10 @@ body {
 }
 #frontpage_studio-foley .studio .text .btn,
 #frontpage_studio-foley .foley .text .btn {
-  -webkit-transition: opacity 0.75s, -webkit-transform 0.75s;
-  -moz-transition: opacity 0.75s, -moz-transform 0.75s;
-  -o-transition: opacity 0.75s, -o-transform 0.75s;
-  transition: opacity 0.75s,-webkit-transform 0.75s,-moz-transform 0.75s,-o-transform 0.75s,transform 0.75s;
+  -webkit-transition: opacity 0.65s, -webkit-transform 0.65s;
+  -moz-transition: opacity 0.65s, -moz-transform 0.65s;
+  -o-transition: opacity 0.65s, -o-transform 0.65s;
+  transition: opacity 0.65s,-webkit-transform 0.65s,-moz-transform 0.65s,-o-transform 0.65s,transform 0.65s;
   -webkit-transform: translate3d(0, 100px, 0);
   -moz-transform: translate3d(0, 100px, 0);
   -o-transform: translate3d(0, 100px, 0);
@@ -876,10 +910,10 @@ body {
   right: -12%;
   left: -12%;
   width: 135%;
-  -webkit-transition: -webkit-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  -moz-transition: -moz-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  -o-transition: -o-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
-  transition: -webkit-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),-moz-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),-o-transform 0.55s cubic-bezier(0.7, 0, 0.3, 1),transform 0.55s cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-transition: -webkit-transform 0.55s;
+  -moz-transition: -moz-transform 0.55s;
+  -o-transition: -o-transform 0.55s;
+  transition: -webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
   -webkit-transform: skew(-16deg) translate3d(-50px, 0, 0);
   -moz-transform: skew(-16deg) translate3d(-50px, 0, 0);
   -o-transform: skew(-16deg) translate3d(-50px, 0, 0);
@@ -900,7 +934,7 @@ body {
 }
 #frontpage_studio-foley .foley .sizer-div img {
   width: 140%;
-  height: 100%;
+  height: 140%;
 }
 .no-touch #frontpage_studio-foley .foley:hover .sizer-div {
   -webkit-transform: skew(-16deg) translate3d(0, 0, 0);
@@ -911,6 +945,9 @@ body {
 }
 #frontpage_studio-foley .studio .text {
   right: -8%;
+}
+#frontpage_kunder {
+  margin-bottom: 2em;
 }
 #frontpage_kunder .row {
   text-align: center;
@@ -962,6 +999,7 @@ body {
 .grid {
   overflow: hidden;
   margin: 0;
+  margin-bottom: 5rem;
   width: 100%;
   list-style: none;
   text-align: center;
@@ -1375,6 +1413,9 @@ body {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+.grid .btn {
+  margin-top: 2em;
+}
 #frontpage_kontakt {
   background-image: url('/static/temp/contact.jpg');
   background-size: cover;
@@ -1544,10 +1585,8 @@ sizes, pagination, etc.
 ================================================================*/
 .slide-container {
   /* Specify Swiper's Size: */
-
   /*width:200px;
-  height: 100px;*/
-
+    height: 100px;*/
   height: 100%;
   border: 10px solid white;
   border-bottom: 0;
@@ -1557,7 +1596,6 @@ sizes, pagination, etc.
 }
 .slide {
   /* Specify Slides's Size: */
-
   background-size: cover;
   background-position: center center;
   height: 100%;
@@ -1628,6 +1666,16 @@ sizes, pagination, etc.
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
+.slide:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(143, 110, 103, 0.3);
+  z-index: 1;
+}
 ul.pagination {
   padding: 0;
   margin: 0;
@@ -1684,7 +1732,7 @@ ul.pagination li.dot:hover {
 /* Buttons */
 /*****************************************/
 .btn {
-  width: 100px;
+  max-width: 140px;
   display: block;
   margin-top: 1em;
   margin-left: auto;
@@ -1694,12 +1742,15 @@ ul.pagination li.dot:hover {
   font-size: 1rem;
   line-height: 16px;
   line-height: 1rem;
-  -webkit-transition: -webkit-transform 0.35s ease, opacity 0.35s ease;
-  -moz-transition: -moz-transform 0.35s ease, opacity 0.35s ease;
-  -o-transition: -o-transform 0.35s ease, opacity 0.35s ease;
-  transition: -webkit-transform 0.35s ease,-moz-transform 0.35s ease,-o-transform 0.35s ease,transform 0.35s ease, opacity 0.35s ease;
+  -webkit-transition: -webkit-transform 0.35s, opacity 0.35s, color 0.35s, background-color 0.35s;
+  -moz-transition: -moz-transform 0.35s, opacity 0.35s, color 0.35s, background-color 0.35s;
+  -o-transition: -o-transform 0.35s, opacity 0.35s, color 0.35s, background-color 0.35s;
+  transition: -webkit-transform 0.35s,-moz-transform 0.35s,-o-transform 0.35s,transform 0.35s, opacity 0.35s, color 0.35s, background-color 0.35s;
   background-color: white;
-  border: none;
+  border: #392b28;
+}
+.btn.small {
+  width: 100px;
 }
 .btn a {
   display: block;
@@ -1713,7 +1764,7 @@ ul.pagination li.dot:hover {
 }
 .btn.transparent {
   background-color: transparent;
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
 }
 .btn.transparent a {
@@ -1725,44 +1776,19 @@ ul.pagination li.dot:hover {
   position: relative;
   color: white;
 }
-.btn.transparent a:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 1px solid white;
-  -webkit-transition: -webkit-transform 0.55s ease, opacity 0.55s ease;
-  -moz-transition: -moz-transform 0.55s ease, opacity 0.55s ease;
-  -o-transition: -o-transform 0.55s ease, opacity 0.55s ease;
-  transition: -webkit-transform 0.55s ease,-moz-transform 0.55s ease,-o-transform 0.55s ease,transform 0.55s ease, opacity 0.55s ease;
-  zoom: 1;
-  filter: alpha(opacity=100);
-  -webkit-opacity: 1;
-  -moz-opacity: 1;
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -o-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
 .btn.transparent a:hover {
   background-color: white;
   color: #756c59;
 }
-.btn.transparent a:hover:before {
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-  zoom: 1;
-  filter: alpha(opacity=0);
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
+.btn.border {
+  border: 2px solid #392b28;
+}
+.btn.border:hover {
+  background: #392b28;
+  border: 2px solid white;
+}
+.btn.border:hover a {
+  color: white;
 }
 /*****************************************/
 /* Key frames */
@@ -1830,17 +1856,16 @@ lesshat-selector {
   height: 100%;
 }
 /* ==========================================================================
-   Helper classes
-   ========================================================================== */
+Helper classes
+========================================================================== */
 /*
- * Image replacement
- */
+* Image replacement
+*/
 .ir {
   background-color: transparent;
   border: 0;
   overflow: hidden;
   /* IE 6/7 fallback */
-
   *text-indent: -9999px;
 }
 .ir:before {
@@ -1850,15 +1875,15 @@ lesshat-selector {
   height: 150%;
 }
 /*
- * Hide from both screenreaders and browsers: h5bp.com/u
- */
+* Hide from both screenreaders and browsers: h5bp.com/u
+*/
 .hidden {
   display: none !important;
   visibility: hidden;
 }
 /*
- * Hide only visually, but have it available for screenreaders: h5bp.com/v
- */
+* Hide only visually, but have it available for screenreaders: h5bp.com/v
+*/
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -1870,9 +1895,9 @@ lesshat-selector {
   width: 1px;
 }
 /*
- * Extends the .visuallyhidden class to allow the element to be focusable
- * when navigated to via the keyboard: h5bp.com/p
- */
+* Extends the .visuallyhidden class to allow the element to be focusable
+* when navigated to via the keyboard: h5bp.com/p
+*/
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
   clip: auto;
@@ -1883,46 +1908,44 @@ lesshat-selector {
   width: auto;
 }
 /*
- * Hide visually and from screenreaders, but maintain layout
- */
+* Hide visually and from screenreaders, but maintain layout
+*/
 .invisible {
   visibility: hidden;
 }
 /*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
- */
+* Clearfix: contain floats
+*
+* For modern browsers
+* 1. The space content is one way to avoid an Opera bug when the
+*    `contenteditable` attribute is included anywhere else in the document.
+*    Otherwise it causes space to appear at the top and bottom of elements
+*    that receive the `clearfix` class.
+* 2. The use of `table` rather than `block` is only necessary if using
+*    `:before` to contain the top-margins of child elements.
+*/
 .clearfix:before,
 .clearfix:after {
   content: " ";
   /* 1 */
-
   display: table;
   /* 2 */
-
 }
 .clearfix:after {
   clear: both;
 }
 /*
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
+* For IE 6/7 only
+* Include this rule to trigger hasLayout and contain floats.
+*/
 .clearfix {
   *zoom: 1;
 }
 /* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
+EXAMPLE Media Queries for Responsive Design.
+These examples override the primary ('mobile first') styles.
+Modify as content requires.
+========================================================================== */
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
 }
@@ -1930,15 +1953,14 @@ lesshat-selector {
   /* Style adjustments for high resolution devices */
 }
 /* ==========================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
+Print styles.
+Inlined to avoid required HTTP connection: h5bp.com/r
+========================================================================== */
 @media print {
   * {
     background: transparent !important;
     color: #000 !important;
     /* Black prints faster: h5bp.com/s */
-  
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -1953,8 +1975,8 @@ lesshat-selector {
     content: " (" attr(title) ")";
   }
   /*
-       * Don't show links for images, or javascript/internal links
-       */
+    * Don't show links for images, or javascript/internal links
+    */
   .ir a:after,
   a[href^="javascript:"]:after,
   a[href^="#"]:after {
@@ -1968,7 +1990,6 @@ lesshat-selector {
   thead {
     display: table-header-group;
     /* h5bp.com/t */
-  
   }
   tr,
   img {
@@ -1977,7 +1998,7 @@ lesshat-selector {
   img {
     max-width: 100% !important;
   }
-  @page  {
+  @page {
     margin: 0.5cm;
   }
   p,

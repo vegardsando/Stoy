@@ -9,7 +9,7 @@ var $_ = $,
 
 //function init_page() { /* Aktiver når man har EE */
 $_(document).ready(function() {
-	
+
 	/* A couple of selections. */
 	$body         = $_(document.body);
 	$window       = $_(window);
@@ -20,24 +20,23 @@ $_(document).ready(function() {
 	$header = $_('#main-header');
 	$nav_main = $_('.nav_main');
 	var maxScroll = $header.outerHeight() / 4;
-	
+
 	detect_size();
-  		
+
 	window.onresize = function(event) {
 		detect_size();
-	};	
-	
+	};
+
 	setTimeout(function(){
 		$html.addClass('lastet');
 		$(".grid article").fitVids();
-	},1000)
+	},1000);
 
 	var frontpage_slider = new Slider('#frontpage-slide-container', {
 		autoplay: true,
 		speed: 5000,
 	});
 
-	
 
 
 /*=======================================================
@@ -102,7 +101,7 @@ $_(document).ready(function() {
 	$document.on('scroll', function(){
 
 		window.requestAnimationFrame(function(){
-			fixedheader_check();
+			//fixedheader_check();
 		});
 
 	})
@@ -119,8 +118,8 @@ $_(document).ready(function() {
 		} else {
 			$nav_main.removeClass('fixed');
 			//Slider.startPlaying();
-		}		
-	}	
+		}
+	}
 
 	// Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
 	function setImageSize() {
