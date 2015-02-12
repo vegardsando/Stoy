@@ -169,6 +169,8 @@
     </figure>
 </section>
 
+<figure class="divider"></figure>
+
 <section id="frontpage_kunder">
     <div class="row">
         <a href="#">
@@ -187,6 +189,12 @@
             <img src="/static/temp/logo_spaett.png">
         </a>
     </div>
+</section>
+
+<figure class="divider down colored"></figure>
+
+<section id="frontpage_map">
+    <div id="map"></div>
 </section>
 
 <?php include "footer.php"; ?>

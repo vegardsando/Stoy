@@ -1,7 +1,29 @@
 
         <footer>
-            <hr>
-            <img src="static/img/logo.png">
+            <img class="footer_logo" src="static/img/logo_dark.png">
+
+            <ul class="unstyled">
+                <li>
+                    <img src="static/img/icon_address.png">
+                    <span>Båtmannsgata 4<br>7044 Trondheim</span>
+                </li>
+                <li>
+                    <img src="static/img/icon_contact.png">
+                    <span>post@stoey.no<br>
+                        Thomas: 847 58 484<br>
+                        David: 847 58 484
+                    </span>
+
+                </li>
+                <li class="facebook">
+                    <img src="static/img/icon_facebook.png">
+                    <span>Facebook</span>
+                </li>
+                <li class="vimeo">
+                    <img src="static/img/icon_vimeo.png">
+                    <span>Vimeo</span>
+                </li>
+            </ul>
         </footer>
 
         <script src="/static/js/vendor/modernizr-custom-2.7.1.min.js"></script>
@@ -17,7 +39,6 @@
 		  .script("<?php _minimee('{exp:minimee:display js="bottom_js" display="url"}'); ?>")
 		  .wait(function(){
 		  	  try{Typekit.load();}catch(e){}
-			  init_page();
 		  });
 		</script>
 
@@ -37,6 +58,7 @@
 
 		<?php _minimee('{exp:minimee:js queue="bottom_js"}'); ?>
         <script src="/static/js/plugins.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
         <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
         <script src="static/js/vendor/jquery.fitvids.js"></script>
         <script src="/static/js/main.js<?php _dev_time() ?>"></script>

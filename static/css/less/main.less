@@ -348,6 +348,12 @@ body {
         }
     }
 
+    &.colored {
+        &:after {
+            background: @color_sec1;
+        }
+    }
+
 
 }
 
@@ -417,10 +423,51 @@ body {
 }
 
 footer {
-    hr {
-        width: 1200px;
-        margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    padding-bottom: 0;
+
+    img {
+        display: inline-block;
+        vertical-align: top;
+        float: left;
+        margin-right: .7em;
     }
+
+    .footer_logo {
+        width: 5%;
+        margin-right: 15%;
+    }
+
+    ul {
+        display: inline-block;
+        width: 80%;
+        text-align: left;
+        text-transform: uppercase;
+        .font-size(13);
+
+        li {
+            display: inline-block;
+            margin-right: 50px;
+            width: 15%;
+        }
+
+        .facebook, .vimeo {
+            position: relative;
+
+            span {
+                margin-top: 7px;
+                position: relative;
+            }
+        }
+
+        .facebook {
+            margin-left: 6%;
+        }
+
+    }
+
+    span {display: inline-block; vertical-align: top; }
 }
 
 #frontpage_studio-foley {
@@ -456,7 +503,7 @@ footer {
 
                 @media @tablet {
                     .transform(skew(0), scale(1));
-                }        
+                }
             }
         }
 
@@ -472,7 +519,7 @@ footer {
 
             h2 {
                 margin-top: 25%;
-                position: relative;          
+                position: relative;
                 top: 0;
                 left: 20px;
                 right: 20px;
@@ -589,7 +636,9 @@ footer {
 }
 
 #frontpage_kunder {
-    margin-bottom: 2em;
+    padding-top: 7em;
+    padding-bottom: 2.5em;
+    background: @color_sec1;
 
     .row {
         text-align: center;
@@ -607,6 +656,14 @@ footer {
             }
         }
     }
+}
+
+#frontpage_map {
+    height: 500px;
+}
+
+#map {
+    height: 100%;
 }
 
 .sizer-div {
@@ -1007,7 +1064,6 @@ footer {
 }
 
 
-
 // FORM
 .reformed-form {
 
@@ -1220,6 +1276,11 @@ ul.pagination {
             a { color: white;}
         }
     }
+}
+
+.unstyled {
+    list-style: none;
+    padding: 0;
 }
 
 /*****************************************/

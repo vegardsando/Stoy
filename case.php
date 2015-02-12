@@ -6,8 +6,7 @@
     	<figure class="emblem-heading">
     		<h2>Artsdatabanken<strong></strong></h2>
    		</figure>
-   	</section>	
-
+   	</section>
 
    <section id="case_slide-container" class="slide-container">
 
@@ -19,9 +18,6 @@
             	<p><strong>Lyd og musikk - Helmet</strong></p>
             	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
             </div>
-        	</div class="video">
-
-    		</div>
         </div>
 
       </div>
@@ -30,7 +26,7 @@
 
     <figure class="divider down"></figure>
 
-</header>    
+</header>
 
     <section class="row">
     	<figure class="emblem-heading">

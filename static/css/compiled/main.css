@@ -147,7 +147,7 @@ h6,
   background-color: #756c59;
 }
 .color_sec1 {
-  background-color: #f4f0cb;
+  background-color: #5f5656;
 }
 .color_sec2 {
   background-color: #e6e6e6;
@@ -194,7 +194,7 @@ h2 {
   text-transform: uppercase;
 }
 h3 {
-  color: #f4f0cb;
+  color: #5f5656;
   font-weight: 700;
 }
 h4 {
@@ -205,7 +205,7 @@ h5 {
   font-weight: 700;
 }
 h6 {
-  color: #f4f0cb;
+  color: #5f5656;
   font-family: 'Raleway', serif;
 }
 p {
@@ -619,6 +619,9 @@ body {
   transform: rotate(-1deg);
   top: -30px;
 }
+.divider.colored:after {
+  background: #5f5656;
+}
 .emblem-heading {
   text-align: center;
   margin-top: 3em;
@@ -692,9 +695,49 @@ body {
   -ms-transform: rotate(1deg);
   transform: rotate(1deg);
 }
-footer hr {
-  width: 1200px;
-  margin: 0 auto;
+footer {
+  text-align: center;
+  padding: 40px;
+  padding-bottom: 0;
+}
+footer img {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  margin-right: .7em;
+}
+footer .footer_logo {
+  width: 5%;
+  margin-right: 15%;
+}
+footer ul {
+  display: inline-block;
+  width: 80%;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-size: 0.8125rem;
+}
+footer ul li {
+  display: inline-block;
+  margin-right: 50px;
+  width: 15%;
+}
+footer ul .facebook,
+footer ul .vimeo {
+  position: relative;
+}
+footer ul .facebook span,
+footer ul .vimeo span {
+  margin-top: 7px;
+  position: relative;
+}
+footer ul .facebook {
+  margin-left: 6%;
+}
+footer span {
+  display: inline-block;
+  vertical-align: top;
 }
 #frontpage_studio-foley {
   font-size: 0px;
@@ -932,10 +975,6 @@ footer hr {
     transform: none;
   }
 }
-#frontpage_studio-foley .foley .sizer-div img {
-  width: 140%;
-  height: 140%;
-}
 .no-touch #frontpage_studio-foley .foley:hover .sizer-div {
   -webkit-transform: skew(-16deg) translate3d(0, 0, 0);
   -moz-transform: skew(-16deg) translate3d(0, 0, 0);
@@ -947,7 +986,9 @@ footer hr {
   right: -8%;
 }
 #frontpage_kunder {
-  margin-bottom: 2em;
+  padding-top: 7em;
+  padding-bottom: 2.5em;
+  background: #5f5656;
 }
 #frontpage_kunder .row {
   text-align: center;
@@ -982,6 +1023,12 @@ footer hr {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
+}
+#frontpage_map {
+  height: 500px;
+}
+#map {
+  height: 100%;
 }
 .sizer-div {
   position: absolute;
@@ -1789,6 +1836,10 @@ ul.pagination li.dot:hover {
 }
 .btn.border:hover a {
   color: white;
+}
+.unstyled {
+  list-style: none;
+  padding: 0;
 }
 /*****************************************/
 /* Key frames */
