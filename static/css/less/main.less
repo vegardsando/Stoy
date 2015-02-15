@@ -190,7 +190,8 @@ body {
     position: absolute;
     top: 50px;
     left: 5%;
-    height: 80px;
+    height: 90px;
+    width: 125px;
     z-index: 2;
     .transition(opacity 1s ease .8s, transform 1s ease 1.4s, height .55s ease-in-out, top .55s ease-in-out, left .55s ease-in-out);
     .opacity(0);
@@ -387,7 +388,7 @@ body {
 
     h2:before {
         content: '';
-        background-image: url('/static/img/emblem.png');
+        background-image: url('/static/img/logo_emblem.svg');
         background-repeat: no-repeat;
         height: 30px;
         width: 24px;
@@ -409,12 +410,8 @@ body {
         .opacity(1);
         .transform(scale(1), translate3d(0,0,0));
         top: 200px;
-        left: 46%;
-
-        &.done {
-            top: 0;
-            left: 5%;
-        }
+        left: 50%;
+        margin-left: -62px;
     }
 
     body {

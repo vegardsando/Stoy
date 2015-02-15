@@ -417,7 +417,8 @@ body {
   position: absolute;
   top: 50px;
   left: 5%;
-  height: 80px;
+  height: 90px;
+  width: 125px;
   z-index: 2;
   -webkit-transition: opacity 1s ease 0.8s, -webkit-transform 1s ease 1.4s, height 0.55s ease-in-out, top 0.55s ease-in-out, left 0.55s ease-in-out;
   -moz-transition: opacity 1s ease 0.8s, -moz-transform 1s ease 1.4s, height 0.55s ease-in-out, top 0.55s ease-in-out, left 0.55s ease-in-out;
@@ -657,7 +658,7 @@ body {
 }
 .emblem-heading h2:before {
   content: '';
-  background-image: url('/static/img/emblem.png');
+  background-image: url('/static/img/logo_emblem.svg');
   background-repeat: no-repeat;
   height: 30px;
   width: 24px;
@@ -691,11 +692,8 @@ body {
   -ms-transform: scale(1) translate3d(0, 0, 0);
   transform: scale(1) translate3d(0, 0, 0);
   top: 200px;
-  left: 46%;
-}
-.lastet .logo.done {
-  top: 0;
-  left: 5%;
+  left: 50%;
+  margin-left: -62px;
 }
 .lastet body {
   -webkit-transform: translate3d(0, 0, 0);

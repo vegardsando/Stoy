@@ -51,10 +51,9 @@ include_once 'static/php/header_top.php';
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header id="main-header">          
+        <header id="main-header">
 
             <nav class="nav_main <?php if (isset($underside)) { echo $underside; } ?>">
-                 <img class="logo" src="static/img/logo.svg">
                 <ul>
                     <li class="active">
                         <a>Lyddesign</a>
@@ -73,4 +72,6 @@ include_once 'static/php/header_top.php';
                 </ul>
             </nav>
 
- 
+            <img class="logo" src="static/img/logo.svg">
+
+
