@@ -54,20 +54,22 @@ include_once 'static/php/header_top.php';
         <header id="main-header">          
 
             <nav class="nav_main <?php if (isset($underside)) { echo $underside; } ?>">
-                 <img class="logo" src="static/img/logo.png">
+                 <img class="logo" src="static/img/logo.svg">
                 <ul>
                     <li class="active">
-                        <a>Hjem</a>
+                        <a>Lyddesign</a>
                     </li>
                     <li>
-                        <a>Studio</a>
-                    </li>
-                    <li>
-                        <a>Portefølje</a>
+                        <a>Lydproduksjon</a>
                     </li>
                     <li>
                         <a>Kontakt</a>
-                    </li>                                                            
+                    </li>
+                    <li class="facebook">
+                        <a href="">
+                            <img src="static/img/icon_facebook.svg">
+                        </a>
+                    </li>
                 </ul>
             </nav>
 

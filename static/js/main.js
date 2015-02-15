@@ -29,7 +29,11 @@ $_(document).ready(function() {
 
 	setTimeout(function(){
 		$html.addClass('lastet');
-		$(".grid article").fitVids();
+
+        setTimeout(function() {
+            $(".grid article").fitVids();
+        }, 1000);
+
 	},1000);
 
 	var frontpage_slider = new Slider('#frontpage-slide-container', {

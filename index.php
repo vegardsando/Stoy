@@ -3,12 +3,18 @@
 <section id="frontpage-slide-container" class="slide-container">
 
     <!--First Slide-->
-    <div class="slide current setsrc text-right" data-desktop="/static/img/SUITE01_3-EDIT.jpg"
-         data-tablet="static/temp/bg3.jpg"
-         data-phone="static/temp/bg3.jpg" data-id='1'>
+    <div class="slide current setsrc text-right" data-desktop="/static/img/stock12.jpg"
+         data-tablet="static/temp/SUITE01_3-EDIT.jpg"
+         data-phone="static/temp/SUITE01_3-EDIT.jpg" data-id='1'>
         <div class="slide-text">
-            <p>
-                Støy lydstudio er et profesjonelt lydstudio med en Pro Tools-basert workflow. Vi holder til i nyoppussede lokaler i Båtsmannsgate 4, ved Dora i Trondheim.</p>
+            <p>Lyden av den gode historie</p>
+            <p class="smaller">Musikk, lyddesign, voiceover og foley</p>
+<!--
+<p>Lyd som gir liv til gode historier</p>
+            <p>Lyden av den gode historie</p>
+            <p>Lyden som gir liv til din historie</p>
+            <p>Lyden gir liv til den gode historie</p>
+-->
 
         </div>
     </div>
@@ -132,11 +138,11 @@
 
     <figure class="foley">
         <div class="sizer-div">
-            <img src="/static/img/FOLEYcropped.jpg">
+            <img src="/static/img/stock13.jpg">
         </div>
 
         <div class="text">
-            <h2>Lyd og <span>foley</span></h2>
+            <h2>Lyd til<span> bilde</span></h2>
             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.</p>
             <span class="btn transparent small">
                 <a href="#">Les mer</a>
@@ -148,11 +154,11 @@
     <figure class="studio">
 
         <div class="sizer-div">
-            <img src="/static/temp/studio.jpg">
+            <img src="/static/img/stock1.jpg">
         </div>
 
         <div class="text">
-            <h2>Studio</h2>
+            <h2>Studio og <strong>musikkproduksjon</strong></h2>
             <p>At vero eos et accusamus et iusto odio dignissimos mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
             <span class="btn transparent small">
                 <a href="#">Les mer</a>
@@ -189,9 +195,9 @@
             <img src="/static/temp/logo_spaett.png">
         </a>
     </div>
+    <figure class="divider down colored"></figure>
 </section>
 
-<figure class="divider down colored"></figure>
 
 <section id="frontpage_map">
     <div id="map"></div>

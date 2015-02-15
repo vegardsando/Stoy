@@ -192,9 +192,9 @@ body {
     left: 5%;
     height: 80px;
     z-index: 2;
-    .transition(opacity 1s ease .8s, transform 1s ease .8s, height .55s ease-in-out, top .55s ease-in-out, left .55s ease-in-out);
+    .transition(opacity 1s ease .8s, transform 1s ease 1.4s, height .55s ease-in-out, top .55s ease-in-out, left .55s ease-in-out);
     .opacity(0);
-    .transform(scale(0), translate3d(50%,50%,0));
+    .transform(scale(0), translate3d(50%, 50%, 0));
 }
 
 .nav_main {
@@ -202,7 +202,7 @@ body {
     top: 0px;
     width: 100%;
     text-align: right;
-    padding-right: 150px;
+    padding-right: 20px;
     z-index: 10;
     padding-top: 10px;
 
@@ -279,6 +279,11 @@ body {
                 cursor: pointer;
             }
 
+            &.facebook{
+                margin-left: 40px;
+                &:before { display: none; }
+            }
+
             // Interpunct
             &:before {
                 position: absolute;
@@ -304,24 +309,38 @@ body {
 }
 
 .slide-text {
-    position: absolute;
-    bottom: 30%;
-    width: 30%;
+    width: 100%;
     text-align: center;
     z-index: 1;
-
-    .text-left &{
-        left: 10%;
-    }
-
-    .text-right &{
-        right: 10%;
-    }
+    position: relative;
+    top: 65%;
+    .translateY(-50%);
 
     p {
-        .font-size(14);
-        font-weight: normal;
+        .font-size(28);
+        font-weight: 600;
         color: white;
+        text-transform: uppercase;
+        text-decoration: underline;
+        padding-bottom: .2em;
+    }
+
+    .smaller {
+        position: relative;
+        .font-size(20);
+        font-weight: 300;
+        text-transform: initial;
+        line-height: 1.5em;
+        text-decoration: none;
+        
+        &:before {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background: white;
+            top: 0;
+            left: 0;
+        }
     }
 }
 
@@ -389,10 +408,13 @@ body {
     .logo {
         .opacity(1);
         .transform(scale(1), translate3d(0,0,0));
-    }
+        top: 200px;
+        left: 46%;
 
-    #main-header {
-        height: 60vh;
+        &.done {
+            top: 0;
+            left: 5%;
+        }
     }
 
     body {
@@ -403,18 +425,13 @@ body {
 
 
 #main-header {
-    height: 65vh;
+    height: 70vh;
     width: 100%;
 
     h1 {
         color: white;
         font-size: bold;
     }
-
-    p {
-        font-size: 18px;
-    }
-
 
     .divider {
         &:after { .rotate(1deg); }
@@ -424,8 +441,8 @@ body {
 
 footer {
     text-align: center;
-    padding: 40px;
-    padding-bottom: 0;
+    padding: 20px;
+    padding-bottom: 5px;
 
     img {
         display: inline-block;
@@ -436,7 +453,7 @@ footer {
 
     .footer_logo {
         width: 5%;
-        margin-right: 15%;
+        margin-right: 10%;
     }
 
     ul {
@@ -450,6 +467,17 @@ footer {
             display: inline-block;
             margin-right: 50px;
             width: 15%;
+
+            img {
+                position: relative;
+                .transition(top .35s ease);
+                top: 0;
+            }
+            
+            &:hover img {
+                top: -5px;
+            }
+            
         }
 
         .facebook, .vimeo {
@@ -462,7 +490,8 @@ footer {
         }
 
         .facebook {
-            margin-left: 6%;
+            margin-left: 15%;
+            margin-right: 0;
         }
 
     }
@@ -494,17 +523,12 @@ footer {
                 left: 0;
                 right: 0;
                 bottom: 0;
-            } 
+            }
 
             img {
                 .transition(transform .55s);
-                .transform(skew(16deg), scale(1.1));
-                position: relative;
-
-                @media @tablet {
-                    .transform(skew(0), scale(1));
-                }
             }
+
         }
 
         .text {
@@ -512,13 +536,13 @@ footer {
             top: 0;
             bottom: 0;
             width: 100%;
-            right: -25%;
+            right: -10%;
             .transition(transform .45s);
-            .translate3d(0,50px,0);
+            .translate3d(0,100px,0);
             color: white;
 
             h2 {
-                margin-top: 25%;
+                margin-top: 20%;
                 position: relative;
                 top: 0;
                 left: 20px;
@@ -542,7 +566,7 @@ footer {
                     .transition(transform .45s, opacity .45s);
                     .opacity(0);
                     .translate3d(0,50px,0);
-                }          
+                }
 
                 span {
                     font-weight: 800;
@@ -560,14 +584,15 @@ footer {
                 width: 50%;
                 margin-left: auto;
                 margin-right: auto;
+                padding: 10px;
             }
 
             .btn {
                 .transition(opacity .65s, transform .65s);
-                .translate3d(0,100px,0);
-                .opacity(0);          
+                .translate3d(0,60px,0);
+                .opacity(0);
             }
-        }   
+        }
 
         &:hover {
             .text {
@@ -586,29 +611,34 @@ footer {
                 }
             }
 
-
-            .no-touch &:hover {
-                .sizer-div {
-                    img {
-                        .transform(skew(16deg), scale(1.2), translate3d(0,0,0));
-                    }
-                }
-            }       
         }
 
     }
 
     .foley {
-        z-index: 2;   
+        z-index: 2;
 
         .sizer-div {
             .backface-visibility(hidden);
             overflow: hidden;
             right: -12%;
             left: -12%;
-            width: 135%;
+            width: 125%;
             .transition(transform .55s);
-            .transform(skew(-16deg), translate3d(-50px,0,0));      
+            .transform(skew(-16deg), translate3d(-50px,0,0));
+
+            img {
+                width: 110%;
+                max-height: 150%;
+
+                .transition(transform .55s);
+                .transform(skew(16deg), scale(1.1));
+                position: relative;
+
+                @media @tablet {
+                    .transform(skew(0), scale(1));
+                }
+            }
 
             @media @tablet {
                 left: 0;
@@ -621,7 +651,7 @@ footer {
 
         .no-touch &:hover {
             .sizer-div {
-                .transform(skew(-16deg), translate3d(0,0,0));
+                .transform(scale(1.2), skew(-16deg), translate3d(0,0,0));
             }
         }
 
@@ -631,6 +661,21 @@ footer {
         .text {
             right: -8%;
         }
+
+        .sizer-div {
+            img {
+                width: 150%;
+            }
+        }
+
+        .no-touch &:hover {
+            .sizer-div {
+                img {
+                    .transform(scale(1.2), translate3d(0,0,0));
+                }
+            }
+        }
+
     }
 
 }
@@ -639,6 +684,7 @@ footer {
     padding-top: 7em;
     padding-bottom: 2.5em;
     background: @color_sec1;
+    border: 10px solid white;
 
     .row {
         text-align: center;
@@ -656,10 +702,15 @@ footer {
             }
         }
     }
+    
+    .divider:after {
+        top: 20px;
+    }
 }
 
 #frontpage_map {
     height: 500px;
+    border: 10px solid white;
 }
 
 #map {
@@ -1153,7 +1204,7 @@ sizes, pagination, etc.
         width: 100%;
         height: 100%;
         position: absolute;
-        background: #8F6E67;
+        background: rgba(52, 43, 37, 0.3);
         .opacity(0.2);
     }  
 
@@ -1177,7 +1228,7 @@ sizes, pagination, etc.
         left: 0;
         height: 100%;
         width: 100%;
-        background: rgba(143, 110, 103, 0.3);
+        background: rgba(143, 103, 126, 0.3);
         z-index: 1;
     }
 
@@ -1230,9 +1281,10 @@ ul.pagination {
     .font-size(16);
     .line-height(16);
     .transition(transform .35s, opacity .35s, color .35s, background-color .35s);
-    
+
     background-color: white;
     border: @color_pr1;
+    border-radius: 5px;
 
     &.small {
         width: 100px;
@@ -1240,7 +1292,7 @@ ul.pagination {
 
     a {
         display: block;
-        padding: 5px;
+        padding: 10px;
         color: @color_pr3;
         font-family: @raleway;
         font-weight: 500;
@@ -1250,7 +1302,7 @@ ul.pagination {
 
     &.transparent {
         background-color: transparent;
-        border: 2px solid white;
+        border: 1px solid white;
         color: white;
 
         a {

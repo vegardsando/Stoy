@@ -2,12 +2,6 @@
 <?php global $base; include "header.php"; ?>
 
 
-    <section class="row">
-    	<figure class="emblem-heading">
-    		<h2>Artsdatabanken<strong></strong></h2>
-   		</figure>
-   	</section>
-
    <section id="case_slide-container" class="slide-container">
 
       <!--First Slide-->
