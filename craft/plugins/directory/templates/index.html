@@ -1,0 +1,62 @@
+{% extends "_layouts/cp" %}
+
+{% set title = "Directory"|t %}
+
+{% set content %}
+
+    <div id="directory-ko">
+        <form id="directory-search" action="">
+
+            <div class="spinner hidden"></div>
+
+            <div class="texticon search icon">
+                <input
+                    name="q"
+                    data-bind="value: query, valueUpdate: 'keyup'"
+                    class="text nicetext fullwidth"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="{{ 'Search plugins'|t }}">
+            </div>
+
+            <p class="error hidden"></p>
+
+            <!-- ko if: plugins().length -->
+                <div class="directory-plugins">
+                    <div class="directory-plugins-in">
+                        <div data-bind="template: {name:'plugin', foreach:plugins}"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            <!-- /ko -->
+        </form>
+
+        <hr>
+
+        <div class="directory-popular">
+            <h2>{{ "Popular Plugins"|t }}</h2>
+
+            <p class="error hidden"></p>
+            <div class="spinner hidden"></div>
+
+            <div class="directory-plugins">
+                <div class="directory-plugins-in">
+                    <div data-bind="template: {name:'plugin', foreach:popularPlugins}"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dukt-footer light">
+
+        <p><a href="https://dukt.net/craft/directory">{{plugin.name}}</a> {{plugin.version}} — {{ "Designed by {developer}"|t({developer:'<a href="'~plugin.developerUrl~'">'~plugin.developer~'</a>'})|raw }}</p>
+
+        <p>
+            {{ "Data provided by {dukt} &amp; {suc}"|t({dukt:'<a href="https://dukt.net/">Dukt</a>', suc:'<a href="http://straightupcraft.com">Straight Up Craft</a>'})|raw }}
+        </p>
+    </div>
+
+    {% include 'directory/_plugin' %}
+
+{% endset %}

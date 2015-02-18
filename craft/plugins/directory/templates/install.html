@@ -1,0 +1,21 @@
+{% extends "_layouts/basecp" %}
+{% set title = "Install plugin"|t %}
+{% includeCssResource "directory/css/install.css" %}
+{% includeJsResource "directory/js/install.js" %}
+
+{% includeTranslations
+    "Plugin Installed!"
+%}
+
+{% block body %}
+    {% set plugin = craft.directory.plugin(handle) %}
+
+    <div id="graphic" class="spinner big"></div>
+    <div id="status">{{ "Preparing to install {plugin}…"|t({plugin:plugin.name}) }}</div>
+{% endblock %}
+
+
+{% set js %}
+    new DirectoryInstall('{{ handle }}');
+{% endset %}
+{% includeJs js %}

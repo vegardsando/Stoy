@@ -1,0 +1,57 @@
+
+<script type="text/html" id="plugin">
+
+    <div class="directory-plugin">
+
+        <div class="directory-content">
+
+            <div class="directory-infos">
+
+                <h2 data-bind="text: name"></h2>
+
+                <p class="directory-developer">
+                    <a data-bind="text: developer, attr: { href: localDeveloperUrl }"></a>
+                </p>
+
+                <p class="description" data-bind="text: shortDescription"></p>
+
+                <div class="directory-status">
+
+                    <!-- ko if: isInstalled -->
+                        <span class="directory-installed">{{ "Installed"|t }}</span>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+
+            <div class="directory-btns">
+
+                <!-- ko if: isInstallable -->
+                    <a data-bind="attr: { href: installUrl }" class="btn submit">Install</a>
+                <!-- /ko -->
+
+                <!-- ko ifnot: isInstallable -->
+
+                    <!-- ko if: isInstalled -->
+                        <span class="btn disabled submit">{{ "Installed"|t }}</span>
+                    <!-- /ko -->
+
+                    <!-- ko ifnot: isInstalled -->
+                        <span class="btn disabled submit">{{ "Install"|t }}</span>
+                    <!-- /ko -->
+
+                <!-- /ko -->
+
+                <!-- ko if: localInfosUrl -->
+                    <a class="btn" target="_blank" data-bind="attr: { href: localInfosUrl }">{{ "Learn More"|t }}</a>
+                <!-- /ko -->
+
+                <!-- ko ifnot: localInfosUrl -->
+                    <span class="btn disabled">{{ "Learn More"|t }}</span>
+                <!-- /ko -->
+
+            </div>
+        </div>
+
+    </div>
+</script>

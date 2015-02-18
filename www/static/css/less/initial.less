@@ -1,0 +1,25 @@
+// Default inview behaviour
+@import "_03_lesshat.less"; // Lesshat
+@import "_04_mixins.less"; // Lesshat
+
+body {
+	.transition(transform 1.2s .3s ease, opacity 1.2s .3s ease);
+	.translate3d(0,-80px,0);
+	opacity:0;
+
+	&.lastet {
+		.translate3d(0,0,0);
+		opacity:1;
+	}
+
+	&.lastet-ferdig {
+		-ms-transform: none;
+		-webkit-transform: none;
+		transform: none;
+	}
+
+    &.livePreview {
+        opacity: 1;
+        .translate3d(0,0,0);
+    }
+}
