@@ -13,18 +13,16 @@ return array(
 		'tablePrefix' => 'craft',
 	),
 	'LOCAL' => array(
-		'server' => 'localhost',
-		'user' => 'root',
-		'password' => 'root',
-		'database' => 'stoy_craft'
+		'server' => 'vsandbox.net',
+		'user' => 'sando85_admin',
+		'password' => 'Polaroid',
+		'database' => 'sando85_stoy_craft'
 	),
 	'DEV' => array(
-		'server' => '10.0.0.14',
-		'port' => '8889',
-		//'port' => '3306',
-		'user' => 'root',
-		'password' => 'root',
-		'database' => 'standard_craft'
+		'server' => 'vsandbox.net',
+		'user' => 'sando85_admin',
+		'password' => 'Polaroid',
+		'database' => 'sando85_stoy_craft'
 	),
 	'STAGE' => array(
 		'server' => 'serverbart',
@@ -33,9 +31,9 @@ return array(
 		'database' => ''
 	),
 	'PROD' => array(
-		'server' => '',
-		'user' => '',
-		'password' => '',
-		'database' => ''
+		'server' => 'vsandbox.net',
+		'user' => 'sando85_admin',
+		'password' => 'Polaroid',
+		'database' => 'sando85_stoy_craft'
 	)
 );
