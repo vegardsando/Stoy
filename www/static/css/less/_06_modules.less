@@ -371,3 +371,186 @@
     .btn { margin-top: 2em; }
 }
 
+.module_divider {
+    .font-size(0);
+    border: 10px solid white;
+    overflow: hidden;
+
+    .second, .first {
+        width: 50%;
+        display: inline-block;
+        position: relative;
+        z-index: 0;
+        vertical-align: top;
+        height: 450px;
+        .backface-visibility(hidden);
+
+        .sizer-div{
+
+            &:after {
+                background: (rgba(143, 110, 103, 0.2));
+                content: '..';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            img {
+                .transition(transform .55s);
+            }
+
+        }
+
+        .text {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            right: -10%;
+            .transition(transform .45s);
+            .translate3d(0,100px,0);
+            color: white;
+
+            h2 {
+                margin-top: 20%;
+                position: relative;
+                top: 0;
+                left: 20px;
+                right: 20px;
+                text-align: center;
+                color: white;
+                font-weight: 300;
+                .font-size(28);
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 20%;
+                    right: 20%;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    height: 4px;
+                    background-color: white;
+                    .transition(transform .45s, opacity .45s);
+                    .opacity(0);
+                    .translate3d(0,50px,0);
+                }
+
+                span {
+                    font-weight: 800;
+                }
+            }
+
+            p {
+                .transition(opacity .45s, transform .45s);
+                .translate3d(0,50px,0);
+                .opacity(0);
+                font-weight: 300;
+                .font-size(14);
+                text-transform: uppercase;
+                text-align: center;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 10px;
+            }
+
+            .btn {
+                .transition(opacity .65s, transform .65s);
+                .translate3d(0,60px,0);
+                .opacity(0);
+            }
+        }
+
+        &:hover {
+            .text {
+                .translate3d(0,0,0);
+
+                h2 {
+                    &:after {
+                        .opacity(1);
+                        .translate3d(0,0,0);
+                    }
+                }
+
+                p, .btn {
+                    .opacity(1);
+                    .translate3d(0,0,0);
+                }
+            }
+
+        }
+
+    }
+
+    .first {
+        z-index: 2;
+
+        .sizer-div {
+            .backface-visibility(hidden);
+            overflow: hidden;
+            right: -12%;
+            left: -12%;
+            width: 125%;
+            .transition(transform .55s);
+            .transform(skew(-16deg), translate3d(-50px,0,0));
+
+            img {
+                width: 110%;
+                max-height: 150%;
+
+                .transition(transform .55s);
+                .transform(skew(16deg), scale(1.1));
+                position: relative;
+
+                @media @tablet {
+                    .transform(skew(0), scale(1));
+                }
+            }
+
+
+        }
+
+        .no-touch &:hover {
+            .sizer-div {
+                .transform(scale(1.2), skew(-16deg), translate3d(0,0,0));
+            }
+        }
+
+    }
+
+    .second {
+        .text {
+            right: -8%;
+        }
+
+        .sizer-div {
+            img {
+                width: 150%;
+            }
+        }
+
+        .no-touch &:hover {
+            .sizer-div {
+                img {
+                    .transform(scale(1.2), translate3d(0,0,0));
+                }
+            }
+        }
+
+    }
+
+}
+
+.map_wrapper {
+    height: 500px;
+    border: 10px solid white;
+}
+
+#map {
+    height: 100%;
+}

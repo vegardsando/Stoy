@@ -23,6 +23,7 @@ var $ = $,
         resizeTimeout,
         rippling,
         mouseover,
+        map,
         area = 120,
         fps = 24,
         now,
@@ -182,7 +183,7 @@ var $ = $,
     }
 
     //Kart
-    if ($m('.map').length) {
+    if ($m('.map_wrapper').length) {
         maps();
     }
 
