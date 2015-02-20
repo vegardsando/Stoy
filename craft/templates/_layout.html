@@ -78,10 +78,62 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
+        <header id="main-header">
+
+            <nav class="nav_main">
+                <ul>
+                    <li class="active">
+                        <a>Lyddesign</a>
+                    </li>
+                    <li>
+                        <a>Lydproduksjon</a>
+                    </li>
+                    <li>
+                        <a>Kontakt</a>
+                    </li>
+                    <li class="facebook">
+                        <a href="">
+                            <img src="static/img/icon_facebook.svg">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <img class="logo" src="static/img/logo.svg">
+        </header>
+
+
 		{% block content %}
 			<p>Du mangler innhold</p>
 		{% endblock %}
 
+        <footer>
+            <img class="footer_logo" src="static/img/logo_dark.png">
+
+            <ul class="unstyled">
+                <li>
+                    <img src="static/img/icon_address.png">
+                    <span>Båtmannsgata 4<br>7044 Trondheim</span>
+                </li>
+                <li>
+                    <img src="static/img/icon_contact.png">
+                    <span>post@stoey.no<br>
+                        Thomas: 847 58 484<br>
+                        David: 847 58 484
+                    </span>
+
+                </li>
+                <li class="facebook">
+                    <img src="static/img/icon_facebook.png">
+                    <span>Facebook</span>
+                </li>
+                <li class="vimeo">
+                    <img src="static/img/icon_vimeo.png">
+                    <span>Vimeo</span>
+                </li>
+            </ul>
+        </footer>
 
         {% if craft.config.devMode %}<div id="devmode"></div>{% endif %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

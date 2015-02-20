@@ -13,10 +13,10 @@ return array(
 		'tablePrefix' => 'craft',
 	),
 	'LOCAL' => array(
-		'server' => 'vsandbox.net',
-		'user' => 'sando85_admin',
-		'password' => 'Polaroid',
-		'database' => 'sando85_stoy_craft'
+		'server' => 'localhost',
+		'user' => 'root',
+		'password' => 'root',
+		'database' => 'stoy_craft'
 	),
 	'DEV' => array(
 		'server' => 'vsandbox.net',

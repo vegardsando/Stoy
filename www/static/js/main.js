@@ -59,6 +59,11 @@ var $ = $,
                 tablet = phone = false;
 			}
 		}
+
+        if(gammel_label != label){
+            setImageSrc();
+        }
+
 		gammel_label = label;
 	}
 
@@ -80,6 +85,105 @@ var $ = $,
         }
 
         window.requestAnimationFrame(render);
+    }
+
+    function maps() {
+
+        //'use strict';
+
+        var styles = [{
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+                { "visibility": "simplified" },
+                { "color": "#50504f" }
+            ]
+        }, {
+            "featureType": "landscape",
+            "stylers": [
+                { "color": "#c8c8c8" }
+            ]
+        }, {
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                { "color": "#000000" }
+            ]
+        }, {
+            "featureType": "water",
+            "stylers": [
+                { "color": "#ffffff" }
+            ]
+        }, {
+            "featureType": "transit",
+            "stylers": [
+                { "color": "#ffffff" }
+            ]
+        }, {
+            "featureType": "poi",
+            "stylers": [
+                { "visibility": "simplified" },
+                { "color": "#8d8c8d" }
+            ]
+        }, {
+            "stylers": [
+                { "lightness": 60 },
+                { "visibility": "simplified" }
+            ]
+        }];
+
+        var mapOptions = {
+            center: { lat: 63.4391142, lng: 10.4155636 },
+            scrollwheel: false,
+            zoom: 15,
+            mapTypeControl: false,
+            panControl: false,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            }
+        };
+
+
+
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        map.setOptions({styles: styles});
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(63.4391142, 10.4155636),
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10
+            },
+            draggable: false,
+            map: map
+        });
+
+
+    }
+
+    // Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
+    function setImageSrc() {
+        $m('.setsrc:not(".loaded")').each(function(){
+
+            var denne = $m(this);
+
+            if (denne.is('img:not(":hidden")')) {
+                denne.attr('src', $(this).data(label));
+                if(!denne.hasClass('setsrc')){
+                    return
+                }
+
+            } else {
+                denne.css('background-image', 'url(' + $(this).data(label) + ')');
+            }
+
+
+        });
+    }
+
+    //Kart
+    if ($m('.map').length) {
+        maps();
     }
 
 	$html.addClass('lastet');
