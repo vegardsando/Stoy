@@ -375,8 +375,6 @@ body {
   color: #392b28;
   font-size: 16px;
   font-size: 1rem;
-  line-height: 24px;
-  line-height: 1.5rem;
   font-family: 'Raleway', sans-serif;
 }
 .h1,
@@ -535,7 +533,10 @@ a:hover {
 }
 .grid {
   overflow: hidden;
-  margin: 0px 0px 5rem;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
   width: 100%;
   list-style: none;
   text-align: center;
