@@ -47,17 +47,7 @@
 /* FONTS FACE VARIABLES */
 /**************************/
 
-/* Thin SKAL VÆRE READER MEDIUM */
-@font-face{
-    .font-face(Nexa, ~'../../fonts/Nexa Light', 100, normal);
-}
-
-/* Light */
-@font-face{
-    .font-face(Nexa, ~'../../fonts/Nexa Bold', 300, normal);
-}
-
-@font_default: 'Nexa', sans-serif;
+@font_default: 'Raleway', sans-serif;
 
 
 /* DEFAULT FONT LOOKS AND BEHAVIOUR - MEDIA QUERIES - MOBILE FIRST */
@@ -79,6 +69,7 @@ body {
     color: @color_pr1;
     .font-size(@basesize);
     .line-height(24);
+    font-family: @font_default;
 }
 
 .h1,.h2,.h3,.h4,.h5,.h6 { display: block; }

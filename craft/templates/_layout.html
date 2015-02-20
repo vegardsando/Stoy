@@ -59,10 +59,12 @@
         {% if craft.config.devMode %}<link rel="shortcut icon" href="/static/php/favicon.php?t={{ craft.config.time }}&env={{craft.config.env}}" />{% endif%}
         {{ craft.minimee.css([
                 '/static/css/normalize.css',
+                'http://fonts.googleapis.com/css?family=Raleway:600,400',
                 '/static/css/compiled/main.css'
             ])
         }}
         <script src="/static/js/vendor/modernizr-custom-2.8.3.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Raleway:600,400' rel='stylesheet' type='text/css'>
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -79,8 +81,8 @@
 		{% block content %}
 			<p>Du mangler innhold</p>
 		{% endblock %}
-        
-        
+
+
         {% if craft.config.devMode %}<div id="devmode"></div>{% endif %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
