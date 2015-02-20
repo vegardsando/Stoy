@@ -12,26 +12,86 @@
 	max-width: 800px;
 }
 
+.sizer-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
 .sizer {
-	visibility: hidden;
+    width: 100%!important;
+    min-height: inherit!important;
+    visibility: hidden;
 }
 
 // TOPP-MODUL
 .top {
     height: 70vh;
-    width: 100%;
+    border: 10px solid white;
 
-    h1 {
-        color: white;
-        font-size: bold;
+    .top-content {
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+
+        &:after {
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(143, 103, 126, 0.2);
+        }
     }
+
+
+    .slide-text {
+        width: 100%;
+        text-align: center;
+        z-index: 1;
+        position: relative;
+        top: 65%;
+        .translateY(-50%);
+        color: white;
+
+        h1 {
+            .font-size(28);
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: underline;
+            padding-bottom: .2em;
+        }
+
+        span {
+            position: relative;
+            .font-size(20);
+            font-weight: 300;
+            text-transform: initial;
+            line-height: 1.5em;
+            text-decoration: none;
+
+            &:before {
+                content: '';
+                width: 100%;
+                height: 3px;
+                background: white;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
 }
 
 // GRID-MODUL SOM LISTER UT JOBBER
 .grid {
     overflow: hidden;
-    margin: 0;
-    margin-bottom: 5rem;
+    margin: 0px 0px 5rem;
     width: 100%;
     list-style: none;
     text-align: center;
@@ -307,3 +367,4 @@
 
     .btn { margin-top: 2em; }
 }
+
