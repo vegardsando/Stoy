@@ -477,6 +477,10 @@ a:hover {
   height: 70vh;
   border: 10px solid white;
 }
+.top .divider:after {
+  width: 101%;
+  margin-left: -1%;
+}
 .top .top-content {
   height: 100%;
   background-size: cover;
@@ -1079,11 +1083,10 @@ a:hover {
 .divider:after {
   content: '';
   position: absolute;
-  left: 0;
-  width: 101%;
+  width: 100%;
   height: 60px;
   bottom: -30px;
-  left: -1%;
+  left: 0;
   background: white;
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
@@ -1535,5 +1538,43 @@ body {
   height: 70px;
   margin: 0;
   left: 40px;
+}
+.underside .emblem {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: -57px;
+  left: 50%;
+  margin-left: -30px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 4;
+  text-align: center;
+}
+.underside .emblem img {
+  width: 25px;
+  display: inline;
+  position: relative;
+  top: 10px;
+}
+.underside .article_body {
+  margin-top: 80px;
+}
+.underside .article_body h1 {
+  font-weight: 800;
+  margin-left: -50px;
+  margin-bottom: 25px;
+}
+.underside .article_body h2 {
+  text-transform: none;
+  font-weight: 800;
+}
+.underside .article_body article {
+  display: inline-block;
+  width: 69%;
+}
+.underside .article_body aside {
+  display: inline-block;
+  width: 30%;
 }
 /** SHAME **/
