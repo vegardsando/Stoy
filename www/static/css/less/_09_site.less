@@ -20,8 +20,6 @@ body {
     .logo {
         .opacity(1);
         .transform(scale(1), translate3d(0,0,0));
-        top: 200px;
-        left: 50%;
         margin-left: -62px;
     }
 
@@ -35,14 +33,21 @@ body {
 .forside {
     height: 100%;
 
-    .top {
+    .logo {
+        top: 200px;
+        left: 50%;
+    }
 
-        .divider {
-            width: 101%;
-            margin: 0;
-            left: -1%;
-            &:after { .rotate(1deg); }
+    .grid {
+        article:nth-of-type(1) {
+            h2 { margin-top: 1em;  }
         }
+
+        article:nth-of-type(2) {
+            h2 { margin-top: .75em;  }
+        }
+
+
     }
 
     #frontpage_kunder {
@@ -71,13 +76,16 @@ body {
         .divider:after {
             top: 20px;
         }
-    }    
+    }
 }
-
-
-
 
 
 .underside {
     height: 100%;
+
+    .logo {
+        height: 70px;
+        margin: 0;
+        left: 40px;
+    }
 }
