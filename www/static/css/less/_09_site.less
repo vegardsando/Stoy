@@ -27,6 +27,7 @@ body {
         .translate3d(0,0,0);
         opacity: 1;
     }
+
 }
 
 // FORSIDE
@@ -34,8 +35,24 @@ body {
     height: 100%;
 
     .logo {
-        top: 200px;
+        top: 120px;
         left: 50%;
+        height: 70px;
+
+        @media @desktop {
+            top: 200px;
+            height: 90px;
+        }
+    }
+
+    .top {
+        h1{ .font-size(20); }
+        span { .font-size(16); }
+
+        @media @desktop {
+            h1{ .font-size(28); }
+            span { .font-size(20); }
+        }
     }
 
     .grid {
@@ -51,14 +68,19 @@ body {
     }
 
     #frontpage_kunder {
-        padding-top: 7em;
+        padding-top: 4em;
         padding-bottom: 2.5em;
         background: @color_sec1;
         border: 10px solid white;
 
+        @media @desktop {
+            padding-top: 7em;
+        }
+
         .row {
             text-align: center;
             a {
+                width: 80px;
                 margin-right: 40px;
                 display: inline-block;
                 position: relative;
@@ -70,6 +92,14 @@ body {
                     .translate3d(0,-5px,0);
                     .opacity(1);
                 }
+
+                @media @desktop {
+                    width: auto;
+                }
+            }
+
+            img {
+                width: 100%;
             }
         }
 
@@ -114,23 +144,47 @@ body {
 
         h1 {
             font-weight: 800;
-            margin-left: -50px;
-            margin-bottom: 25px;
+            margin-left: -25px;
+            margin-bottom: 27px;
         }
 
         h2 {
             text-transform: none;
             font-weight: 800;
+            margin-bottom: 2em;
         }
-        
+
         article {
             display: inline-block;
-            width: 69%;            
+            width: 40%;
         }
-        
+
         aside {
             display: inline-block;
-            width: 30%;
+            width: 35%;
+            margin-left: 20%;
+            vertical-align: top;
+
+
+            .info-tekst {
+                position: relative;
+                padding-left: 27px;
+                margin-bottom: 6em;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: -5%;
+                    left: 0;
+                    height: 110%;
+                    width: 1px;
+                    background: black;
+                }
+            }
+
+            img {
+                max-width: 100%;
+            }
         }
     }
 }

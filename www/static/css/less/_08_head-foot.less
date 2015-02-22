@@ -3,10 +3,14 @@
     position: fixed;
     top: 0px;
     width: 100%;
-    text-align: right;
+    text-align: center;
     padding-right: 20px;
     z-index: 10;
     padding-top: 10px;
+
+    @media @tablet {
+        text-align: right;
+    }
 
     ul {
         position: relative;
@@ -33,7 +37,7 @@
             }
 
             &:nth-of-type(4) {
-                .transition(transform 1s ease 1.4s, opacity 2s ease 1.4s);
+                .transition(transform 1s ease 1.4s, opacity 2s ease 1.4s,);
             }
 
             a {
@@ -45,27 +49,45 @@
             }
 
             &.facebook{
+                display: none;
                 margin-left: 40px;
                 &:before { display: none; }
+
+                @media @tablet {
+                    display: inline-block;
+                }
+
             }
+
 
             // Interpunct
             &:before {
                 position: absolute;
+                color: transparent;
                 top: 60%;
                 left: 50%;
-                color: transparent;
                 content: '•';
                 text-shadow: 0 0 transparent;
                 font-size: 1.2em;
                 .transition(text-shadow .3s ease-in-out, color .3s ease-in-out, transform .3s ease-in-out);
                 .transform(translateX(-50%));
                 pointer-events: none;
+
             }
 
-            &:hover:before {
+            .no-touch &:hover:before {
                 color: #fff;
                 text-shadow: 10px 0 #fff, -10px 0 #fff;
+            }
+
+            &.active {
+
+                .no-touch &:hover:before {
+                    color: @color_pr1;
+                    text-shadow: 10px 0 @color_pr1, -10px 0 @color_pr1;
+                }
+
+                a { color: @color_pr1; }
             }
 
         }
@@ -95,26 +117,45 @@ footer {
     img {
         display: inline-block;
         vertical-align: top;
-        float: left;
         margin-right: .7em;
+        margin-bottom: 10px;
     }
 
     .footer_logo {
-        width: 5%;
-        margin-right: 10%;
+        width: 100%;
+        padding: 0 40% 0 40%;
+        margin-bottom: 20px;
+
+        @media @desktop {
+            width: 70px;
+            padding: 0;
+            margin-bottom: 0;
+            float: left;
+        }
     }
 
     ul {
         display: inline-block;
-        width: 80%;
-        text-align: left;
+        width: 100%;
+        text-align: center;
         text-transform: uppercase;
         .font-size(13);
 
+        @media @desktop {
+            width: 80%;
+        }
+
         li {
             display: inline-block;
-            margin-right: 50px;
-            width: 15%;
+            margin-right: 0;
+            width: 49%;
+            margin-top: 10px;
+
+            @media @desktop {
+                width: 15%;
+                margin-right: 50px;
+                margin-top: 0;
+            }
 
             img {
                 position: relative;
@@ -124,6 +165,10 @@ footer {
 
             &:hover img {
                 top: -5px;
+            }
+
+            span {
+                width: 100%;
             }
 
         }
@@ -138,8 +183,11 @@ footer {
         }
 
         .facebook {
-            margin-left: 15%;
             margin-right: 0;
+
+            @media @desktop {
+                margin-left: 15%;
+            }
         }
 
     }
