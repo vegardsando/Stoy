@@ -165,7 +165,7 @@
             h2 {
                 position: relative;
                 word-spacing: -0.15em;
-                font-weight: 300;
+                font-weight: 700;
                 .font-size(28);
                 color: white;
                 .transition(transform .35s, opacity .35s);
@@ -314,7 +314,7 @@
     border: 10px solid white;
     overflow: hidden;
 
-    .second, .first {
+    .eq1, .eq2 {
         width: 100%;
         display: inline-block;
         position: relative;
@@ -360,10 +360,12 @@
                 .translate3d(0,100px,0);
             }
 
-            h2 {
-                margin-top: 20%;
+            .tittel {
+                margin-top: 140px;
+                margin-bottom: .5em;
                 position: relative;
                 top: 0;
+                text-transform: uppercase;
                 text-align: center;
                 color: white;
                 font-weight: 300;
@@ -394,10 +396,9 @@
                 }
             }
 
-            p {
+            .paragraph {
                 font-weight: 300;
                 .font-size(14);
-                text-transform: uppercase;
                 text-align: center;
                 width: 80%;
                 margin-left: auto;
@@ -426,14 +427,14 @@
             .text {
                 .translate3d(0,0,0);
 
-                h2 {
+                .tittel {
                     &:after {
                         .opacity(1);
                         .translate3d(0,0,0);
                     }
                 }
 
-                p, .btn {
+                .paragraph, .btn {
                     .opacity(1);
                     .translate3d(0,0,0);
                 }
@@ -443,7 +444,7 @@
 
     }
 
-    .first {
+    .eq1 {
         z-index: 2;
 
         .sizer-div {
@@ -484,7 +485,7 @@
 
     }
 
-    .second {
+    .eq2 {
         .text {
 
             @media only screen and (min-width: 1025px) {

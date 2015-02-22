@@ -633,7 +633,7 @@ a:hover {
 .grid article figcaption h2 {
   position: relative;
   word-spacing: -0.15em;
-  font-weight: 300;
+  font-weight: 700;
   font-size: 28px;
   font-size: 1.75rem;
   color: white;
@@ -865,8 +865,8 @@ a:hover {
   border: 10px solid white;
   overflow: hidden;
 }
-.module_divider .second,
-.module_divider .first {
+.module_divider .eq1,
+.module_divider .eq2 {
   width: 100%;
   display: inline-block;
   position: relative;
@@ -880,13 +880,13 @@ a:hover {
   backface-visibility: hidden;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second,
-  .module_divider .first {
+  .module_divider .eq1,
+  .module_divider .eq2 {
     width: 50%;
   }
 }
-.module_divider .second .sizer-div:after,
-.module_divider .first .sizer-div:after {
+.module_divider .eq1 .sizer-div:after,
+.module_divider .eq2 .sizer-div:after {
   background: rgba(143, 110, 103, 0.2);
   content: '..';
   position: absolute;
@@ -895,15 +895,15 @@ a:hover {
   right: 0;
   bottom: 0;
 }
-.module_divider .second .sizer-div img,
-.module_divider .first .sizer-div img {
+.module_divider .eq1 .sizer-div img,
+.module_divider .eq2 .sizer-div img {
   -webkit-transition: -webkit-transform 0.55s;
   -moz-transition: -moz-transform 0.55s;
   -o-transition: -o-transform 0.55s;
   transition: -webkit-transform 0.55s,-moz-transform 0.55s,-o-transform 0.55s,transform 0.55s;
 }
-.module_divider .second .text,
-.module_divider .first .text {
+.module_divider .eq1 .text,
+.module_divider .eq2 .text {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -911,8 +911,8 @@ a:hover {
   color: white;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second .text,
-  .module_divider .first .text {
+  .module_divider .eq1 .text,
+  .module_divider .eq2 .text {
     right: -10%;
     width: 70%;
     -webkit-transition: -webkit-transform 0.45s;
@@ -926,19 +926,21 @@ a:hover {
     transform: translate3d(0, 100px, 0);
   }
 }
-.module_divider .second .text h2,
-.module_divider .first .text h2 {
-  margin-top: 20%;
+.module_divider .eq1 .text .tittel,
+.module_divider .eq2 .text .tittel {
+  margin-top: 140px;
+  margin-bottom: .5em;
   position: relative;
   top: 0;
+  text-transform: uppercase;
   text-align: center;
   color: white;
   font-weight: 300;
   font-size: 28px;
   font-size: 1.75rem;
 }
-.module_divider .second .text h2:after,
-.module_divider .first .text h2:after {
+.module_divider .eq1 .text .tittel:after,
+.module_divider .eq2 .text .tittel:after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -951,8 +953,8 @@ a:hover {
   background-color: white;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second .text h2:after,
-  .module_divider .first .text h2:after {
+  .module_divider .eq1 .text .tittel:after,
+  .module_divider .eq2 .text .tittel:after {
     -webkit-transition: -webkit-transform 0.45s, opacity 0.45s;
     -moz-transition: -moz-transform 0.45s, opacity 0.45s;
     -o-transition: -o-transform 0.45s, opacity 0.45s;
@@ -969,16 +971,15 @@ a:hover {
     transform: translate3d(0, 50px, 0);
   }
 }
-.module_divider .second .text h2 span,
-.module_divider .first .text h2 span {
+.module_divider .eq1 .text .tittel span,
+.module_divider .eq2 .text .tittel span {
   font-weight: 800;
 }
-.module_divider .second .text p,
-.module_divider .first .text p {
+.module_divider .eq1 .text .paragraph,
+.module_divider .eq2 .text .paragraph {
   font-weight: 300;
   font-size: 14px;
   font-size: 0.875rem;
-  text-transform: uppercase;
   text-align: center;
   width: 80%;
   margin-left: auto;
@@ -986,8 +987,8 @@ a:hover {
   padding: 10px;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second .text p,
-  .module_divider .first .text p {
+  .module_divider .eq1 .text .paragraph,
+  .module_divider .eq2 .text .paragraph {
     -webkit-transition: opacity 0.45s, -webkit-transform 0.45s;
     -moz-transition: opacity 0.45s, -moz-transform 0.45s;
     -o-transition: opacity 0.45s, -o-transform 0.45s;
@@ -1005,8 +1006,8 @@ a:hover {
   }
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second .text .btn,
-  .module_divider .first .text .btn {
+  .module_divider .eq1 .text .btn,
+  .module_divider .eq2 .text .btn {
     -webkit-transition: opacity 0.65s, -webkit-transform 0.65s;
     -moz-transition: opacity 0.65s, -moz-transform 0.65s;
     -o-transition: opacity 0.65s, -o-transform 0.65s;
@@ -1023,16 +1024,16 @@ a:hover {
     opacity: 0;
   }
 }
-.module_divider .second:hover .text,
-.module_divider .first:hover .text {
+.module_divider .eq1:hover .text,
+.module_divider .eq2:hover .text {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.module_divider .second:hover .text h2:after,
-.module_divider .first:hover .text h2:after {
+.module_divider .eq1:hover .text .tittel:after,
+.module_divider .eq2:hover .text .tittel:after {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -1044,10 +1045,10 @@ a:hover {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.module_divider .second:hover .text p,
-.module_divider .first:hover .text p,
-.module_divider .second:hover .text .btn,
-.module_divider .first:hover .text .btn {
+.module_divider .eq1:hover .text .paragraph,
+.module_divider .eq2:hover .text .paragraph,
+.module_divider .eq1:hover .text .btn,
+.module_divider .eq2:hover .text .btn {
   zoom: 1;
   filter: alpha(opacity=100);
   -webkit-opacity: 1;
@@ -1059,10 +1060,10 @@ a:hover {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-.module_divider .first {
+.module_divider .eq1 {
   z-index: 2;
 }
-.module_divider .first .sizer-div {
+.module_divider .eq1 .sizer-div {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
@@ -1074,7 +1075,7 @@ a:hover {
   width: 100%;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .first .sizer-div {
+  .module_divider .eq1 .sizer-div {
     right: -12%;
     left: -12%;
     width: 125%;
@@ -1089,12 +1090,12 @@ a:hover {
     transform: skew(-16deg) translate3d(-50px, 0, 0);
   }
 }
-.module_divider .first .sizer-div img {
+.module_divider .eq1 .sizer-div img {
   max-height: 100%;
   position: relative;
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .first .sizer-div img {
+  .module_divider .eq1 .sizer-div img {
     width: 110%;
     max-height: 150%;
     -webkit-transition: -webkit-transform 0.55s;
@@ -1108,7 +1109,7 @@ a:hover {
     transform: skew(16deg) scale(1.1);
   }
 }
-.no-touch .module_divider .first:hover .sizer-div {
+.no-touch .module_divider .eq1:hover .sizer-div {
   -webkit-transform: scale(1.2) skew(-16deg) translate3d(0, 0, 0);
   -moz-transform: scale(1.2) skew(-16deg) translate3d(0, 0, 0);
   -o-transform: scale(1.2) skew(-16deg) translate3d(0, 0, 0);
@@ -1116,14 +1117,14 @@ a:hover {
   transform: scale(1.2) skew(-16deg) translate3d(0, 0, 0);
 }
 @media only screen and (min-width: 1025px) {
-  .module_divider .second .text {
+  .module_divider .eq2 .text {
     right: 10%;
   }
 }
-.module_divider .second .sizer-div img {
+.module_divider .eq2 .sizer-div img {
   width: 150%;
 }
-.no-touch .module_divider .second:hover .sizer-div img {
+.no-touch .module_divider .eq2:hover .sizer-div img {
   -webkit-transform: scale(1.2) translate3d(0, 0, 0);
   -moz-transform: scale(1.2) translate3d(0, 0, 0);
   -o-transform: scale(1.2) translate3d(0, 0, 0);

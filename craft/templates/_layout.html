@@ -84,13 +84,19 @@
             <nav class="nav_main">
                 <ul>
                     <li>
-                        <a>Lyddesign</a>
+                        {% for entry in craft.entries.section('lyddesign').limit(1) %}
+                            <a href="{{entry.url}}">{{entry.title}}</a>
+                        {% endfor %}
                     </li>
                     <li>
-                        <a>Lydproduksjon</a>
+                        {% for entry in craft.entries.section('musikkproduksjon').limit(1) %}
+                        <a href="{{entry.url}}">{{entry.title}}</a>
+                        {% endfor %}
                     </li>
                     <li>
-                        <a>Hvem er vi?</a>
+                        {% for entry in craft.entries.section('kontakt').limit(1) %}
+                        <a href="{{entry.url}}">Hvem er vi?</a>
+                        {% endfor %}
                     </li>
                     <li class="facebook">
                         <a href="">
@@ -100,7 +106,7 @@
                 </ul>
             </nav>
 
-            <img class="logo" src="static/img/logo.svg">
+            <a href="/"><img class="logo" src="static/img/logo.svg"></a>
         </header>
 
 
@@ -138,13 +144,13 @@
         {% if craft.config.devMode %}<div id="devmode"></div>{% endif %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
 
         <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         {{ craft.minimee.js([
                 '/static/js/plugins.js',
                 '/static/js/vendor/picturefill.min.js',
                 '/static/js/vendor/svg4everybody.min.js',
-                'http://a.vimeocdn.com/js/froogaloop2.min.js',
                 '/static/js/vendor/jquery.fitvids.js',
                 '/static/js/60-fps-scroll.js',
                 '/static/js/main.js'

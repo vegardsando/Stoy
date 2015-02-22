@@ -187,7 +187,15 @@ var $ = $,
         maps();
     }
 
-	$html.addClass('lastet');
+    setTimeout(function(){
+        $html.addClass('lastet');
+
+        setTimeout(function() {
+            $(".grid article").fitVids();
+        }, 1000);
+
+    },1000);
+
 
     render();
 
@@ -215,4 +223,22 @@ var $ = $,
         }, groups.length*delayOffset + 500);
     });
 
+    // Forside - vimeo-videoer
+    $( ".grid article" ).on('click', function() {
+
+        // Sett alle vimeo-videoer på pause
+        var iframe = $('iframe');
+        iframe.each(function(index){
+            var player = $f($(this)[0]);
+            player.api('pause');
+        })
+
+        // Fjern alle video_active på andre elementer
+        $('.video_active').removeClass('video_active');
+        $(this).addClass('video_active');
+
+    });
+
 }());
+
+

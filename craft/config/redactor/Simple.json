@@ -1,4 +1,5 @@
 {
-	buttons: ['bold', 'italic'],
-	toolbarFixedBox: true
+    buttons: ['bold', 'italic', 'formatting'],
+	toolbarFixedBox: true,
+    formattingTags: ['p', 'blockquote', 'h2', 'h3', 'h4']
 }
