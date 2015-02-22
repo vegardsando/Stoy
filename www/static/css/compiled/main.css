@@ -444,7 +444,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #392b28;
+  color: #5b5657;
 }
 /** OBJECTS **/
 /** ROW WITH CENTERED AND MAXWIDTH **/
@@ -908,14 +908,13 @@ a:hover {
   top: 0;
   bottom: 0;
   width: 100%;
-  right: 0;
   color: white;
 }
 @media only screen and (min-width: 1025px) {
   .module_divider .second .text,
   .module_divider .first .text {
     right: -10%;
-    width: 50%;
+    width: 70%;
     -webkit-transition: -webkit-transform 0.45s;
     -moz-transition: -moz-transform 0.45s;
     -o-transition: -o-transform 0.45s;
@@ -938,20 +937,13 @@ a:hover {
   font-size: 28px;
   font-size: 1.75rem;
 }
-@media only screen and (min-width: 1025px) {
-  .module_divider .second .text h2,
-  .module_divider .first .text h2 {
-    left: 20px;
-    right: 20px;
-  }
-}
 .module_divider .second .text h2:after,
 .module_divider .first .text h2:after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 20%;
-  right: 20%;
+  left: 10%;
+  right: 10%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -961,7 +953,6 @@ a:hover {
 @media only screen and (min-width: 1025px) {
   .module_divider .second .text h2:after,
   .module_divider .first .text h2:after {
-    right: -10%;
     -webkit-transition: -webkit-transform 0.45s, opacity 0.45s;
     -moz-transition: -moz-transform 0.45s, opacity 0.45s;
     -o-transition: -o-transform 0.45s, opacity 0.45s;
@@ -1011,7 +1002,6 @@ a:hover {
     -webkit-opacity: 0;
     -moz-opacity: 0;
     opacity: 0;
-    width: 50%;
   }
 }
 @media only screen and (min-width: 1025px) {
@@ -1079,7 +1069,7 @@ a:hover {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
-  right: 0;
+  right: 10%;
   left: 0;
   width: 100%;
 }
@@ -1127,7 +1117,7 @@ a:hover {
 }
 @media only screen and (min-width: 1025px) {
   .module_divider .second .text {
-    right: -8%;
+    right: 10%;
   }
 }
 .module_divider .second .sizer-div img {
@@ -1546,7 +1536,7 @@ footer ul .vimeo {
 }
 footer ul .facebook span,
 footer ul .vimeo span {
-  margin-top: 7px;
+  margin-top: -5px;
   position: relative;
 }
 footer ul .facebook {
