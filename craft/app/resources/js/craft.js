@@ -12391,6 +12391,9 @@ Craft.StructureTableSorter = Garnish.DragSort.extend({
 						$spinnerRow.remove();
 						this.elementIndex._expandElement($toggle, true);
 					}
+
+					// See if we should run any pending tasks
+					Craft.cp.runPendingTasks();
 				}
 			}, this));
 		}

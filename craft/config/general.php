@@ -24,7 +24,7 @@ define('BASEPATH', realpath(CRAFT_BASE_PATH . '/../') . '/');
 return array(
 	'*' => array(
 		
-		'maxUploadFileSize' => 67108864,
+		'maxUploadFileSize' => 671088644,
 
         // We can use these variables in the URL and Path settings within
         // the Craft Control Panel.  i.e. siteUrl => {siteUrl}, basePath => {basePath} 
