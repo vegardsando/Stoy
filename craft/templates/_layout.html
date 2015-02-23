@@ -1,50 +1,4 @@
 <!DOCTYPE html>
-<!--
-
-                                   @@@@@@@@@@@@@@
-                              @@@@@@@@@@@@@@@@@@@@@@@@
-                            @@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-               @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-             @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      @@@@@    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   @@@@@
-       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-              @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-             @@@@@@                                             @@@@@@
-             @@@@@@                                             @@@@@@
-             @@@@@@                                             @@@@@@
-             @@@@@@                                             @@@@@@
-               @@@@                                             @@@@
-               @@@@                                             @@@@
-               @@@@                                             @@@@
-
-
-                                         @@
-                                        @@@@
-                                       @@@@@@
-                      @@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@@@@@@@
-                    @@@@@@@@@@@@@@@@@@@@    @@@@@@@@@@@@@@@@@@@@
-                   @@@@@@@@@@@@@@@@@@@        @@@@@@@@@@@@@@@@@@@
-                   @@@                                        @@@
-                   @@                                          @@
-                   @@                                          @@
-
-                                  WWW.MUSTASJ.NO
-
--->
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -79,6 +33,32 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        {% set desktop = {
+        mode: 'crop',
+        width: 1400,
+        height: 650,
+        quality: 100,
+        position: 'center-center'
+        } %}
+
+        {% set tablet = {
+        mode: 'crop',
+        width: 800,
+        height: 367,
+        quality: 100,
+        position: 'center-center'
+        } %}
+
+        {% set phone = {
+        mode: 'crop',
+        width: 400,
+        height: 184,
+        quality: 100,
+        position: 'center-center'
+        } %}
+
+        {% set footer = craft.globals.getSetByHandle('footer') %}
+
         <header id="main-header">
 
             <nav class="nav_main">
@@ -95,11 +75,11 @@
                     </li>
                     <li>
                         {% for entry in craft.entries.section('kontakt').limit(1) %}
-                        <a href="{{entry.url}}">Hvem er vi?</a>
+                        <a href="{{entry.url}}">{{entry.title}}</a>
                         {% endfor %}
                     </li>
                     <li class="facebook">
-                        <a href="">
+                        <a href="{{footer.facebook}}" target="_blank">
                             <img src="static/img/icon_facebook.svg">
                         </a>
                     </li>
@@ -120,23 +100,20 @@
             <ul class="unstyled">
                 <li>
                     <img src="static/img/icon_address.png">
-                    <span>Båtmannsgata 4<br>7044 Trondheim</span>
+                    <span>{{footer.adresse}}</span>
                 </li>
                 <li>
                     <img src="static/img/icon_contact.png">
-                    <span>post@stoey.no<br>
-                        Thomas: 847 58 484<br>
-                        David: 847 58 484
-                    </span>
+                    <span>{{footer.kontakt}}</span>
 
                 </li>
                 <li class="facebook">
                     <img src="static/img/icon_facebook.png">
-                    <span>Facebook</span>
+                    <a href="{{footer.facebook}}" target="_blank"><span>Facebook</span></a>
                 </li>
                 <li class="vimeo">
                     <img src="static/img/icon_vimeo.png">
-                    <span>Vimeo</span>
+                    <a href="{{footer.vimeo}}" target="_blank"><span>Vimeo</span></a>
                 </li>
             </ul>
         </footer>

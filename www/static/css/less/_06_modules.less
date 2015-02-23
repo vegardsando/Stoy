@@ -31,6 +31,7 @@
 .top {
     height: 50vh;
     border: 10px solid white;
+    .translateZ(0);
 
     @media @desktop {
         height: 70vh;
@@ -306,6 +307,14 @@
 
     }
 
+    article:nth-of-type(1) {
+        h2 { margin-top: 1em;  }
+    }
+
+    article:nth-of-type(2) {
+        h2 { margin-top: .75em;  }
+    }
+
     .btn { margin-top: 2em; }
 }
 
@@ -460,6 +469,10 @@
                 width: 125%;
                 .transition(transform .55s);
                 .transform(skew(-16deg), translate3d(-50px,0,0));
+            }
+
+            @media only screen and (min-width: 600px) {
+                width: 135%;
             }
 
             img {

@@ -55,18 +55,6 @@ body {
         }
     }
 
-    .grid {
-        article:nth-of-type(1) {
-            h2 { margin-top: 1em;  }
-        }
-
-        article:nth-of-type(2) {
-            h2 { margin-top: .75em;  }
-        }
-
-
-    }
-
     #frontpage_kunder {
         padding-top: 4em;
         padding-bottom: 2.5em;
@@ -165,6 +153,7 @@ body {
             font-weight: 800;
             margin-left: 0;
             margin-bottom: 27px;
+            width: 50%;
 
             @media @desktop {
                 margin-left: -25px;
@@ -229,10 +218,19 @@ body {
             img {
                 max-width: 100%;
             }
-            
+
             .aside-img {
                 p { margin: .5em 0 0 .5em; }
             }
         }
+    }
+}
+
+.jobber {
+    .top { height: 20vh; }
+    .top-content:after { background: rgba(102, 92, 108, 1); }
+
+    footer {
+        margin-top: 20px;
     }
 }

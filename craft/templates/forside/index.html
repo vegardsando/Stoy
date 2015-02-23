@@ -1,30 +1,6 @@
 {% extends "_layout" %}
 {% set bodyClass = "forside" %}
 
-{% set desktop = {
-mode: 'crop',
-width: 1400,
-height: 1400,
-quality: 85,
-position: 'center-center'
-} %}
-
-{% set tablet = {
-mode: 'crop',
-width: 800,
-height: 800,
-quality: 85,
-position: 'center-center'
-} %}
-
-{% set phone = {
-mode: 'crop',
-width: 400,
-height: 400,
-quality: 85,
-position: 'center-center'
-} %}
-
 {% block content %}
 
 {% set forside = craft.entries.section('forside').first() %}
@@ -33,7 +9,7 @@ position: 'center-center'
 
     <div class="top-content setsrc" data-desktop="{{ forside.toppbilde.first().getUrl(desktop) }}"
          data-tablet="{{ forside.toppbilde.first().getUrl(tablet) }}"
-         data-phone="{{ forside.toppbilde.first().getUrl(phone) }}" data-id='1'>
+         data-phone="{{ forside.toppbilde.first().getUrl(phone) }}">
         <div class="text">
             <h1>{{forside.tittel}}</h1>
             <span>
@@ -73,7 +49,7 @@ position: 'center-center'
                 </div>
                 <figcaption>
                     <h2>{{block.title}}</h2>
-                    <p>{{block.tekst}}</p>
+                    <p>{{block.tekstRen}}</p>
                     <span class="icon_play">
                         <?php include "/static/img/icon_play.svg" ?>
                     </span>
@@ -84,7 +60,7 @@ position: 'center-center'
 
     <div class="row centered">
         <div class="btn border">
-            <a href="">Se alle jobber</a>
+            <a href="/jobber">Se alle jobber</a>
         </div>
     </div>
 </section>
@@ -108,7 +84,7 @@ position: 'center-center'
                 <div class="tittel">{{block.tittel}}</div>
                 <div class="paragraph">{{block.tekst}}</div>
                 <span class="btn transparent small">
-                    {{block.link}}">
+                    <a href="{{block.sidelink.first().url}}">Les mer</a>
                 </span>
             </div>
 

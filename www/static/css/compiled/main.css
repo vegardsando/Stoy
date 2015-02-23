@@ -476,6 +476,11 @@ a:hover {
 .top {
   height: 50vh;
   border: 10px solid white;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
 }
 @media only screen and (min-width: 1024px) {
   .top {
@@ -856,6 +861,12 @@ a:hover {
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+.grid article:nth-of-type(1) h2 {
+  margin-top: 1em;
+}
+.grid article:nth-of-type(2) h2 {
+  margin-top: .75em;
+}
 .grid .btn {
   margin-top: 2em;
 }
@@ -1088,6 +1099,11 @@ a:hover {
     -o-transform: skew(-16deg) translate3d(-50px, 0, 0);
     -ms-transform: skew(-16deg) translate3d(-50px, 0, 0);
     transform: skew(-16deg) translate3d(-50px, 0, 0);
+  }
+}
+@media only screen and (min-width: 600px) {
+  .module_divider .eq1 .sizer-div {
+    width: 135%;
   }
 }
 .module_divider .eq1 .sizer-div img {
@@ -1447,6 +1463,7 @@ lesshat-selector {
 }
 .logo {
   position: absolute;
+  display: block;
   top: 50px;
   left: 5%;
   height: 90px;
@@ -1635,12 +1652,6 @@ body {
     font-size: 1.25rem;
   }
 }
-.forside .grid article:nth-of-type(1) h2 {
-  margin-top: 1em;
-}
-.forside .grid article:nth-of-type(2) h2 {
-  margin-top: .75em;
-}
 .forside #frontpage_kunder {
   padding-top: 4em;
   padding-bottom: 2.5em;
@@ -1753,6 +1764,7 @@ body {
   font-weight: 800;
   margin-left: 0;
   margin-bottom: 27px;
+  width: 50%;
 }
 @media only screen and (min-width: 1024px) {
   .underside .article_body h1 {
@@ -1818,5 +1830,14 @@ body {
 }
 .underside .article_body aside .aside-img p {
   margin: .5em 0 0 .5em;
+}
+.jobber .top {
+  height: 20vh;
+}
+.jobber .top-content:after {
+  background: #665c6c;
+}
+.jobber footer {
+  margin-top: 20px;
 }
 /** SHAME **/

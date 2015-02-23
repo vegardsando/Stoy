@@ -192,7 +192,7 @@ var $ = $,
 
         setTimeout(function() {
             $(".grid article").fitVids();
-        }, 1000);
+        }, 3500);
 
     },1000);
 

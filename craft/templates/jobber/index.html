@@ -1,0 +1,52 @@
+{% extends "_layout" %}
+{% set bodyClass = "underside jobber" %}
+
+{% block content %}
+
+<section class="top">
+
+    <div class="top-content setsrc">
+        <div class="text">
+            <h1 class="hidden">Alle jobber</h1>
+        </div>
+    </div>
+    <figure class="divider"></figure>
+</section>
+
+<section class="row">
+    <figure class="emblem-heading">
+        <h2>Alle<strong> jobber</strong></h2>
+    </figure>
+</section>
+
+<figure class="divider down"></figure>
+
+<section class="jobber grid">
+    {% for entry in craft.entries.section('jobber') %}
+
+    {% set video = craft.embedder.url(entry.video, {max_width:500, max_height:800}) %}
+
+    <article class="effect-one">
+        <img class="sizer" src="http://placehold.it/350x250">
+        <div class="sizer-div">
+            <img src="{{ video.video_highres }}">
+            <div class="video">
+                {{ video.embed_code }}
+            </div>
+            <figcaption>
+                <h2>{{entry.title}}</h2>
+                <p>{{entry.tekstRen}}</p>
+                <span class="icon_play">
+                    <?php include "/static/img/icon_play.svg" ?>
+                </span>
+            </figcaption>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+
+{% endblock %}
+
+
+
+
