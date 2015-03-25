@@ -31,14 +31,13 @@ body {
 
     .forside {
         .logo .circle { opacity: 0.8;}
+    }
 
-        .top {
-            h1, .h1, span a {
-                opacity: 1;
-                .translate3d(0,0,0);
-            }
+    .top {
+        h1, .h1, span, span a {
+            opacity: 1;
+            .translate3d(0,0,0);
         }
-
     }
 
     body {
@@ -62,55 +61,6 @@ body {
             height: 250px;
             width: 250px;
             margin-left: -125px;
-        }
-    }
-
-    .top {
-        h1, .h1{
-            font-family: @font_playfair;
-            text-transform: none;
-            opacity: 0;
-            .translate3d(0,20px,0;)
-        }
-        span a{
-            .font-size(16);
-            opacity: 0;
-            .translate3d(0,20px,0;)
-        }
-
-        h1 {
-            .transition(opacity .55s @bezier 1.9s; transform .55s @bezier 1.9s;)
-        }
-
-        .h1 {
-            .transition(opacity .55s @bezier 2s; transform .55s @bezier 2s;)
-        }
-
-        span a{
-            .transition(opacity .55s @bezier 2.1s; transform .55s @bezier 2.1s;)
-        }
-
-        .text {
-            width: 100%;
-            text-align: center;
-            z-index: 1;
-            position: relative;
-            top: 70%;
-            .translateY(-50%);
-            color: white;
-
-            span a{
-                position: relative;
-                .font-size(20);
-                font-weight: 300;
-                text-transform: initial;
-                line-height: 1.5em;
-                text-decoration: none;
-            }
-        }
-
-        @media @desktop {
-            h1, .h1{ .font-size(40); }
         }
     }
 
@@ -175,6 +125,14 @@ body {
             margin: 0;
             left: 20px;
             top: 0px;
+        }
+    }
+
+    .top .text{
+        top: 50%;
+
+        @media @desktop {
+            top: 55%;
         }
     }
 
