@@ -18,9 +18,28 @@ body {
     }
 
     .logo {
-        .opacity(1);
-        .transform(scale(1), translate3d(0,0,0));
-        margin-left: -62px;
+        .circle {
+            .scale(1);
+            opacity: 1;
+        }
+
+        .logoelement {
+            .scale(1);
+        }
+
+        margin-left: -100px;
+    }
+
+    .forside {
+        .logo .circle { opacity: 0.8;}
+
+        .top {
+            h1, .h1, span a {
+                opacity: 1;
+                .translate3d(0,0,0);
+            }
+        }
+
     }
 
     body {
@@ -40,18 +59,58 @@ body {
         height: 70px;
 
         @media @desktop {
-            top: 200px;
-            height: 90px;
+            top: 120px;
+            height: 200px;
+            width: 200px;
         }
     }
 
     .top {
-        h1{ .font-size(20); }
-        span { .font-size(16); }
+        h1, .h1{
+            font-family: @font_playfair;
+            text-transform: none;
+            opacity: 0;
+            .translate3d(0,20px,0;)
+        }
+        span a{
+            .font-size(16);
+            opacity: 0;
+            .translate3d(0,20px,0;)
+        }
+
+        h1 {
+            .transition(opacity .55s @bezier 1.9s; transform .55s @bezier 1.9s;)
+        }
+
+        .h1 {
+            .transition(opacity .55s @bezier 2s; transform .55s @bezier 2s;)
+        }
+
+        span a{
+            .transition(opacity .55s @bezier 2.1s; transform .55s @bezier 2.1s;)
+        }
+
+        .text {
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            top: 65%;
+            .translateY(-50%);
+            color: white;
+
+            span a{
+                position: relative;
+                .font-size(20);
+                font-weight: 300;
+                text-transform: initial;
+                line-height: 1.5em;
+                text-decoration: none;
+            }
+        }
 
         @media @desktop {
-            h1{ .font-size(28); }
-            span { .font-size(20); }
+            h1, .h1{ .font-size(40); }
         }
     }
 
@@ -108,11 +167,14 @@ body {
         top: 40vh;
         left: 0;
 
+        .circle {display: none; }
+
         @media @desktop {
-            height: 70px;
+            height: 150px;
+            width: 150px;
             margin: 0;
-            left: 40px;
-            top: 40px;
+            left: 20px;
+            top: 0px;
         }
     }
 
