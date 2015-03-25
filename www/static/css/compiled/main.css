@@ -1377,8 +1377,8 @@ lesshat-selector {
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 13px;
-  font-size: 0.8125rem;
+  font-size: 15px;
+  font-size: 0.9375rem;
   cursor: pointer;
 }
 .nav_main ul li.facebook {
