@@ -1,0 +1,16 @@
+{
+    "require": {
+        "google/apiclient": "1.1.6",
+        "ins0/google-measurement-php-client": "v2.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Craft\\": "etc/craft/",
+            "Dukt\\Analytics\\DataSources\\": "etc/datasources/"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": ["echo [WARNING] Delete all .git dirs", "rm -rf vendor/**/**/.git"],
+        "post-install-cmd": ["echo [WARNING] Delete all .git dirs", "rm -rf vendor/**/**/.git"]
+    }
+}

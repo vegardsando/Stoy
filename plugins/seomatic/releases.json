@@ -1,0 +1,207 @@
+[
+    {
+        "version": "1.1.1",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-02-09T11:00:00-05:00",
+        "notes": [
+            "[Added] SEOmatic Meta FieldTypes now work to automatically set meta when attached to Categories and also Craft Commerce Products",
+            "[Improved] The Google Analytics script tag is not included during Live Preview anymore",
+            "[Added] [Added] Added the ability to reference the fields of an SEOmatic FieldType via entry.mySeomaticField.seoTitle & entry.mySeomaticField.seoDescription & entry.mySeomaticField.seoKeywords",
+            "[Added] There is now significantly more space available for the Entity Description and Creator Description",
+            "[Fixed] Fixed an issue with PHP 5.3",
+            "[Added] SEOmatic now handles robots.txt; it's configured on the SEO Site Meta tab",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.0",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-02-07T11:00:00-05:00",
+        "notes": [
+            "[Added] Added all of the schema.org Organization types to Identity settings",
+            "[Added] SEOmatic Meta FieldTypes now have settings that let you restrict the Asset Sources available to them",
+            "[Added] SEOmatic Meta FieldTypes now let you set the default Source settings for each field",
+            "[Added] SEOmatic Meta FieldTypes now let you choose if the Source can be changed when editing an entry",
+            "[Added] You can include tags that output entry properties, such as {title} or {myCustomField} in SEOmatic FieldType fields.",
+            "[Added] Twitter Card and Facebook types can now have null values in the FieldType, and Template meta settings",
+            "[Added] We now include separate Place JSON-LD for Organizations (in addition to being part of the Identity)",
+            "[Added] Added the Opening Hours fields for LocalBusiness, and include the openingHoursSpecification in the Site Identity and Place JSON-LD",
+            "[Added] Added support for Google Analytics on the Site Identity tab",
+            "[Added] Added the ability to control whether a PageView is automatically sent by Google Analytics",
+            "[Added] Added support for enabling Google Analytics plugins on an a la carte basis",
+            "[Fixed] We now handle numeric Google+ accounts properly",
+            "[Fixed] The Preview buttons display properly on mobile devices for the SEOmatic FieldType now",
+            "[Improved] Added links to WooRank.com for the SEO Title, SEO Description, and SEO Keywords tags that explain best practices for them",
+            "[Added] Added a config.php file where you can override some of SEOmatic's default behaviors",
+            "[Added] Added menu and acceptsReservations fields for FoodEstablishments",
+            "[Improved] Converted all of the .html template files over to .twig",
+            "[Added] Expanded the JSON-LD parser to support ordinal arrays of associative arrays",
+            "[Fixed] Fixed an issue with the cannonical URL and some localized sites",
+            "[Improved] Updated the README.md"        ]
+    },
+    {
+        "version": "1.0.12",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-19T11:00:00-05:00",
+        "notes": [
+            "[Improved] Performance improvement by not checking to see if a template exists before matching it",
+            "[Improved] Keyword tags are now saved onblur",
+            "[Improved] The Preview buttons in the SEOmatic FieldType are laid out better now",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.11",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-13T11:00:00-05:00",
+        "notes": [
+            "[Added] Added a preview of the Source fields in SEOmatic FieldTypes",
+            "[Added] You can now set Tags fields to be a Source for SEO FieldType Meta fields",
+            "[Added] Added a meta referrer tag to the template (set to 'always')",
+            "[Added] Added a http-equiv='Content-Type' content='text/html; charset=utf-8' meta tag",
+            "[Fixed] If the SEO Title is empty, it no longer appear in the title",
+            "[Fixed] Fixed an issue that would cause the seomatic* variables to not be properly sanitized",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.10",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-12T11:00:00-05:00",
+        "notes": [
+            "[Added] You can now set Matrix blocks to be a Source for SEO FieldType Meta fields; it iterates through all text and rich text fields",
+            "[Added] Added a extractTextFromMatrix() Twig filter/function/variable for templating use",
+            "[Improved] The truncateStringOnWord() function does a much better job on comma-delimited keywords now",
+            "[Fixed] Fixed a regression that caused the 'New Template Meta' button to be broken",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.9",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-11T11:00:00-05:00",
+        "notes": [
+            "[Added] Added tokenized input fields for the keywords for the Site Meta, Template Meta, and Field Meta",
+            "[Added] You can now specify the position of the SEO Site Title relative to the Title",
+            "[Added] You can now specify the separator character that appears between the SEO Site Title and the Title",
+            "[Fixed] Potentially fixed an issue with iconv when using the extractKeywords() or extractSummary() filters",
+            "[Fixed] Fixed a regression that caused the Template Metas to stop working on the front-end",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.8",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-09T11:00:00-05:00",
+        "notes": [
+            "[Improved] The rendering of the Identity and WebSite JSON-LD is now done via a tag in the templates, giving flexibility to people who want to use custom templates",
+            "[Added] If the site is in devMode, [devMode] is prepended to the <title>",
+            "[Fixed] Fixed an issue with PHP < 5.4",
+            "[Fixed] Fixed an issue if a plugin (like A&M forms) renders a template with Twig code in the template name",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.7",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-01-01T11:00:00-05:00",
+        "notes": [
+            "[Added] Added a 'robots' field globally to the SEO Meta for specifying noindex/nofollow",
+            "[Fixed] Added error handling to the 'Look up Latitude/Longitude' buttons",
+            "[Fixed] Some minor template / logic issues",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.6",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-31T11:00:00-05:00",
+        "notes": [
+            "[Added] Added an SEOmatic Meta field type that allows you to attach meta to Entries/Sections",
+            "[Added] The SEOmatic Meta field type can have custom date, or pull from other fields in that Entry, or even extract keywords from other fields",
+            "[Added] You can preview the settings from SEOmatic Meta field types that are attached to entries",
+            "[Fixed] Fixed db error on install on Windows due to trying to set a default for 'genericCreatorHumansTxt'",
+            "[Fixed] Facebook Open Graph tags weren't being generated if you had no Facebook Profile ID set, which could cause templating errors",
+            "[Fixed] The seomatic.twitter.creator field wasn't set unless summary_large_image was chosen, which could cause templating errors",
+            "[Fixed] The seomaticMeta variables were being overzealously encoded as htmlentities",
+            "[Fixed] Fixed an issue where weird characters would appear in truncated strings on certain versions of PHP",
+            "[Improved] All JSON-LD rendered through SEOmatic is now minified if you have the Minify plugin installed",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.5",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-28T11:00:00-05:00",
+        "notes": [
+            "[Added] Added 'renderJSONLD' Twig function & filter, and 'craft.seomatic.renderJSONLD()' variable for rendering arbitary JSON-LD schemas",
+            "[Added] SEOmatic now uses 'renderJSONLD' internally to render the Identity and WebSite JSON-LD microdata, rather than templates",
+            "[Added] The 'seomaticIdenity' and 'seomaticCreator' variables are now proper JSON-LD arrays that can be manipulated/added to via Twig",
+            "[Added] Refactored a bunch of internal code to support the new Identity & WebSite formats",
+            "[Added] Rolled all of the SEOmatic calculated variables into the 'seomaticHelper' array",
+            "[Added] Added support for humans.txt authorship accreditation via a tag and template",
+            "[Fixed] Fixed some sticky encoding issues with meta variables",
+            "[Fixed] Cleaned up the code base so we're no longer passing objects around into the templates, just pure arrays, for efficiency's sake",
+            "[Added] Support for Twitter Summary & Summary with Large Image cards",
+            "[Added] The Twitter Card variables are now rendered into the semomaticMeta array, and thus can be independently manipulated",
+            "[Added] The Facebook Open Graph variables are now rendered into the semomaticMeta array, and thus can be independently manipulated",
+            "[Added] Database migrations to support the new features",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.4",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-22T11:00:00-05:00",
+        "notes": [
+            "[Added] Added 'copyrightNotice', 'addressString', 'addressHtml', & 'mapUrl' to 'seomaticIdentity'",
+            "[Added] Added 'copyrightNotice', 'addressString', 'addressHtml', & 'mapUrl' to 'seomaticCreator'",
+            "[Added] Added 'hasMap' to the 'location' schema",
+            "[Added] Added a 'Look up Latitude/Longitude' button to the Site Identity & Site Creator settings",
+            "[Fixed] Fixed an issue with the releases.json; the 'Update' button should show up going forward for the plugin",
+            "[Improved] The length of the 'seoSiteName' is now taken into account when truncating the 'seoTitle'",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.3",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-21T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed an issue with the TextRank lib not being properly in the git repo, causing it to error when used",
+            "[Fixed] The SEOmatic settings pages now have a SAVE button on them for Craft 2.4",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.2",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-20T11:00:00-05:00",
+        "notes": [
+            "[Added] Exposed a few more utility functions via Twig filters & functions",
+            "[Added] The genericOwnerEmail & genericCreatorEmail variables are ordinal-encoded, to obfuscate them",
+            "[Added] Added 'location': 'Place' type to the Identity & Creator schemas, including GeoCoordinates",
+            "[Fixed] Fixed the localization so SEOmatic works if your Admin CP is in a language other than English",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.0.1",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-19T11:00:00-05:00",
+        "notes": [
+            "[Added] If the Minify plugin is installed, SEOmatic will minify the SEO Meta tags & JSON-LD",
+            "[Improved] Improved the caching mechanism to span all of the meta",
+            "[Fixed] Fixed a few of small errors",
+            "[Improved] Updated the README.md to better document SEOmatic"
+        ]
+    },
+    {
+        "version": "1.0.0",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2015-12-18T11:00:00-05:00",
+        "notes": [
+            "[Added] Initial release"
+        ]
+    }
+]

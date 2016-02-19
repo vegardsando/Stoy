@@ -1,0 +1,7 @@
+{# her bruker vi teknikker for dns-prefetch og preconnect, #}
+{% cache globally using key "prestuff" until midnight unless not craft.config.cache %}
+{% spaceless %}
+<link rel="preconnect" href="//ajax.googleapis.com">
+<link rel="preconnect" href="//www.google-analytics.com">
+{% endspaceless %}
+{% endcache %}

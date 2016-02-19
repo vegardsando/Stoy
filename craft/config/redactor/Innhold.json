@@ -1,0 +1,6 @@
+{
+	buttons: ['formatting','bold','italic','unorderedlist','link','image'],
+	plugins: ['fullscreen'],
+    formatting: ['p', 'h3'],
+	toolbarFixedBox: true
+}

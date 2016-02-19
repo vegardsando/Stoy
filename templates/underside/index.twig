@@ -1,0 +1,70 @@
+{% extends "_layout" %}
+{% set bodyClass = "underside" %}
+
+{% block content %}
+
+{% set underside = craft.entries.section(entry.slug).first() %}
+
+<section class="top">
+
+	{% set img = underside.toppbilde.first | default(false) %}
+	{% set bilde = craft.imager.transformImage(img, [
+		{ width: 320 },
+		{ width: 840 },
+		{ width: 1680 },
+		], { mode: 'crop', ratio:"16/9" }) %}
+
+    <div class="top-content lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-bgset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}"></div>
+    <figure class="divider">
+        <div class="emblem">
+            <img src="/static/img/logo_emblem.svg">
+        </div>
+    </figure>
+</section>
+
+<section class="article_body row">
+
+    <h1>{{underside.tittel}}</h1>
+
+    <article>
+        <h2>{{underside.ingress}}</h2>
+        {{underside.tekstRik}}
+    </article>
+
+    <aside>
+        <div class="info-tekst">
+            {% for block in underside.ansatte %}
+            <p><strong>{{block.navn}}</strong><br>
+                {{block.stilling}}<br>
+                {{block.telefonnummer}}<br>
+                <a href="mailto: {{block.mailadresse}}">{{block.mailadresse}}</a><br><br>
+            {% endfor %}
+
+            {% for block in underside.liste %}
+            <p><strong>{{block.tittel}}</strong></p><br>
+            {% endfor %}
+        </div>
+
+        <div class="aside-img">
+            {% for block in underside.bilder %}
+
+            {% set img = block.bilde.first | default(false) %}
+            {% set bilde = craft.imager.transformImage(img, [
+              { width: 320 },
+              { width: 840 },
+              { width: 1680 },
+              ], { mode: 'crop', ratio:"16/9" }) %}
+
+            <img class="setsrc lazyload" data-srcset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}">
+            <p>{{block.bildetekst}}</p>
+            {% endfor %}
+        </div>
+    </aside>
+
+</section>
+
+<section class="map_wrapper">
+    <div id="map"></div>
+</section>
+
+{% endblock %}

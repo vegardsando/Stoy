@@ -1,0 +1,37 @@
+linters:
+  TrailingSemicolonAfterPropertyValue:
+    enabled: true
+  StringQuotes:
+    enabled: false
+  UrlQuotes:
+    enabled: false
+  Indentation:
+    enabled: true
+    character: tab
+    width: 1
+  EmptyLineBetweenBlocks:
+    enabled: true
+  ZeroUnit:
+    enabled: true
+  SingleLinePerSelector:
+    enabled: false
+  Comment:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  SelectorFormat:
+    enabled: false
+  IdSelector:
+    enabled: false
+  SpaceBeforeBrace:
+    enabled: false
+  NestingDepth:
+    enabled: true
+    max_depth: 8
+  SelectorDepth:
+    enabled: true
+    max_depth: 8
+  QualifyingElement:
+    enabled: false

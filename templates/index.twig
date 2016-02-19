@@ -1,0 +1,129 @@
+{% extends "_layout" %}
+{% set bodyClass = "forside" %}
+
+{% block content %}
+<section class="top">
+
+	{% set img = entry.toppbilde.first | default(false) %}
+	{% set bilde = craft.imager.transformImage(img, [
+		{ width: 320 },
+		{ width: 840 },
+		{ width: 1680 },
+		], { mode: 'crop', ratio:"16/9" }) %}
+
+    <div class="top-content lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-bgset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}">
+        <div class="text">
+            <h1>{{entry.tittel}}</h1>
+            <span class="h1">&</span>
+            <span>
+                {{entry.undertittel}}
+            </span>
+            <!--
+<p>Lyd som gir liv til gode historier</p>
+<p>Lyden av den gode historie</p>
+<p>Lyden som gir liv til din historie</p>
+<p>Lyden gir liv til den gode historie</p>
+-->
+
+        </div>
+    </div>
+    <figure class="divider"></figure>
+</section>
+
+<div class="row">
+    <figure class="emblem-heading">
+        <h2>Utvalgte<strong> jobber</strong></h2>
+    </figure>
+</div>
+
+<figure class="divider down"></figure>
+
+<section class="jobber grid">
+    {% for block in entry.utvalgteJobber %}
+
+        {% set video = craft.embedder.url(block.video, {max_width:500, max_height:800}) %}
+
+        <article class="effect-one">
+            <img class="sizer" src="http://placehold.it/350x250">
+            <div class="sizer-div">
+                <img src="{{ video.video_highres }}">
+                <div class="video">
+                    {{ video.embed_code }}
+                </div>
+                <figcaption>
+                    <h2>{{block.title}}</h2>
+                    <p>{{block.tekstRen}}</p>
+                    <span class="icon_play">
+                        <?php include "/static/img/icon_play.svg" ?>
+                    </span>
+                </figcaption>
+            </div>
+        </article>
+    {% endfor %}
+
+    <div class="row centered">
+        <div class="btn border">
+            <a href="/jobber">Se alle jobber</a>
+        </div>
+    </div>
+</section>
+
+<section class="row">
+    <figure class="emblem-heading">
+        <h2>Hva vi er <strong>gode</strong> på</h2>
+    </figure>
+</section>
+
+<figure class="divider down"></figure>
+
+<section id="frontpage_studio-foley" class="module_divider">
+    {% for block in entry.tjenester %}
+
+		{% set img = block.bilde.first | default(false) %}
+		{% set bilde = craft.imager.transformImage(img, [
+			{ width: 320 },
+			{ width: 840 },
+			{ width: 1680 },
+			], { mode: 'crop', ratio:"16/9" }) %}
+
+    <article class="eq{{ loop.index}}">
+            <div class="sizer-div">
+                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
+						</div>
+            <div class="text">
+                <div class="tittel">{{block.tittel}}</div>
+                <div class="paragraph">{{block.tekst}}</div>
+                {#<span class="btn transparent small">
+                     <a href="{{block.sidelink.first().url}}">Les mer</a>
+                </span>#}
+            </div>
+
+        </article>
+    {% endfor %}
+
+</section>
+
+<section class="row">
+    <figure class="emblem-heading">
+        <h2>Noen av våre<strong> samarbeidspartnere</strong></h2>
+    </figure>
+</section>
+
+<figure class="divider"></figure>
+
+<section id="frontpage_kunder">
+    <div class="row">
+
+        {% for asset in entry.samarbeidspartnere %}
+        <a><img src="{{ asset.url }}"></a>
+        {% endfor %}
+
+    </div>
+    <figure class="divider down colored"></figure>
+</section>
+
+<section class="map_wrapper">
+    <div id="map"></div>
+</section>
+
+{% endblock %}

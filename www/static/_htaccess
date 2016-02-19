@@ -1,0 +1,2 @@
+Header unset Cookie
+Header unset Set-Cookie
