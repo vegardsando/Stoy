@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -286,19 +286,24 @@ class GlobalsService extends BaseApplicationComponent
 						$globalSetRecord->id = $globalSet->id;
 					}
 
-					if (!$isNewSet && $oldSet->fieldLayoutId)
-					{
-						// Drop the old field layout
-						craft()->fields->deleteLayoutById($oldSet->fieldLayoutId);
-					}
-
-					// Save the new one
+					// Is there a new field layout?
 					$fieldLayout = $globalSet->getFieldLayout();
-					craft()->fields->saveLayout($fieldLayout);
 
-					// Update the set record/model with the new layout ID
-					$globalSet->fieldLayoutId = $fieldLayout->id;
-					$globalSetRecord->fieldLayoutId = $fieldLayout->id;
+					if (!$fieldLayout->id)
+					{
+						// Delete the old one
+						if (!$isNewSet && $oldSet->fieldLayoutId)
+						{
+							craft()->fields->deleteLayoutById($oldSet->fieldLayoutId);
+						}
+
+						// Save the new one
+						craft()->fields->saveLayout($fieldLayout);
+
+						// Update the global set record/model with the new layout ID
+						$globalSet->fieldLayoutId = $fieldLayout->id;
+						$globalSetRecord->fieldLayoutId = $fieldLayout->id;
+					}
 
 					$globalSetRecord->save(false);
 

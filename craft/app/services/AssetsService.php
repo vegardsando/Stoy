@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author     Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright  Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license    http://buildwithcraft.com/license Craft License Agreement
- * @see        http://buildwithcraft.com
+ * @license    http://craftcms.com/license Craft License Agreement
+ * @see        http://craftcms.com
  * @package    craft.app.services
  * @since      1.0
  * @deprecated This class will have several breaking changes in Craft 3.0.
@@ -152,7 +152,7 @@ class AssetsService extends BaseApplicationComponent
 		if ($isNewFile && !$file->getContent()->title)
 		{
 			// Give it a default title based on the file name
-			$file->getContent()->title = str_replace('_', ' ', IOHelper::getFileName($file->filename, false));
+			$file->getContent()->title = $file->generateAttributeLabel(IOHelper::getFileName($file->filename, false));
 		}
 
 		$transaction = craft()->db->getCurrentTransaction() === null ? craft()->db->beginTransaction() : null;
@@ -624,6 +624,21 @@ class AssetsService extends BaseApplicationComponent
 	}
 
 	/**
+	 * Returns the root folder for a given source ID.
+	 *
+	 * @param int $sourceId
+	 *
+	 * @return AssetFolderModel|null
+	 */
+	public function getRootFolderBySourceId($sourceId)
+	{
+		return $this->findFolder(array(
+			'sourceId' => $sourceId,
+			'parentId' => ':empty:'
+		));
+	}
+
+	/**
 	 * Gets the total number of folders that match a given criteria.
 	 *
 	 * @param mixed $criteria
@@ -771,21 +786,26 @@ class AssetsService extends BaseApplicationComponent
 				$source = craft()->assetSources->getSourceTypeById($file->sourceId);
 
 				// Fire an 'onBeforeDeleteAsset' event
-				$this->onBeforeDeleteAsset(new Event($this, array(
+				$event = new Event($this, array(
 					'asset' => $file
-				)));
+				));
 
-				if ($deleteFile)
+				$this->onBeforeDeleteAsset($event);
+
+				if ($event->performAction)
 				{
-					$source->deleteFile($file);
+					if ($deleteFile)
+					{
+						$source->deleteFile($file);
+					}
+
+					craft()->elements->deleteElementById($fileId);
+
+					// Fire an 'onDeleteAsset' event
+					$this->onDeleteAsset(new Event($this, array(
+						'asset' => $file
+					)));
 				}
-
-				craft()->elements->deleteElementById($fileId);
-
-				// Fire an 'onDeleteAsset' event
-				$this->onDeleteAsset(new Event($this, array(
-					'asset' => $file
-				)));
 			}
 
 			$response->setSuccess();

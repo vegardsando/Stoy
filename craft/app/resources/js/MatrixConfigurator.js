@@ -1,8 +1,8 @@
 /**
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.resources
  */
 
@@ -45,7 +45,7 @@ Craft.MatrixConfigurator = Garnish.Base.extend(
 		this.inputNamePrefix = inputNamePrefix;
 		this.inputIdPrefix = Craft.formatInputId(this.inputNamePrefix);
 
-		this.$container = $('.matrix-configurator:first .input:first');
+		this.$container = $('#'+this.inputIdPrefix+'-matrix-configurator:first .input:first');
 
 		this.$blockTypesColumnContainer = this.$container.children('.block-types').children();
 		this.$fieldsColumnContainer = this.$container.children('.fields').children();
@@ -676,6 +676,9 @@ Field = Garnish.Base.extend(
 			Craft.initUiElements($body);
 			Garnish.$bod.append(footHtml);
 		}
+
+		// Firefox might have been sleeping on the job.
+		this.$typeSettingsContainer.trigger('resize');
 	},
 
 	getParsedFieldTypeHtml: function(html)

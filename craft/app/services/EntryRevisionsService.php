@@ -1,15 +1,13 @@
 <?php
 namespace Craft;
 
-craft()->requireEdition(Craft::Client);
-
 /**
  * Class EntryRevisionsService
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -335,13 +333,14 @@ class EntryRevisionsService extends BaseApplicationComponent
 	/**
 	 * Returns versions by an entry ID.
 	 *
-	 * @param int      $entryId
-	 * @param string   $localeId
-	 * @param int|null $limit
+	 * @param int      $entryId        The entry ID to search for.
+	 * @param string   $localeId       The locale ID to search for.
+	 * @param int|null $limit          The limit on the number of versions to retrieve.
+	 * @param bool     $includeCurrent Whether to include the current "top" version of the entry.
 	 *
 	 * @return array
 	 */
-	public function getVersionsByEntryId($entryId, $localeId, $limit = null)
+	public function getVersionsByEntryId($entryId, $localeId, $limit = null, $includeCurrent = false)
 	{
 		if (!$localeId)
 		{
@@ -350,14 +349,19 @@ class EntryRevisionsService extends BaseApplicationComponent
 
 		$versions = array();
 
-		$results = craft()->db->createCommand()
+		$query = craft()->db->createCommand()
 			->select('*')
 			->from('entryversions')
 			->where(array('and', 'entryId = :entryId', 'locale = :locale'), array(':entryId' => $entryId, ':locale' => $localeId))
 			->order('dateCreated desc')
-			->offset(1)
-			->limit($limit)
-			->queryAll();
+			->limit($limit);
+
+		if (!$includeCurrent)
+		{
+			$query->offset(1);
+		}
+
+		$results = $query->queryAll();
 
 		foreach ($results as $result)
 		{
@@ -559,6 +563,7 @@ class EntryRevisionsService extends BaseApplicationComponent
 			'postDate'   => ($revision->postDate   ? $revision->postDate->getTimestamp()   : null),
 			'expiryDate' => ($revision->expiryDate ? $revision->expiryDate->getTimestamp() : null),
 			'enabled'    => $revision->enabled,
+			'parentId'   => $revision->parentId,
 			'fields'     => array(),
 		);
 

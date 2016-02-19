@@ -1,8 +1,8 @@
 /**
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.resources
  */
 
@@ -152,7 +152,7 @@ var FieldsAdmin = Garnish.Base.extend(
 
 		for (var attribute in responseErrors)
 		{
-			errors = errors.concat(response.errors[attribute]);
+			errors = errors.concat(responseErrors[attribute]);
 		}
 
 		return errors;

@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     2.1
  */
@@ -45,13 +45,13 @@ class TokensService extends BaseApplicationComponent
 		}
 
 		$tokenRecord = new TokenRecord();
-		$tokenRecord->token = craft()->security->generateRandomString(32, false);
+		$tokenRecord->token = craft()->security->generateRandomString(32);
 		$tokenRecord->route = $route;
 
 		if ($usageLimit)
 		{
 			$tokenRecord->usageCount = 0;
-			$usageLimit->usageLimit = $usageLimit;
+			$tokenRecord->usageLimit = $usageLimit;
 		}
 
 		$tokenRecord->expiryDate = $expiryDate;
@@ -128,8 +128,14 @@ class TokensService extends BaseApplicationComponent
 	 */
 	public function incrementTokenUsageCountById($tokenId)
 	{
+		$currentUsageCount = craft()->db->createCommand()
+			->select('usageCount')
+			->from('tokens')
+			->where(array('id' => $tokenId))
+			->queryScalar();
+
 		$affectedRows = craft()->db->createCommand()->update('tokens', array(
-			'usageCount' => 'usageCount + 1'
+			'usageCount' => $currentUsageCount + 1
 		), array(
 			'id' => $tokenId
 		));

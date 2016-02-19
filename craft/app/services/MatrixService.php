@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.3
  */
@@ -206,7 +206,7 @@ class MatrixService extends BaseApplicationComponent
 				}
 			}
 
-			if ($field->hasErrors())
+			if ($field->hasErrors() || $field->hasSettingErrors())
 			{
 				$blockType->hasFieldErrors = true;
 				$validates = false;
@@ -404,16 +404,26 @@ class MatrixService extends BaseApplicationComponent
 
 			$this->deleteBlockById($blockIds);
 
-			// Now delete the block type fields
+			// Set the new contentTable
+			$originalContentTable = craft()->content->contentTable;
+			$matrixField = craft()->fields->getFieldById($blockType->fieldId);
+			$newContentTable = $this->getContentTableName($matrixField);
+			craft()->content->contentTable = $newContentTable;
+
+			// Set the new fieldColumnPrefix
 			$originalFieldColumnPrefix = craft()->content->fieldColumnPrefix;
 			craft()->content->fieldColumnPrefix = 'field_'.$blockType->handle.'_';
 
+
+			// Now delete the block type fields
 			foreach ($blockType->getFields() as $field)
 			{
 				craft()->fields->deleteField($field);
 			}
 
+			// Restore the contentTable and the fieldColumnPrefix to original values.
 			craft()->content->fieldColumnPrefix = $originalFieldColumnPrefix;
+			craft()->content->contentTable = $newContentTable;
 
 			// Delete the field layout
 			craft()->fields->deleteLayoutById($blockType->fieldLayoutId);
@@ -724,7 +734,23 @@ class MatrixService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Saves a block.
+	 * Saves a new or existing Matrix block.
+	 *
+	 * ```php
+	 * $block = new MatrixBlockModel();
+	 * $block->fieldId = 5;
+	 * $block->ownerId = 100;
+	 * $block->ownerLocale = 'en_us';
+	 * $block->typeId = 2;
+	 * $block->sortOrder = 10;
+	 *
+	 * $block->setContentFromPost(array(
+	 *     'fieldHandle' => 'value',
+	 *     // ...
+	 * ));
+	 *
+	 * $success = craft()->matrix->saveBlock($block);
+	 * ```
 	 *
 	 * @param MatrixBlockModel $block    The Matrix block.
 	 * @param bool             $validate Whether the block should be validated before being saved.
@@ -799,12 +825,15 @@ class MatrixService extends BaseApplicationComponent
 			$blockIds = array($blockIds);
 		}
 
-		// Tell the browser to forget about these
-		craft()->userSession->addJsResourceFlash('js/MatrixInput.js');
-
-		foreach ($blockIds as $blockId)
+		if (!craft()->isConsole())
 		{
-			craft()->userSession->addJsFlash('Craft.MatrixInput.forgetCollapsedBlockId('.$blockId.');');
+			// Tell the browser to forget about these
+			craft()->userSession->addJsResourceFlash('js/MatrixInput.js');
+
+			foreach ($blockIds as $blockId)
+			{
+				craft()->userSession->addJsFlash('Craft.MatrixInput.forgetCollapsedBlockId('.$blockId.');');
+			}
 		}
 
 		// Pass this along to ElementsService for the heavy lifting
@@ -903,7 +932,7 @@ class MatrixService extends BaseApplicationComponent
 		}
 
 		// Tell the browser to collapse any new block IDs
-		if ($collapsedBlockIds)
+		if (!craft()->isConsole() && $collapsedBlockIds)
 		{
 			craft()->userSession->addJsResourceFlash('js/MatrixInput.js');
 

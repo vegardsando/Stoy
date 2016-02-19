@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.models
  * @since     1.0
  */
@@ -247,31 +247,8 @@ abstract class BaseElementModel extends BaseModel
 	{
 		if ($this->uri !== null)
 		{
-			$useLocaleSiteUrl = (
-				($this->locale != craft()->language) &&
-				($localeSiteUrl = craft()->config->getLocalized('siteUrl', $this->locale))
-			);
-
-			if ($useLocaleSiteUrl)
-			{
-				// Temporarily set Craft to use this element's locale's site URL
-				$siteUrl = craft()->getSiteUrl();
-				craft()->setSiteUrl($localeSiteUrl);
-			}
-
-			if ($this->uri == '__home__')
-			{
-				$url = UrlHelper::getSiteUrl();
-			}
-			else
-			{
-				$url = UrlHelper::getSiteUrl($this->uri);
-			}
-
-			if ($useLocaleSiteUrl)
-			{
-				craft()->setSiteUrl($siteUrl);
-			}
+			$path = ($this->uri == '__home__') ? '' : $this->uri;
+			$url = UrlHelper::getSiteUrl($path, null, null, $this->locale);
 
 			return $url;
 		}
@@ -322,23 +299,11 @@ abstract class BaseElementModel extends BaseModel
 	 *
 	 * @param int|null $size
 	 *
-	 * @return string|false
+	 * @return string|null
 	 */
 	public function getThumbUrl($size = null)
 	{
-		return false;
-	}
-
-	/**
-	 * Returns the URL to the element's icon image, if there is one.
-	 *
-	 * @param int|null $size
-	 *
-	 * @return string|false
-	 */
-	public function getIconUrl($size = null)
-	{
-		return false;
+		return null;
 	}
 
 	/**
@@ -542,7 +507,7 @@ abstract class BaseElementModel extends BaseModel
 			in_array($this->elementType, array(ElementType::Asset, ElementType::GlobalSet, ElementType::Tag, ElementType::User))
 		)
 		{
-			craft()->deprecator->log('BaseElementModel::getChildren()_for_relations', 'Calling getChildren() to fetch an element’s target relations has been deprecated. Use the <a href="http://buildwithcraft.com/docs/relations#the-relatedTo-param">relatedTo</a> param instead.');
+			craft()->deprecator->log('BaseElementModel::getChildren()_for_relations', 'Calling getChildren() to fetch an element’s target relations has been deprecated. Use the <a href="http://craftcms.com/docs/relations#the-relatedTo-param">relatedTo</a> param instead.');
 			return $this->_getRelChildren($field);
 		}
 		else
@@ -828,7 +793,7 @@ abstract class BaseElementModel extends BaseModel
 
 			if (!$this->_content)
 			{
-				$this->_content = craft()->content->createContent($this);
+				$this->_content = $this->createContent();
 			}
 		}
 
@@ -848,7 +813,7 @@ abstract class BaseElementModel extends BaseModel
 		{
 			if (!isset($this->_content))
 			{
-				$this->_content = craft()->content->createContent($this);
+				$this->_content = $this->createContent();
 			}
 
 			$this->_content->setAttributes($content);
@@ -900,7 +865,8 @@ abstract class BaseElementModel extends BaseModel
 					// Do we have any post data for this field?
 					if (isset($content[$handle]))
 					{
-						$value = $this->_rawPostContent[$handle] = $content[$handle];
+						$value = $content[$handle];
+						$this->setRawPostContent($handle, $value);
 					}
 					// Were any files uploaded for this field?
 					else if (!empty($this->_contentPostLocation) && UploadedFile::getInstancesByName($this->_contentPostLocation.'.'.$handle))
@@ -927,6 +893,17 @@ abstract class BaseElementModel extends BaseModel
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sets a field’s raw post content.
+	 *
+	 * @param string $handle The field handle.
+	 * @param string|array   The posted field value.
+	 */
+	public function setRawPostContent($handle, $value)
+	{
+		$this->_rawPostContent[$handle] = $value;
 	}
 
 	/**
@@ -1048,14 +1025,14 @@ abstract class BaseElementModel extends BaseModel
 	 *
 	 * @param mixed $field
 	 *
-	 * @deprecated Deprecated in 1.3. Use the [relatedTo](http://buildwithcraft.com/docs/relations#the-relatedTo-param)
+	 * @deprecated Deprecated in 1.3. Use the [relatedTo](http://craftcms.com/docs/relations#the-relatedTo-param)
 	 *             param instead.
 	 *
 	 * @return ElementCriteriaModel
 	 */
 	public function getParents($field = null)
 	{
-		craft()->deprecator->log('BaseElementModel::getParents()', 'Calling getParents() to fetch an element’s source relations has been deprecated. Use the <a href="http://buildwithcraft.com/docs/relations#the-relatedTo-param">relatedTo</a> param instead.');
+		craft()->deprecator->log('BaseElementModel::getParents()', 'Calling getParents() to fetch an element’s source relations has been deprecated. Use the <a href="http://craftcms.com/docs/relations#the-relatedTo-param">relatedTo</a> param instead.');
 
 		$criteria = craft()->elements->getCriteria($this->elementType);
 		$criteria->parentOf    = $this;
@@ -1113,7 +1090,19 @@ abstract class BaseElementModel extends BaseModel
 			'lft'           => AttributeType::Number,
 			'rgt'           => AttributeType::Number,
 			'level'         => AttributeType::Number,
+
+			'searchScore'   => AttributeType::Number,
 		);
+	}
+
+	/**
+	 * Creates the content model associated with this element.
+	 *
+	 * @return ContentModel The content model associated with this element
+	 */
+	protected function createContent()
+	{
+		return craft()->content->createContent($this);
 	}
 
 	// Private Methods

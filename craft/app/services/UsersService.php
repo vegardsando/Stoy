@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -137,7 +137,7 @@ class UsersService extends BaseApplicationComponent
 	 * Returns whether a verification code is valid for the given user.
 	 *
 	 * This method first checks if the code has expired past the
-	 * [verificationCodeDuration](http://buildwithcraft.com/docs/config-settings#verificationCodeDuration) config
+	 * [verificationCodeDuration](http://craftcms.com/docs/config-settings#verificationCodeDuration) config
 	 * setting. If it is still valid, then, the checks the validity of the contents of the code.
 	 *
 	 * @param UserModel $user The user to check the code for.
@@ -337,8 +337,10 @@ class UsersService extends BaseApplicationComponent
 					if ($user->username != $oldUsername)
 					{
 						// Rename the user's photo directory
-						$oldFolder = craft()->path->getUserPhotosPath().$oldUsername;
-						$newFolder = craft()->path->getUserPhotosPath().$user->username;
+						$cleanOldUsername = AssetsHelper::cleanAssetName($oldUsername, false);
+						$cleanUsername = AssetsHelper::cleanAssetName($user->username, false);
+						$oldFolder = craft()->path->getUserPhotosPath().$cleanOldUsername;
+						$newFolder = craft()->path->getUserPhotosPath().$cleanUsername;
 
 						if (IOHelper::folderExists($newFolder))
 						{
@@ -522,7 +524,13 @@ class UsersService extends BaseApplicationComponent
 		{
 			// We want to hide the CP trigger if they don't have access to the CP.
 			$path = craft()->config->get('actionTrigger').'/users/verifyemail';
-			$url = UrlHelper::getSiteUrl($path, array('code' => $unhashedVerificationCode, 'id' => $userRecord->uid), craft()->request->isSecureConnection() ? 'https' : 'http');
+			$params = array(
+				'code' => $unhashedVerificationCode,
+				'id' => $userRecord->uid
+			);
+			$protocol = craft()->request->isSecureConnection() ? 'https' : 'http';
+			$locale = $user->preferredLocale ?: craft()->i18n->getPrimarySiteLocaleId();
+			$url = UrlHelper::getSiteUrl($path, $params, $protocol, $locale);
 		}
 
 		return $url;
@@ -541,40 +549,45 @@ class UsersService extends BaseApplicationComponent
 		$unhashedVerificationCode = $this->_setVerificationCodeOnUserRecord($userRecord);
 		$userRecord->save();
 
+		$path = craft()->config->get('actionTrigger').'/users/setpassword';
+		$params = array(
+			'code' => $unhashedVerificationCode,
+			'id' => $userRecord->uid
+		);
+		$scheme = craft()->request->isSecureConnection() ? 'https' : 'http';
+
 		if ($user->can('accessCp'))
 		{
-			$url = UrlHelper::getActionUrl('users/setpassword', array('code' => $unhashedVerificationCode, 'id' => $userRecord->uid), craft()->request->isSecureConnection() ? 'https' : 'http');
+			return UrlHelper::getCpUrl($path, $params, $scheme);
 		}
 		else
 		{
-			// We want to hide the CP trigger if they don't have access to the CP.
-			$path = craft()->config->get('actionTrigger').'/users/setpassword';
-			$url = UrlHelper::getSiteUrl($path, array('code' => $unhashedVerificationCode, 'id' => $userRecord->uid), craft()->request->isSecureConnection() ? 'https' : 'http');
+			$locale = $user->preferredLocale ?: craft()->i18n->getPrimarySiteLocaleId();
+			return UrlHelper::getSiteUrl($path, $params, $scheme, $locale);
 		}
-
-		return $url;
 	}
 
 	/**
 	 * Crops and saves a user’s photo.
 	 *
 	 * @param string    $fileName The name of the file.
-	 * @param Image     $image    The image.
+	 * @param BaseImage $image    The image.
 	 * @param UserModel $user     The user.
 	 *
 	 * @throws \Exception
 	 * @return bool Whether the photo was saved successfully.
 	 */
-	public function saveUserPhoto($fileName, Image $image, UserModel $user)
+	public function saveUserPhoto($fileName, BaseImage $image, UserModel $user)
 	{
-		$userName = IOHelper::cleanFilename($user->username);
+		$userName = AssetsHelper::cleanAssetName($user->username, false);
 		$userPhotoFolder = craft()->path->getUserPhotosPath().$userName.'/';
 		$targetFolder = $userPhotoFolder.'original/';
 
 		IOHelper::ensureFolderExists($userPhotoFolder);
 		IOHelper::ensureFolderExists($targetFolder);
 
-		$targetPath = $targetFolder.AssetsHelper::cleanAssetName($fileName);
+		$fileName = AssetsHelper::cleanAssetName($fileName);
+		$targetPath = $targetFolder.$fileName;
 
 		$result = $image->saveAs($targetPath);
 
@@ -602,7 +615,8 @@ class UsersService extends BaseApplicationComponent
 	 */
 	public function deleteUserPhoto(UserModel $user)
 	{
-		$folder = craft()->path->getUserPhotosPath().$user->username;
+		$username = AssetsHelper::cleanAssetName($user->username, false);
+		$folder = craft()->path->getUserPhotosPath().$username;
 
 		if (IOHelper::folderExists($folder))
 		{
@@ -755,7 +769,6 @@ class UsersService extends BaseApplicationComponent
 				$user->setActive();
 				$userRecord->verificationCode = null;
 				$userRecord->verificationCodeIssuedDate = null;
-				$userRecord->lockoutDate = null;
 				$userRecord->save();
 
 				// If they have an unverified email address, now is the time to set it to their primary email address
@@ -808,11 +821,21 @@ class UsersService extends BaseApplicationComponent
 		if ($user->unverifiedEmail)
 		{
 			$userRecord = $this->_getUserRecordById($user->id);
+			$oldEmail = $userRecord->email;
 			$userRecord->email = $user->unverifiedEmail;
 
 			if (craft()->config->get('useEmailAsUsername'))
 			{
 				$userRecord->username = $user->unverifiedEmail;
+
+				$oldProfilePhotoPath = craft()->path->getUserPhotosPath().AssetsHelper::cleanAssetName($oldEmail);
+				$newProfilePhotoPath = craft()->path->getUserPhotosPath().AssetsHelper::cleanAssetName($user->unverifiedEmail);
+
+				// Update the user profile photo folder name, if it exists.
+				if (IOHelper::folderExists($oldProfilePhotoPath))
+				{
+					IOHelper::rename($oldProfilePhotoPath, $newProfilePhotoPath);
+				}
 			}
 
 			$userRecord->unverifiedEmail = null;
@@ -858,6 +881,7 @@ class UsersService extends BaseApplicationComponent
 
 				$userRecord->invalidLoginCount = $user->invalidLoginCount = null;
 				$userRecord->invalidLoginWindowStart = null;
+				$userRecord->lockoutDate = $user->lockoutDate = null;
 
 				$userRecord->save();
 				$success = true;
@@ -1254,7 +1278,7 @@ class UsersService extends BaseApplicationComponent
 	 * Deletes any pending users that have shown zero sense of urgency and are just taking up space.
 	 *
 	 * This method will check the
-	 * [purgePendingUsersDuration](http://buildwithcraft.com/docs/config-settings#purgePendingUsersDuration) config
+	 * [purgePendingUsersDuration](http://craftcms.com/docs/config-settings#purgePendingUsersDuration) config
 	 * setting, and if it is set to a valid duration, it will delete any user accounts that were created that duration
 	 * ago, and have still not activated their account.
 	 *
@@ -1527,7 +1551,7 @@ class UsersService extends BaseApplicationComponent
 	 */
 	private function _setVerificationCodeOnUserRecord(UserRecord $userRecord)
 	{
-		$unhashedCode = StringHelper::UUID();
+		$unhashedCode = craft()->security->generateRandomString(32);
 		$hashedCode = craft()->security->hashPassword($unhashedCode);
 		$userRecord->verificationCode = $hashedCode;
 		$userRecord->verificationCodeIssuedDate = DateTimeHelper::currentUTCDateTime();

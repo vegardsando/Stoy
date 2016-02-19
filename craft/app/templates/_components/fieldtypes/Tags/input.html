@@ -18,19 +18,17 @@
 	<div class="texticon add icon">
 		{{ text({
 			width: 'auto',
-			placeholder: "Add a tag"|t
+			placeholder: selectionLabel,
 		}) }}
 		<div class="spinner hidden"></div>
 	</div>
 </div>
 
-{% set js %}
+{% includejs %}
 	new Craft.TagSelectInput(
 		"{{ id   | namespaceInputId   | e('js') }}",
 		"{{ name | namespaceInputName | e('js') }}",
 		{{ tagGroupId }},
 		{{ sourceElementId ?: 'null' }}
 	);
-{% endset %}
-
-{% includeJs js %}
+{% endincludejs %}

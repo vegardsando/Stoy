@@ -1,27 +1,24 @@
-/*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
-/*global define */
-var $ = $,
-    Modernizr = Modernizr,
-    $m = $;
+/*jslint browser: true*/
+/*global jQuery, console, svg4everybody,requestFrame, Modernizr, runforceFeed*/
 
-//function init_page() { /* Aktiver når man har EE */
+var $m = jQuery;
+
+if (typeof svg4everybody === 'function') { svg4everybody(); }
+if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ declares requestAnimationFrame & cancelAnimationFrame
+
 (function () {
-	'use strict';
+    'use strict';
 	/* A couple of selections. */
 	var $body         = $m(document.body),
         $window       = $m(window),
         $html         = $m(document.documentElement),
         $document	  = $m(document),
         desktop,
-        tablet,
-        phone,
-        touch = Modernizr.touch || document.documentElement.hasOwnProperty('ontouchstart'),
-        label = '',
+    		tablet,
+    		phone,
+    		touch = Modernizr.touch || document.documentElement.hasOwnProperty('ontouchstart'),
         mouse_x = 0,
         mouse_y = 0,
-        gammel_label,
-        resizeTimeout,
-        rippling,
         mouseover,
         map,
         area = 120,
@@ -29,23 +26,26 @@ var $ = $,
         now,
         then = Date.now(),
         interval = 1000/fps,
-        delta;
+        delta,
+        label = '',
+    		gammel_label,
+        window_width,
+        resizeTO;
 
 /*=======================================================
 					@function events
 =======================================================*/
 
 	function detect_size() {
-		var window_width = $window.width();
-		//logg('detecting size');
-		if (window_width <= 767) {
+		window_width = $window.width();
+		if (window_width < 768) {
 			label = 'phone';
 			if (gammel_label !== label) {
 				$html.addClass('phone').removeClass('desktop tablet');
 				desktop = tablet = false;
                 phone = true;
 			}
-		} else if (window_width <= 1024) {
+		} else if (window_width < 1025) {
 			label = 'tablet';
 			if (gammel_label !== label) {
 				$html.removeClass('phone').addClass('desktop tablet');
@@ -60,185 +60,135 @@ var $ = $,
                 tablet = phone = false;
 			}
 		}
-
-        if(gammel_label != label){
-            setImageSrc();
-        }
-
 		gammel_label = label;
 	}
 
-	detect_size();
-
-	window.onresize = function (event) {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(detect_size, 100);
+    detect_size();
+	//runforceFeed();
+	window.onresize = function () {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(detect_size, 100);
 	};
 
-    function render() {
+  function render() {
 
-        now = Date.now();
-        delta = now - then;
+      now = Date.now();
+      delta = now - then;
 
-        if (delta > interval) {
-            //console.log('rendering');
-            then = now - (delta % interval);
-        }
+      if (delta > interval) {
+          //console.log('rendering');
+          then = now - (delta % interval);
+      }
 
-        window.requestAnimationFrame(render);
-    }
+      window.requestAnimationFrame(render);
+  }
 
-    function maps() {
+  function maps() {
 
-        //'use strict';
+      //'use strict';
 
-        var styles = [{
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
-                { "visibility": "simplified" },
-                { "color": "#50504f" }
-            ]
-        }, {
-            "featureType": "landscape",
-            "stylers": [
-                { "color": "#c8c8c8" }
-            ]
-        }, {
-            "featureType": "administrative",
-            "elementType": "labels.text.fill",
-            "stylers": [
-                { "color": "#000000" }
-            ]
-        }, {
-            "featureType": "water",
-            "stylers": [
-                { "color": "#ffffff" }
-            ]
-        }, {
-            "featureType": "transit",
-            "stylers": [
-                { "color": "#ffffff" }
-            ]
-        }, {
-            "featureType": "poi",
-            "stylers": [
-                { "visibility": "simplified" },
-                { "color": "#8d8c8d" }
-            ]
-        }, {
-            "stylers": [
-                { "lightness": 60 },
-                { "visibility": "simplified" }
-            ]
-        }];
+      var styles = [{
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+              { "visibility": "simplified" },
+              { "color": "#50504f" }
+          ]
+      }, {
+          "featureType": "landscape",
+          "stylers": [
+              { "color": "#c8c8c8" }
+          ]
+      }, {
+          "featureType": "administrative",
+          "elementType": "labels.text.fill",
+          "stylers": [
+              { "color": "#000000" }
+          ]
+      }, {
+          "featureType": "water",
+          "stylers": [
+              { "color": "#ffffff" }
+          ]
+      }, {
+          "featureType": "transit",
+          "stylers": [
+              { "color": "#ffffff" }
+          ]
+      }, {
+          "featureType": "poi",
+          "stylers": [
+              { "visibility": "simplified" },
+              { "color": "#8d8c8d" }
+          ]
+      }, {
+          "stylers": [
+              { "lightness": 60 },
+              { "visibility": "simplified" }
+          ]
+      }];
 
-        var mapOptions = {
-            center: { lat: 63.4391142, lng: 10.4155636 },
-            scrollwheel: false,
-            zoom: 15,
-            mapTypeControl: false,
-            panControl: false,
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.LEFT_CENTER
-            }
-        };
-
-
-
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        map.setOptions({styles: styles});
-
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(63.4391142, 10.4155636),
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 10
-            },
-            draggable: false,
-            map: map
-        });
+      var mapOptions = {
+          center: { lat: 63.4391142, lng: 10.4155636 },
+          scrollwheel: false,
+          zoom: 15,
+          mapTypeControl: false,
+          panControl: false,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_CENTER
+          }
+      };
 
 
-    }
 
-    // Sett korrekt versjon av bilder mtp desktop, tablet, phone etc
-    function setImageSrc() {
-        $m('.setsrc:not(".loaded")').each(function(){
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      map.setOptions({styles: styles});
 
-            var denne = $m(this);
-
-            if (denne.is('img:not(":hidden")')) {
-                denne.attr('src', $(this).data(label));
-                if(!denne.hasClass('setsrc')){
-                    return
-                }
-
-            } else {
-                denne.css('background-image', 'url(' + $(this).data(label) + ')');
-            }
+      var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(63.4391142, 10.4155636),
+          icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 10
+          },
+          draggable: false,
+          map: map
+      });
 
 
-        });
-    }
+  }
 
-    //Kart
-    if ($m('.map_wrapper').length) {
-        maps();
-    }
+  //Kart
+  if ($m('.map_wrapper').length) {
+      maps();
+  }
 
-    setTimeout(function(){
-        $html.addClass('lastet');
+  setTimeout(function(){
+      $html.addClass('lastet');
+      //$(".grid article").fitVids();
+  },1000);
 
-        setTimeout(function() {
-            $(".grid article").fitVids();
-        }, 3500);
+  render();
 
-    },1000);
-
-
-    render();
-
+	$html.addClass('lastet');
 /*=======================================================
 				  @Click/hover events
 =======================================================*/
 
-    $document.on("mousemove", "#grid", function (e) {
-        mouse_x = e.pageX;
-        mouse_y = e.pageY;
-        mouseover = true;
-    });
+  // Forside - vimeo-videoer
+  $( ".grid article" ).on('click', function() {
 
+      // Sett alle vimeo-videoer på pause
+      var iframe = $('iframe');
+      iframe.each(function(index){
+          var player = $f($(this)[0]);
+          player.api('pause');
+      })
 
+      // Fjern alle video_active på andre elementer
+      $('.video_active').removeClass('video_active');
+      $(this).addClass('video_active');
 
-    $('#grid').on('click', function(e) {
-        var delayOffset = 1;
-        rippling = true;
-        for (var i = 0; i < groups.length; i+=Math.ceil(Math.random()*3)) {
-            fadeInDelay(groups[i], i*delayOffset);
-        }
-        setTimeout(function() {
-            rippling = false;
-            render();
-        }, groups.length*delayOffset + 500);
-    });
+  });
 
-    // Forside - vimeo-videoer
-    $( ".grid article" ).on('click', function() {
-
-        // Sett alle vimeo-videoer på pause
-        var iframe = $('iframe');
-        iframe.each(function(index){
-            var player = $f($(this)[0]);
-            player.api('pause');
-        })
-
-        // Fjern alle video_active på andre elementer
-        $('.video_active').removeClass('video_active');
-        $(this).addClass('video_active');
-
-    });
 
 }());
-
-

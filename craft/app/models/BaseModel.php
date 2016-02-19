@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.models
  * @since     1.0
  */
@@ -541,6 +541,24 @@ abstract class BaseModel extends \CModel
 		$class = get_class($this);
 		return new $class($this->getAttributes());
 	}
+
+	/**
+	 * Generates a user friendly attribute label.
+	 * This is done by replacing underscores or dashes with blanks andchanging the first letter of each word to upper case.
+	 * For example, 'department_name' or 'DepartmentName' becomes 'Department Name'.
+	 *
+	 * Overriding CModel's implementation to be UTF-8 friendly since they don't consider this a bug:
+	 * https://github.com/yiisoft/yii/issues/1851
+	 *
+	 * @param string $name The column name.
+	 *
+	 * @return string The attribute label
+	 */
+	public function generateAttributeLabel($name)
+	{
+		return mb_convert_case(trim(mb_strtolower(str_replace(array('-','_','.'),' ',preg_replace('/(?<![A-Z])[A-Z]/', ' \0', $name)), craft()->charset)), MB_CASE_TITLE, craft()->charset);
+	}
+
 
 	// Protected Methods
 	// =========================================================================

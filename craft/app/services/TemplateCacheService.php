@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     2.0
  */
@@ -99,6 +99,12 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function getTemplateCache($key, $global)
 	{
+		// Make sure template caching is enabled.
+		if (!$this->_isTemplateCachingEnabled())
+		{
+			return;
+		}
+
 		// Take the opportunity to delete any expired caches
 		$this->deleteExpiredCachesIfOverdue();
 
@@ -116,11 +122,13 @@ class TemplateCacheService extends BaseApplicationComponent
 			$params[':path'] = $this->_getPath();
 		}
 
-		return craft()->db->createCommand()
+		$cachedBody = craft()->db->createCommand()
 			->select('body')
 			->from(static::$_templateCachesTable)
 			->where($conditions, $params)
 			->queryScalar();
+
+		return ($cachedBody !== false ? $cachedBody : null);
 	}
 
 	/**
@@ -132,6 +140,12 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function startTemplateCache($key)
 	{
+		// Make sure template caching is enabled.
+		if (!$this->_isTemplateCachingEnabled())
+		{
+			return;
+		}
+
 		if (craft()->config->get('cacheElementQueries'))
 		{
 			$this->_cacheCriteria[$key] = array();
@@ -149,6 +163,12 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function includeCriteriaInTemplateCaches(ElementCriteriaModel $criteria)
 	{
+		// Make sure template caching is enabled.
+		if (!$this->_isTemplateCachingEnabled())
+		{
+			return;
+		}
+
 		if (!empty($this->_cacheCriteria))
 		{
 			$criteriaHash = spl_object_hash($criteria);
@@ -169,6 +189,12 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function includeElementInTemplateCaches($elementId)
 	{
+		// Make sure template caching is enabled.
+		if (!$this->_isTemplateCachingEnabled())
+		{
+			return;
+		}
+
 		if (!empty($this->_cacheElementIds))
 		{
 			foreach (array_keys($this->_cacheElementIds) as $cacheKey)
@@ -195,12 +221,22 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function endTemplateCache($key, $global, $duration, $expiration, $body)
 	{
-		// If there are any transform generation URLs in the body, don't cache it.
-		// Can't use getResourceUrl() here because that will append ?d= or ?x= to the URL.
-		if (strpos($body, UrlHelper::getSiteUrl(craft()->config->getResourceTrigger().'/transforms')))
+		// Make sure template caching is enabled.
+		if (!$this->_isTemplateCachingEnabled())
 		{
 			return;
 		}
+
+		// If there are any transform generation URLs in the body, don't cache it.
+		// stripslashes($body) in case the URL has been JS-encoded or something.
+		// Can't use getResourceUrl() here because that will append ?d= or ?x= to the URL.
+		if (strpos(stripslashes($body), UrlHelper::getSiteUrl(craft()->config->getResourceTrigger().'/transforms')))
+		{
+			return;
+		}
+
+		// Encode any 4-byte UTF-8 characters
+		$body = StringHelper::encodeMb4($body);
 
 		// Figure out the expiration date
 		if ($duration)
@@ -293,7 +329,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteCacheById($cacheId)
 	{
-		if ($this->_deletedAllCaches)
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -322,15 +358,25 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteCachesByElementType($elementType)
 	{
-		if ($this->_deletedAllCaches || !empty($this->_deletedCachesByElementType[$elementType]))
+		if ($this->_deletedAllCaches || !empty($this->_deletedCachesByElementType[$elementType]) || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
 
 		$this->_deletedCachesByElementType[$elementType] = true;
 
-		$affectedRows = craft()->db->createCommand()->delete(static::$_templateCachesTable, array('type = :type'), array(':type' => $elementType));
-		return (bool) $affectedRows;
+		$cacheIds = craft()->db->createCommand()
+			->select('cacheId')
+			->from(static::$_templateCacheCriteriaTable)
+			->where(array('type' => $elementType))
+			->queryColumn();
+
+		if ($cacheIds)
+		{
+			craft()->db->createCommand()->delete(static::$_templateCachesTable, array('in', 'id', $cacheIds));
+		}
+
+		return true;
 	}
 
 	/**
@@ -342,7 +388,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteCachesByElement($elements)
 	{
-		if ($this->_deletedAllCaches)
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -352,23 +398,25 @@ class TemplateCacheService extends BaseApplicationComponent
 			return false;
 		}
 
-		if (!is_array($elements))
+		if (is_array($elements))
 		{
+			$firstElement = ArrayHelper::getFirstValue($elements);
+		}
+		else
+		{
+			$firstElement = $elements;
 			$elements = array($elements);
 		}
 
+		$deleteQueryCaches = empty($this->_deletedCachesByElementType[$firstElement->getElementType()]);
 		$elementIds = array();
 
 		foreach ($elements as $element)
 		{
-			// Make sure we haven't just deleted all of the caches for this element type.
-			if (empty($this->_deletedCachesByElementType[$element->getElementType()]))
-			{
-				$elementIds[] = $element->id;
-			}
+			$elementIds[] = $element->id;
 		}
 
-		return $this->deleteCachesByElementId($elementIds);
+		return $this->deleteCachesByElementId($elementIds, $deleteQueryCaches);
 	}
 
 	/**
@@ -383,7 +431,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteCachesByElementId($elementId, $deleteQueryCaches = true)
 	{
-		if ($this->_deletedAllCaches)
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -466,7 +514,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteCachesByCriteria(ElementCriteriaModel $criteria)
 	{
-		if ($this->_deletedAllCaches)
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -478,13 +526,42 @@ class TemplateCacheService extends BaseApplicationComponent
 	}
 
 	/**
+	 * Deletes a cache by its key(s).
+	 *
+	 * @param int|array $key The cache key(s) to delete.
+	 *
+	 * @return bool
+	 */
+	public function deleteCachesByKey($key)
+	{
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
+		{
+			return false;
+		}
+
+		if (is_array($key))
+		{
+			$condition = array('in', 'cacheKey', $key);
+			$params = array();
+		}
+		else
+		{
+			$condition = 'cacheKey = :cacheKey';
+			$params = array(':cacheKey' => $key);
+		}
+
+		$affectedRows = craft()->db->createCommand()->delete(static::$_templateCachesTable, $condition, $params);
+		return (bool) $affectedRows;
+	}
+
+	/**
 	 * Deletes any expired caches.
 	 *
 	 * @return bool
 	 */
 	public function deleteExpiredCaches()
 	{
-		if ($this->_deletedAllCaches || $this->_deletedExpiredCaches)
+		if ($this->_deletedAllCaches || $this->_deletedExpiredCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -507,7 +584,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	public function deleteExpiredCachesIfOverdue()
 	{
 		// Ignore if we've already done this once during the request
-		if ($this->_deletedExpiredCaches)
+		if ($this->_deletedExpiredCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -535,7 +612,7 @@ class TemplateCacheService extends BaseApplicationComponent
 	 */
 	public function deleteAllCaches()
 	{
-		if ($this->_deletedAllCaches)
+		if ($this->_deletedAllCaches || !$this->_isTemplateCachingEnabled())
 		{
 			return false;
 		}
@@ -574,10 +651,10 @@ class TemplateCacheService extends BaseApplicationComponent
 				$this->_path .= '/'.craft()->config->get('pageTrigger').$pageNum;
 			}
 
-			if ($queryString = craft()->request->getQueryString())
+			// Get the querystring without the path param.
+			if ($queryString = craft()->request->getQueryStringWithoutPath())
 			{
-				// Strip the path param
-				$queryString = trim(preg_replace('/'.craft()->urlManager->pathParam.'=[^&]*/', '', $queryString), '&');
+				$queryString = trim($queryString, '&');
 
 				if ($queryString)
 				{
@@ -587,5 +664,16 @@ class TemplateCacheService extends BaseApplicationComponent
 		}
 
 		return $this->_path;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function _isTemplateCachingEnabled()
+	{
+		if (craft()->config->get('enableTemplateCaching'))
+		{
+			return true;
+		}
 	}
 }

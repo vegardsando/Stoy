@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -275,6 +275,11 @@ class LocalizationService extends BaseApplicationComponent
 				craft()->db->createCommand()->insertAll('categorygroups_i18n', array('groupId', 'locale', 'urlFormat', 'nestedUrlFormat'), $newCategoryLocales);
 			}
 
+			// Fire an 'onAddLocale' event
+			$this->onAddLocale(new Event($this, array(
+				'localeId' => $localeId,
+			)));
+
 			// Re-save all of the localizable elements
 			if (!craft()->tasks->areTasksPending('ResaveAllElements'))
 			{
@@ -310,45 +315,7 @@ class LocalizationService extends BaseApplicationComponent
 		// Did the primary site locale just change?
 		if ($oldPrimaryLocaleId != $newPrimaryLocaleId)
 		{
-			craft()->config->maxPowerCaptain();
-
-			// Update all of the non-localized elements
-			$nonLocalizedElementTypes = array();
-
-			foreach (craft()->elements->getAllElementTypes() as $elementType)
-			{
-				if (!$elementType->isLocalized())
-				{
-					$nonLocalizedElementTypes[] = $elementType->getClassHandle();
-				}
-			}
-
-			if ($nonLocalizedElementTypes)
-			{
-				$elementIds = craft()->db->createCommand()
-					->select('id')
-					->from('elements')
-					->where(array('in', 'type', $nonLocalizedElementTypes))
-					->queryColumn();
-
-				if ($elementIds)
-				{
-					// To be sure we don't hit any unique constraint MySQL errors, first make sure there are no rows for
-					// these elements that don't currently use the old primary locale
-					$deleteConditions = array('and', array('in', 'elementId', $elementIds), 'locale != :locale');
-					$deleteParams = array(':locale' => $oldPrimaryLocaleId);
-
-					craft()->db->createCommand()->delete('elements_i18n', $deleteConditions, $deleteParams);
-					craft()->db->createCommand()->delete('content', $deleteConditions, $deleteParams);
-
-					// Now convert the locales
-					$updateColumns = array('locale' => $newPrimaryLocaleId);
-					$updateConditions = array('in', 'elementId', $elementIds);
-
-					craft()->db->createCommand()->update('elements_i18n', $updateColumns, $updateConditions);
-					craft()->db->createCommand()->update('content', $updateColumns, $updateConditions);
-				}
-			}
+			$this->_processNewPrimaryLocale($oldPrimaryLocaleId, $newPrimaryLocaleId);
 		}
 
 		return true;
@@ -527,6 +494,31 @@ class LocalizationService extends BaseApplicationComponent
 					}
 				}
 
+				$primaryLocaleId = $this->getPrimarySiteLocaleId();
+
+				// Did the primary locale ID just get deleted?
+				if ($primaryLocaleId === $localeId)
+				{
+					// Find out what's *about* to be the new primary locale, since we're going to nuke the current one
+					// a few lines down.
+					$allLocales = $this->getSiteLocaleIds();
+
+					if (isset($allLocales[1]))
+					{
+						$newPrimaryLocaleId = $allLocales[1];
+					}
+					else
+					{
+						$newPrimaryLocaleId = false;
+					}
+
+					// Did the primary site locale just change?
+					if ($primaryLocaleId != $newPrimaryLocaleId)
+					{
+						$this->_processNewPrimaryLocale($primaryLocaleId, $newPrimaryLocaleId);
+					}
+				}
+
 				// Delete the locale
 				$affectedRows = craft()->db->createCommand()->delete('locales', array('locale' => $localeId));
 				$success = (bool) $affectedRows;
@@ -621,6 +613,18 @@ class LocalizationService extends BaseApplicationComponent
 	}
 
 	/**
+	 * Fires an 'onAddLocale' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onAddLocale(Event $event)
+	{
+		$this->raiseEvent('onAddLocale', $event);
+	}
+
+	/**
 	 * Fires an 'onDeleteLocale' event.
 	 *
 	 * @param Event $event
@@ -630,5 +634,55 @@ class LocalizationService extends BaseApplicationComponent
 	public function onDeleteLocale(Event $event)
 	{
 		$this->raiseEvent('onDeleteLocale', $event);
+	}
+
+	// Private Methods
+	// =========================================================================
+
+	/**
+	 * @param $oldPrimaryLocaleId
+	 * @param $newPrimaryLocaleId
+	 */
+	private function _processNewPrimaryLocale($oldPrimaryLocaleId, $newPrimaryLocaleId)
+	{
+		craft()->config->maxPowerCaptain();
+
+		// Update all of the non-localized elements
+		$nonLocalizedElementTypes = array();
+
+		foreach (craft()->elements->getAllElementTypes() as $elementType)
+		{
+			if (!$elementType->isLocalized())
+			{
+				$nonLocalizedElementTypes[] = $elementType->getClassHandle();
+			}
+		}
+
+		if ($nonLocalizedElementTypes)
+		{
+			$elementIds = craft()->db->createCommand()
+				->select('id')
+				->from('elements')
+				->where(array('in', 'type', $nonLocalizedElementTypes))
+				->queryColumn();
+
+			if ($elementIds)
+			{
+				// To be sure we don't hit any unique constraint MySQL errors, first make sure there are no rows for
+				// these elements that don't currently use the old primary locale
+				$deleteConditions = array('and', array('in', 'elementId', $elementIds), 'locale != :locale');
+				$deleteParams = array(':locale' => $oldPrimaryLocaleId);
+
+				craft()->db->createCommand()->delete('elements_i18n', $deleteConditions, $deleteParams);
+				craft()->db->createCommand()->delete('content', $deleteConditions, $deleteParams);
+
+				// Now convert the locales
+				$updateColumns = array('locale' => $newPrimaryLocaleId);
+				$updateConditions = array('in', 'elementId', $elementIds);
+
+				craft()->db->createCommand()->update('elements_i18n', $updateColumns, $updateConditions);
+				craft()->db->createCommand()->update('content', $updateColumns, $updateConditions);
+			}
+		}
 	}
 }

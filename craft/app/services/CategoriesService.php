@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     2.0
  */
@@ -342,17 +342,24 @@ class CategoriesService extends BaseApplicationComponent
 				$groupRecord->structureId = $structure->id;
 				$group->structureId = $structure->id;
 
-				// Create and set the field layout
-
-				if (!$isNewCategoryGroup && $oldCategoryGroup->fieldLayoutId)
-				{
-					craft()->fields->deleteLayoutById($oldCategoryGroup->fieldLayoutId);
-				}
-
+				// Is there a new field layout?
 				$fieldLayout = $group->getFieldLayout();
-				craft()->fields->saveLayout($fieldLayout);
-				$groupRecord->fieldLayoutId = $fieldLayout->id;
-				$group->fieldLayoutId = $fieldLayout->id;
+
+				if (!$fieldLayout->id)
+				{
+					// Delete the old one
+					if (!$isNewCategoryGroup && $oldCategoryGroup->fieldLayoutId)
+					{
+						craft()->fields->deleteLayoutById($oldCategoryGroup->fieldLayoutId);
+					}
+
+					// Save the new one
+					craft()->fields->saveLayout($fieldLayout);
+
+					// Update the category group record/model with the new layout ID
+					$groupRecord->fieldLayoutId = $fieldLayout->id;
+					$group->fieldLayoutId = $fieldLayout->id;
+				}
 
 				// Save the category group
 				$groupRecord->save(false);
@@ -519,47 +526,63 @@ class CategoriesService extends BaseApplicationComponent
 			return false;
 		}
 
-		$transaction = craft()->db->getCurrentTransaction() === null ? craft()->db->beginTransaction() : null;
-		try
+		// Fire an 'onBeforeDeleteGroup' event
+		$event = new Event($this, array(
+			'groupId' => $groupId
+		));
+
+		$this->onBeforeDeleteGroup($event);
+
+		if ($event->performAction)
 		{
-			// Delete the field layout
-			$fieldLayoutId = craft()->db->createCommand()
-				->select('fieldLayoutId')
-				->from('categorygroups')
-				->where(array('id' => $groupId))
-				->queryScalar();
+			$transaction = craft()->db->getCurrentTransaction() === null ? craft()->db->beginTransaction() : null;
 
-			if ($fieldLayoutId)
+			try
 			{
-				craft()->fields->deleteLayoutById($fieldLayoutId);
+				// Delete the field layout
+				$fieldLayoutId = craft()->db->createCommand()
+					->select('fieldLayoutId')
+					->from('categorygroups')
+					->where(array('id' => $groupId))
+					->queryScalar();
+
+				if ($fieldLayoutId)
+				{
+					craft()->fields->deleteLayoutById($fieldLayoutId);
+				}
+
+				// Grab the category ids so we can clean the elements table.
+				$categoryIds = craft()->db->createCommand()
+					->select('id')
+					->from('categories')
+					->where(array('groupId' => $groupId))
+					->queryColumn();
+
+				craft()->elements->deleteElementById($categoryIds);
+
+				$affectedRows = craft()->db->createCommand()->delete('categorygroups', array('id' => $groupId));
+
+				if ($transaction !== null)
+				{
+					$transaction->commit();
+				}
+
+				// Fire an 'onDeleteGroup' event
+				$this->onDeleteGroup(new Event($this, array(
+					'groupId' => $groupId
+				)));
+
+				return (bool)$affectedRows;
 			}
-
-			// Grab the category ids so we can clean the elements table.
-			$categoryIds = craft()->db->createCommand()
-				->select('id')
-				->from('categories')
-				->where(array('groupId' => $groupId))
-				->queryColumn();
-
-			craft()->elements->deleteElementById($categoryIds);
-
-			$affectedRows = craft()->db->createCommand()->delete('categorygroups', array('id' => $groupId));
-
-			if ($transaction !== null)
+			catch (\Exception $e)
 			{
-				$transaction->commit();
-			}
+				if ($transaction !== null)
+				{
+					$transaction->rollback();
+				}
 
-			return (bool) $affectedRows;
-		}
-		catch (\Exception $e)
-		{
-			if ($transaction !== null)
-			{
-				$transaction->rollback();
+				throw $e;
 			}
-
-			throw $e;
 		}
 	}
 
@@ -717,7 +740,7 @@ class CategoriesService extends BaseApplicationComponent
 				}
 
 				// Update the category's descendants, who may be using this category's URI in their own URIs
-				craft()->elements->updateDescendantSlugsAndUris($category);
+				craft()->elements->updateDescendantSlugsAndUris($category, true, true);
 			}
 			else
 			{
@@ -937,6 +960,30 @@ class CategoriesService extends BaseApplicationComponent
 		$this->raiseEvent('onDeleteCategory', $event);
 	}
 
+	/**
+	 * Fires an 'onBeforeDeleteGroup' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onBeforeDeleteGroup(Event $event)
+	{
+		$this->raiseEvent('onBeforeDeleteGroup', $event);
+	}
+
+	/**
+	 * Fires an 'onDeleteGroup' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onDeleteGroup(Event $event)
+	{
+		$this->raiseEvent('onDeleteGroup', $event);
+	}
+
 	// Private Methods
 	// =========================================================================
 
@@ -1002,6 +1049,7 @@ class CategoriesService extends BaseApplicationComponent
 		$criteria->ancestorOf = $category;
 		$criteria->ancestorDist = 1;
 		$criteria->status = null;
+		$criteria->locale = $category->locale;
 		$criteria->localeEnabled = null;
 
 		$oldParent = $criteria->first();

@@ -6,13 +6,18 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.helpers
  * @since     1.0
  */
 class IOHelper
 {
+	// Public Methods
+	// =========================================================================
+
+	private static $_fileKinds;
+
 	// Public Methods
 	// =========================================================================
 
@@ -341,8 +346,8 @@ class IOHelper
 	}
 
 	/**
-	 * If the path points to a real file, we call {@link \CFileHelper::getMimeType}, otherwise
-	 * {@link \CFileHelper::getMimeTypeByExtension}
+	 * If the path points to a real file, we call {@link FileHelper::getMimeType()}, otherwise
+	 * {@link FileHelper::getMimeTypeByExtension()}
 	 *
 	 * @param string $path The path to test.
 	 *
@@ -352,16 +357,16 @@ class IOHelper
 	{
 		if (@file_exists($path))
 		{
-			return \CFileHelper::getMimeType($path);
+			return FileHelper::getMimeType($path);
 		}
 		else
 		{
-			return \CFileHelper::getMimeTypeByExtension($path);
+			return FileHelper::getMimeTypeByExtension($path);
 		}
 	}
 
 	/**
-	 * A wrapper for {@link \CFileHelper::getMimeTypeByExtension}.
+	 * A wrapper for {@link FileHelper::getMimeTypeByExtension()}.
 	 *
 	 * @param  string $path The path to test.
 	 *
@@ -369,7 +374,7 @@ class IOHelper
 	 */
 	public static function getMimeTypeByExtension($path)
 	{
-		return  \CFileHelper::getMimeTypeByExtension($path);
+		return FileHelper::getMimeTypeByExtension($path);
 	}
 
 	/**
@@ -783,25 +788,25 @@ class IOHelper
 
 					try
 					{
-						Craft::log('Trying to write to file at '.$path.' using LOCK_EX.', LogLevel::Info, true);
+						Craft::log('Trying to write to file at '.$path.' using LOCK_EX.', LogLevel::Info);
 						if (static::_writeToFile($path, $contents, true, $append, $suppressErrors))
 						{
 							// Restore quickly.
 							restore_error_handler();
 
 							// Cache the file lock info to use LOCK_EX for 2 months.
-							Craft::log('Successfully wrote to file at '.$path.' using LOCK_EX. Saving in cache.', LogLevel::Info, true);
+							Craft::log('Successfully wrote to file at '.$path.' using LOCK_EX. Saving in cache.', LogLevel::Info);
 							craft()->cache->set('useWriteFileLock', 'yes', 5184000);
 							return true;
 						}
 						else
 						{
 							// Try again without the lock flag.
-							Craft::log('Trying to write to file at '.$path.' without LOCK_EX.', LogLevel::Info, true);
+							Craft::log('Trying to write to file at '.$path.' without LOCK_EX.', LogLevel::Info);
 							if (static::_writeToFile($path, $contents, false, $append, $suppressErrors))
 							{
 								// Cache the file lock info to not use LOCK_EX for 2 months.
-								Craft::log('Successfully wrote to file at '.$path.' without LOCK_EX. Saving in cache.', LogLevel::Info, true);
+								Craft::log('Successfully wrote to file at '.$path.' without LOCK_EX. Saving in cache.', LogLevel::Info);
 								craft()->cache->set('useWriteFileLock', 'no', 5184000);
 								return true;
 							}
@@ -813,11 +818,11 @@ class IOHelper
 						restore_error_handler();
 
 						// Try again without the lock flag.
-						Craft::log('Trying to write to file at '.$path.' without LOCK_EX.', LogLevel::Info, true);
+						Craft::log('Trying to write to file at '.$path.' without LOCK_EX.', LogLevel::Info);
 						if (static::_writeToFile($path, $contents, false, $append, $suppressErrors))
 						{
 							// Cache the file lock info to not use LOCK_EX for 2 months.
-							Craft::log('Successfully wrote to file at '.$path.' without LOCK_EX. Saving in cache.', LogLevel::Info, true);
+							Craft::log('Successfully wrote to file at '.$path.' without LOCK_EX. Saving in cache.', LogLevel::Info);
 							craft()->cache->set('useWriteFileLock', 'no', 5184000);
 							return true;
 						}
@@ -1426,26 +1431,30 @@ class IOHelper
 	 */
 	public static function getFileKinds()
 	{
-		return array(
-			'access'      => array('label' => Craft::t('Access'),      'extensions' => array('adp','accdb','mdb','accde','accdt','accdr')),
-			'audio'       => array('label' => Craft::t('Audio'),       'extensions' => array('3gp','aac','act','aif','aiff','aifc','alac','amr','au','dct','dss','dvf','flac','gsm','iklax','ivs','m4a','m4p','mmf','mp3','mpc','msv','oga','ogg','opus','ra','tta','vox','wav','wma','wv')),
-			'compressed'  => array('label' => Craft::t('Compressed'),  'extensions' => array('bz2', 'tar', 'gz', '7z', 's7z', 'dmg', 'rar', 'zip', 'tgz', 'zipx')),
-			'excel'       => array('label' => Craft::t('Excel'),       'extensions' => array('xls', 'xlsx','xlsm','xltx','xltm')),
-			'flash'       => array('label' => Craft::t('Flash'),       'extensions' => array('fla','flv','swf','swt','swc')),
-			'html'        => array('label' => Craft::t('HTML'),        'extensions' => array('html','htm')),
-			'illustrator' => array('label' => Craft::t('Illustrator'), 'extensions' => array('ai')),
-			'image'       => array('label' => Craft::t('Image'),       'extensions' => array('jfif','jp2','jpx','jpg','jpeg','jpe','tiff','tif','png','gif','bmp','webp','ppm','pgm','pnm','pfm','pam','svg')),
-			'javascript'  => array('label' => Craft::t('Javascript'),  'extensions' => array('js')),
-			'json'        => array('label' => Craft::t('JSON'),        'extensions' => array('json')),
-			'pdf'         => array('label' => Craft::t('PDF'),         'extensions' => array('pdf')),
-			'photoshop'   => array('label' => Craft::t('Photoshop'),   'extensions' => array('psd','psb')),
-			'php'         => array('label' => Craft::t('PHP'),         'extensions' => array('php')),
-			'powerpoint'  => array('label' => Craft::t('PowerPoint'),  'extensions' => array('pps','ppsm','ppsx','ppt','pptm','pptx','potx')),
-			'text'        => array('label' => Craft::t('Text'),        'extensions' => array('txt','text')),
-			'video'       => array('label' => Craft::t('Video'),       'extensions' => array('avchd','asf','asx','avi','flv','fla','mov','m4v','mng','mpeg','mpg','m1s','mp2v','m2v','m2s','mp4','mkv','qt','flv','mp4','ogg','ogv','rm','wmv','webm')),
-			'word'        => array('label' => Craft::t('Word'),        'extensions' => array('doc','docx','dot','docm','dotm')),
-			'xml'         => array('label' => Craft::t('XML'),         'extensions' => array('xml')),
-		);
+		self::_buildFileKinds();
+
+		return self::$_fileKinds;
+	}
+
+	/**
+	 * Returns the label of a given file kind.
+	 *
+	 * @param string $kind
+	 *
+	 * @return array
+	 */
+	public static function getFileKindLabel($kind)
+	{
+		self::_buildFileKinds();
+
+		if (isset(self::$_fileKinds[$kind]['label']))
+		{
+			return self::$_fileKinds[$kind]['label'];
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1490,13 +1499,13 @@ class IOHelper
 	/**
 	 * Cleans a filename.
 	 *
-	 * @param string $fileName
-	 * @param bool   $onlyAlphaNumeric
-	 * @param string $separator
+	 * @param string $fileName  The filename to clean.
+	 * @param bool   $onlyAscii Whether to only allow ASCII characters in the filename.
+	 * @param string $separator The separator to use for any whitespace. Defaults to '-'.
 	 *
-	 * @return mixed
+	 * @return string The cleansed filename.
 	 */
-	public static function cleanFilename($fileName, $onlyAlphaNumeric = false, $separator = '-')
+	public static function cleanFilename($fileName, $onlyAscii = false, $separator = '-')
 	{
 		$disallowedChars = array('â€”', 'â€“', '&#8216;', '&#8217;', '&#8220;', '&#8221;', '&#8211;', '&#8212;', '+', '%', '^', '~', '?', '[', ']', '/', '\\', '=', '<', '>', ':', ';', ',', '\'', '"', '&', '$', '#', '*', '(', ')', '|', '~', '`', '!', '{', '}');
 
@@ -1514,9 +1523,30 @@ class IOHelper
 		// Nuke any trailing or leading .-_
 		$fileName = trim($fileName, '.-_');
 
-		$fileName = ($onlyAlphaNumeric) ? preg_replace('/[^a-zA-Z0-9]/', '', $fileName) : $fileName;
+		$fileName = ($onlyAscii) ? StringHelper::asciiString($fileName) : $fileName;
 
 		return $fileName;
+	}
+
+	/**
+	 * Cleans a path.
+	 *
+	 * @param string $path      The path to clean.
+	 * @param bool   $onlyAscii Whether to only allow ASCII characters in the path.
+	 * @param string $separator The separator to use for any whitespace. Defaults to '-'.
+	 *
+	 * @return string The cleansed path.
+	 */
+	public static function cleanPath($path, $onlyAscii = false, $separator = '-')
+	{
+		$segments = explode('/', $path);
+
+		foreach ($segments as &$segment)
+		{
+			$segment = self::cleanFilename($segment, $onlyAscii, $separator);
+		}
+
+		return implode('/', $segments);
 	}
 
 	/**
@@ -1827,5 +1857,37 @@ class IOHelper
 		}
 
 		return $passed;
+	}
+
+	/**
+	 * Builds the internal file kinds array, if it hasn't been built already.
+	 *
+	 * @return void
+	 */
+	private static function _buildFileKinds()
+	{
+		if (!isset(self::$_fileKinds))
+		{
+			self::$_fileKinds = array(
+				'access'      => array('label' => Craft::t('Access'),      'extensions' => array('adp','accdb','mdb','accde','accdt','accdr')),
+				'audio'       => array('label' => Craft::t('Audio'),       'extensions' => array('3gp','aac','act','aif','aiff','aifc','alac','amr','au','dct','dss','dvf','flac','gsm','iklax','ivs','m4a','m4p','mmf','mp3','mpc','msv','oga','ogg','opus','ra','tta','vox','wav','wma','wv')),
+				'compressed'  => array('label' => Craft::t('Compressed'),  'extensions' => array('bz2', 'tar', 'gz', '7z', 's7z', 'dmg', 'rar', 'zip', 'tgz', 'zipx')),
+				'excel'       => array('label' => Craft::t('Excel'),       'extensions' => array('xls', 'xlsx','xlsm','xltx','xltm')),
+				'flash'       => array('label' => Craft::t('Flash'),       'extensions' => array('fla','flv','swf','swt','swc')),
+				'html'        => array('label' => Craft::t('HTML'),        'extensions' => array('html','htm')),
+				'illustrator' => array('label' => Craft::t('Illustrator'), 'extensions' => array('ai')),
+				'image'       => array('label' => Craft::t('Image'),       'extensions' => array('jfif','jp2','jpx','jpg','jpeg','jpe','tiff','tif','png','gif','bmp','webp','ppm','pgm','pnm','pfm','pam','svg')),
+				'javascript'  => array('label' => Craft::t('Javascript'),  'extensions' => array('js')),
+				'json'        => array('label' => Craft::t('JSON'),        'extensions' => array('json')),
+				'pdf'         => array('label' => Craft::t('PDF'),         'extensions' => array('pdf')),
+				'photoshop'   => array('label' => Craft::t('Photoshop'),   'extensions' => array('psd','psb')),
+				'php'         => array('label' => Craft::t('PHP'),         'extensions' => array('php')),
+				'powerpoint'  => array('label' => Craft::t('PowerPoint'),  'extensions' => array('pps','ppsm','ppsx','ppt','pptm','pptx','potx')),
+				'text'        => array('label' => Craft::t('Text'),        'extensions' => array('txt','text')),
+				'video'       => array('label' => Craft::t('Video'),       'extensions' => array('avchd','asf','asx','avi','flv','fla','mov','m4v','mng','mpeg','mpg','m1s','mp2v','m2v','m2s','mp4','mkv','qt','flv','mp4','ogg','ogv','rm','wmv','webm','vob')),
+				'word'        => array('label' => Craft::t('Word'),        'extensions' => array('doc','docx','dot','docm','dotm')),
+				'xml'         => array('label' => Craft::t('XML'),         'extensions' => array('xml')),
+			);
+		}
 	}
 }

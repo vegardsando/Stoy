@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.variables
  * @since     1.0
  */
@@ -144,11 +144,27 @@ class CraftVariable
 	}
 
 	/**
+	 * @return CategoryGroupsVariable
+	 */
+	public function categoryGroups()
+	{
+		return new CategoryGroupsVariable();
+	}
+
+	/**
 	 * @return ConfigVariable
 	 */
 	public function config()
 	{
 		return new ConfigVariable();
+	}
+
+	/**
+	 * @return ElementsVariable
+	 */
+	public function elementIndexes()
+	{
+		return new ElementIndexesVariable();
 	}
 
 	/**
@@ -165,14 +181,6 @@ class CraftVariable
 	public function cp()
 	{
 		return new CpVariable();
-	}
-
-	/**
-	 * @return DashboardVariable
-	 */
-	public function dashboard()
-	{
-		return new DashboardVariable();
 	}
 
 	/**
@@ -217,10 +225,7 @@ class CraftVariable
 	 */
 	public function entryRevisions()
 	{
-		if (craft()->getEdition() >= Craft::Client)
-		{
-			return new EntryRevisionsVariable();
-		}
+		return new EntryRevisionsVariable();
 	}
 
 	/**

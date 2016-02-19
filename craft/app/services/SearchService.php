@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -108,14 +108,23 @@ class SearchService extends BaseApplicationComponent
 	 * @param array $elementIds   The list of element IDs to filter by the search query.
 	 * @param mixed $query        The search query (either a string or a SearchQuery instance)
 	 * @param bool  $scoreResults Whether to order the results based on how closely they match the query.
+	 * @param mixed $localeId     The locale to filter by.
+	 * @param bool  $returnScores Whether the search scores should be included in the results. If true, results will be returned as `element ID => score`.
 	 *
 	 * @return array The filtered list of element IDs.
 	 */
-	public function filterElementIdsByQuery($elementIds, $query, $scoreResults = true)
+	public function filterElementIdsByQuery($elementIds, $query, $scoreResults = true, $localeId = null, $returnScores = false)
 	{
 		if (is_string($query))
 		{
-			$query = new SearchQuery($query);
+			$query = new SearchQuery($query, craft()->config->get('defaultSearchTermOptions'));
+		}
+		else if (is_array($query))
+		{
+			$options = $query;
+			$query = $options['query'];
+			unset($options['query']);
+			$query = new SearchQuery($query, $options);
 		}
 
 		// Get tokens for query
@@ -137,11 +146,17 @@ class SearchService extends BaseApplicationComponent
 		}
 
 		// Get where clause from tokens, bail out if no valid query is there
-		$where = $this->_getWhereClause();
+		$where = $this->_getWhereClause($localeId);
 
 		if (!$where)
 		{
 			return array();
+		}
+
+		// Add any locale restrictions
+		if ($localeId)
+		{
+			$where .= sprintf(' AND %s = %s', craft()->db->quoteColumnName('locale'), craft()->db->quoteValue($localeId));
 		}
 
 		// Begin creating SQL
@@ -186,8 +201,15 @@ class SearchService extends BaseApplicationComponent
 			// Sort found elementIds by score
 			arsort($scoresByElementId);
 
-			// Store entry ids in return value
-			$elementIds = array_keys($scoresByElementId);
+			if ($returnScores)
+			{
+				return $scoresByElementId;
+			}
+			else
+			{
+				// Just return the ordered element IDs
+				return array_keys($scoresByElementId);
+			}
 		}
 		else
 		{
@@ -199,11 +221,8 @@ class SearchService extends BaseApplicationComponent
 				$elementIds[] = $row['elementId'];
 			}
 
-			$elementIds = array_unique($elementIds);
+			return array_unique($elementIds);
 		}
-
-		// Return elementIds
-		return $elementIds;
 	}
 
 	// Private Methods
@@ -373,18 +392,18 @@ class SearchService extends BaseApplicationComponent
 		}
 
 		// Account for substrings
-		if ($term->subLeft)
-		{
-			$keywords = $keywords.' ';
-		}
-
-		if ($term->subRight)
+		if (!$term->subLeft)
 		{
 			$keywords = ' '.$keywords;
 		}
 
+		if (!$term->subRight)
+		{
+			$keywords = $keywords.' ';
+		}
+
 		// Get haystack and safe word count
-		$haystack  = $this->_removePadding($row['keywords'], true);
+		$haystack  = $row['keywords'];
 		$wordCount = count(array_filter(explode(' ', $haystack)));
 
 		// Get number of matches
@@ -424,14 +443,14 @@ class SearchService extends BaseApplicationComponent
 	 *
 	 * @return string|false
 	 */
-	private function _getWhereClause()
+	private function _getWhereClause($localeId = null)
 	{
 		$where  = array();
 
 		// Add the regular terms to the WHERE clause
 		if ($this->_terms)
 		{
-			$condition = $this->_processTokens($this->_terms);
+			$condition = $this->_processTokens($this->_terms, true, $localeId);
 
 			if ($condition === false)
 			{
@@ -444,7 +463,7 @@ class SearchService extends BaseApplicationComponent
 		// Add each group to the where clause
 		foreach ($this->_groups as $group)
 		{
-			$condition = $this->_processTokens($group, false);
+			$condition = $this->_processTokens($group, false, $localeId);
 
 			if ($condition === false)
 			{
@@ -466,7 +485,7 @@ class SearchService extends BaseApplicationComponent
 	 *
 	 * @return string|false
 	 */
-	private function _processTokens($tokens = array(), $inclusive = true)
+	private function _processTokens($tokens = array(), $inclusive = true, $localeId = null)
 	{
 		$andor = $inclusive ? ' AND ' : ' OR ';
 		$where = array();
@@ -475,7 +494,7 @@ class SearchService extends BaseApplicationComponent
 		foreach ($tokens as $obj)
 		{
 			// Get SQL and/or keywords
-			list($sql, $keywords) = $this->_getSqlFromTerm($obj);
+			list($sql, $keywords) = $this->_getSqlFromTerm($obj, $localeId);
 
 			if ($sql === false && $inclusive)
 			{
@@ -535,7 +554,7 @@ class SearchService extends BaseApplicationComponent
 	 *
 	 * @return array
 	 */
-	private function _getSqlFromTerm(SearchQueryTerm $term)
+	private function _getSqlFromTerm(SearchQueryTerm $term, $localeId = null)
 	{
 		// Initiate return value
 		$sql = null;
@@ -643,7 +662,7 @@ class SearchService extends BaseApplicationComponent
 		// If we have a where clause in the subselect, add the keyword bit to it.
 		if ($subSelect && $sql)
 		{
-			$sql = $this->_sqlSubSelect($subSelect.' AND '.$sql);
+			$sql = $this->_sqlSubSelect($subSelect.' AND '.$sql, $localeId);
 
 			// We need to reset keywords even if the subselect ended up in no results.
 			$keywords = null;
@@ -770,14 +789,20 @@ class SearchService extends BaseApplicationComponent
 	 *
 	 * @return string|false
 	 */
-	private function _sqlSubSelect($where)
+	private function _sqlSubSelect($where, $localeId = null)
 	{
 		// FULLTEXT indexes are not used in queries with subselects, so let's do this as its own query.
-		$elementIds = craft()->db->createCommand()
+		$query = craft()->db->createCommand()
 			->select('elementId')
 			->from('searchindex')
-			->where($where)
-			->queryColumn();
+			->where($where);
+
+		if ($localeId)
+		{
+			$query->andWhere('locale=:locale', array(':locale' => $localeId));
+		}
+
+		$elementIds = $query->queryColumn();
 
 		if ($elementIds)
 		{

@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -196,7 +196,7 @@ class EntriesService extends BaseApplicationComponent
 						$entry->clearErrors();
 
 						// Create the new "title" error message.
-						$errors['title'] = str_replace('Title', $entryType->titleLabel, $originalTitleError);
+						$errors['title'] = str_replace(Craft::t('Title'), $entryType->titleLabel, $originalTitleError);
 
 						// Add all of the errors back on the model.
 						$entry->addErrors($errors);
@@ -230,11 +230,11 @@ class EntriesService extends BaseApplicationComponent
 					}
 
 					// Update the entry's descendants, who may be using this entry's URI in their own URIs
-					craft()->elements->updateDescendantSlugsAndUris($entry);
+					craft()->elements->updateDescendantSlugsAndUris($entry, true, true);
 				}
 
 				// Save a new version
-				if (craft()->getEdition() >= Craft::Client && $section->enableVersioning)
+				if ($section->enableVersioning)
 				{
 					craft()->entryRevisions->saveVersion($entry);
 				}
@@ -499,6 +499,7 @@ class EntriesService extends BaseApplicationComponent
 		$criteria->ancestorOf = $entry;
 		$criteria->ancestorDist = 1;
 		$criteria->status = null;
+		$criteria->locale = $entry->locale;
 		$criteria->localeEnabled = null;
 
 		$oldParent = $criteria->first();

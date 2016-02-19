@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.helpers
  * @since     1.1
  */
@@ -39,18 +39,18 @@ class ImageHelper
 
 		if (empty($targetHeight))
 		{
-			$targetHeight = round($targetWidth / $factor);
+			$targetHeight = ceil($targetWidth / $factor);
 		}
 		else if (empty($targetWidth))
 		{
-			$targetWidth = round($targetHeight * $factor);
+			$targetWidth = ceil($targetHeight * $factor);
 		}
 
 		return array($targetWidth, $targetHeight);
 	}
 
 	/**
-	 * Returns if an image is manipulatable or not.
+	 * Returns whether an image extension is considered manipulatable.
 	 *
 	 * @param $extension
 	 *
@@ -58,18 +58,28 @@ class ImageHelper
 	 */
 	public static function isImageManipulatable($extension)
 	{
-		return in_array(mb_strtolower($extension), array('jpg', 'jpeg', 'gif', 'png', 'wbmp', 'xbm'));
+		$path = craft()->path->getResourcesPath();
+		$file = $path."images/samples/sample.".StringHelper::toLowerCase($extension);
 
+		try
+		{
+			craft()->images->loadImage($file);
+			return true;
+		}
+		catch(\Exception $e)
+		{
+			return false;
+		}
 	}
 
 	/**
-	 * Return a list of web safe formats.
+	 * Returns a list of web safe image formats.
 	 *
 	 * @return array
 	 */
 	public static function getWebSafeFormats()
 	{
-		return array('jpg', 'jpeg', 'gif', 'png');
+		return array('jpg', 'jpeg', 'gif', 'png', 'svg');
 	}
 
 	/**
@@ -147,9 +157,9 @@ class ImageHelper
 	}
 
 	/**
-	 * Return true if the file can have EXIF information embedded.
+	 * Returns whether an image can have EXIF information embedded.
 	 *
-	 * @param string $filePath the file path to check.
+	 * @param string $filePath The path to the image
 	 *
 	 * @return bool
 	 */
@@ -158,5 +168,114 @@ class ImageHelper
 		$extension = IOHelper::getExtension($filePath);
 
 		return in_array(StringHelper::toLowerCase($extension), array('jpg', 'jpeg', 'tiff'));
+	}
+
+	/**
+	 * Returns the size of an image based on its file path.
+	 *
+	 * @param string $filePath The path to the image
+	 *
+	 * @return array [$width, $height]
+	 */
+	public static function getImageSize($filePath)
+	{
+		if (IOHelper::getExtension($filePath) == 'svg')
+		{
+			$svg = IOHelper::getFileContents($filePath);
+			return static::parseSvgSize($svg);
+		}
+		else
+		{
+			$image = craft()->images->loadImage($filePath);
+			return array($image->getWidth(), $image->getHeight());
+		}
+	}
+
+	/**
+	 * Parses SVG data and determines its size (normalized to pixels).
+	 *
+	 * @param string $svg The SVG data
+	 *
+	 * @return array [$width, $height]
+	 */
+	public static function parseSvgSize($svg)
+	{
+		if (
+			preg_match(SvgImage::SVG_WIDTH_RE, $svg, $widthMatch) &&
+			preg_match(SvgImage::SVG_HEIGHT_RE, $svg, $heightMatch) &&
+			($matchedWidth = floatval($widthMatch[2])) &&
+			($matchedHeight = floatval($heightMatch[2]))
+		)
+		{
+			$width = round($matchedWidth * self::_getSizeUnitMultiplier($widthMatch[3]));
+			$height = round($matchedHeight * self::_getSizeUnitMultiplier($heightMatch[3]));
+		}
+		elseif (preg_match(SvgImage::SVG_VIEWBOX_RE, $svg, $viewboxMatch))
+		{
+			$width = round($viewboxMatch[3]);
+			$height = round($viewboxMatch[4]);
+		}
+		else
+		{
+			$width = null;
+			$height = null;
+		}
+
+		return array($width, $height);
+	}
+
+	// Private Methods
+	// =========================================================================
+
+	/**
+	 * Returns the multiplier that should be used to convert an image size unit to pixels.
+	 *
+	 * @param string $unit
+	 *
+	 * @return float The multiplier
+	 */
+	private static function _getSizeUnitMultiplier($unit)
+	{
+		$ppi = 72;
+
+		switch ($unit)
+		{
+			case 'px':
+			{
+				return 1;
+			}
+			case 'in':
+			{
+				return $ppi;
+			}
+			case 'pt':
+			{
+				return $ppi / 72;
+			}
+			case 'pc':
+			{
+				return $ppi / 6;
+			}
+			case 'cm':
+			{
+				return $ppi / 2.54;
+			}
+			case 'mm':
+			{
+				return $ppi / 25.4;
+			}
+			case 'em':
+			{
+				return 16;
+			}
+			case 'ex':
+			{
+				return 10;
+			}
+			default:
+			{
+				return 1;
+			}
+		}
 	}
 }

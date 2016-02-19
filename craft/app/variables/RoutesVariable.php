@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.variables
  * @since     1.0
  */
@@ -44,7 +44,7 @@ class RoutesVariable
 				}
 				else
 				{
-					$urlDisplayHtml .= '<span class="token" data-name="'.$part[0].'" data-value="'.$part[1].'"><span>'.$part[0].'</span></span>';
+					$urlDisplayHtml .= HtmlHelper::encodeParams('<span class="token" data-name="{partZero}" data-value="{partOne}"><span>{partZero}</span></span>', array('partZero' => $part[0], 'partOne' => $part[1]));
 				}
 			}
 

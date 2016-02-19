@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.variables
  * @since     1.0
  */
@@ -56,18 +56,42 @@ class PaginateVariable
 		if ($page >= 1 && $page <= $this->totalPages)
 		{
 			$path = craft()->request->getPath();
+			$params = array();
 
 			if ($page != 1)
 			{
-				if ($path)
+				$pageTrigger = craft()->config->get('pageTrigger');
+
+				if (!is_string($pageTrigger) || !strlen($pageTrigger))
 				{
-					$path .= '/';
+					$pageTrigger = 'p';
 				}
 
-				$path .= craft()->config->get('pageTrigger').$page;
+				// Is this query string-based pagination?
+				if ($pageTrigger[0] === '?')
+				{
+					$pageTrigger = trim($pageTrigger, '?=');
+
+					if ($pageTrigger === 'p')
+					{
+						// Avoid conflict with the main 'p' param
+						$pageTrigger = 'pg';
+					}
+
+					$params = array($pageTrigger => $page);
+				}
+				else
+				{
+					if ($path)
+					{
+						$path .= '/';
+					}
+
+					$path .= $pageTrigger.$page;
+				}
 			}
 
-			return UrlHelper::getUrl($path);
+			return UrlHelper::getUrl($path, $params);
 		}
 	}
 

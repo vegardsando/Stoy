@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.records
  * @since     1.0
  */
@@ -17,7 +17,9 @@ class FieldRecord extends BaseRecord
 	// =========================================================================
 
 	/**
-	 * @var array
+	 * @var array Reserved field handles.
+	 *
+	 * Some of these are element type-specific, but necessary to prevent 'order' criteria param conflicts
 	 */
 	protected $reservedHandleWords = array(
 		'archived',
@@ -26,16 +28,30 @@ class FieldRecord extends BaseRecord
 		'dateUpdated',
 		'enabled',
 		'id',
+		'level',
+		'lft',
 		'link',
 		'locale',
+		'localeEnabled',
+		'name', // global set-specific
 		'parents',
+		'postDate', // entry-specific
+		'rgt',
+		'root',
 		'siblings',
+		'sortOrder',
 		'uid',
 		'uri',
 		'url',
+		'username', // user-specific
 		'ref',
 		'status',
 		'title',
+		'searchScore',
+		'slug',
+		'prev',
+		'next',
+		'contentTable'
 	);
 
 	/**

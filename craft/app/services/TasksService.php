@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     2.0
  */
@@ -59,7 +59,7 @@ class TasksService extends BaseApplicationComponent
 		$task->parentId = $parentId;
 		$this->saveTask($task);
 
-		if (!$this->_listeningForRequestEnd && craft()->config->get('runTasksAutomatically') && !$this->isTaskRunning())
+		if (!$this->_listeningForRequestEnd && craft()->config->get('runTasksAutomatically') && !$this->isTaskRunning() && !craft()->isConsole())
 		{
 			// Turn this request into a runner once everything else is done
 			craft()->attachEventHandler('onEndRequest', array($this, 'handleRequestEnd'));
@@ -544,15 +544,19 @@ class TasksService extends BaseApplicationComponent
 	 *
 	 * @param int $taskId
 	 *
-	 * @return bool
+	 * @return bool|null
 	 */
 	public function deleteTaskById($taskId)
 	{
 		$taskRecord = $this->_getTaskRecordById($taskId);
-		$success = $taskRecord->deleteNode();
-		unset($this->_taskRecordsById[$taskId]);
 
-		return $success;
+		if ($taskRecord)
+		{
+			$success = $taskRecord->deleteNode();
+			unset($this->_taskRecordsById[$taskId]);
+
+			return $success;
+		}
 	}
 
 	/**
