@@ -157,15 +157,22 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
 
   }
 
-  //Kart
-  if ($m('.map_wrapper').length) {
-      maps();
-  }
+  	$m('.nav_main .facebook').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+      function(e) {
 
-  setTimeout(function(){
-      $html.addClass('lastet');
-      //$(".grid article").fitVids();
-  },1000);
+
+		  setTimeout(function() {
+			  //Kart
+	    	  if ($m('.map_wrapper').length) {
+	    	      maps();
+	    	  }
+
+	          $(".grid article").fitVids();
+		  }, 800)
+
+
+    });
+
 
   render();
 
