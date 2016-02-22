@@ -19,12 +19,10 @@ $customDbConfig = array(
 		'database' 	=> 'stoy_craft'
 	),
 	'DEV' => array(
-		'server' 	=> '10.0.0.14',
-		'port' 		=> '8889',
-		//'port' => '3306',
+		'server' 	=> 'localhost',
 		'user' 		=> 'root',
 		'password' 	=> 'root',
-		'database' 	=> '_standard_craft'
+		'database' 	=> 'stoy_craft'
 	),
 	'STAGE' => array(
 		'server' 	=> '',
@@ -33,10 +31,10 @@ $customDbConfig = array(
 		'database' 	=> ''
 	),
 	'PROD' => array(
-		'server' 	=> '',
-		'user' 		=> '',
-		'password' 	=> '',
-		'database' 	=> ''
+		'server' 	=> 'db9.subsys.no',
+		'user' 		=> 'stoey',
+		'password' 	=> 'kaFhfjqJUX',
+		'database' 	=> 'stoey'
 	)
 );
 
