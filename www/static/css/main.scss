@@ -224,7 +224,7 @@ footer {
 
 // TOPP-MODUL
 .top {
-    height: 50vh;
+    height: 500px;
     border: 10px solid #FFF;
     //transform: translateZ(0);
 
@@ -1026,11 +1026,12 @@ body {
 .underside {
     height: 100%;
 
+	.nav_main {
+		text-align: right;
+	}
+
     .logo {
-        height: 40px;
-        margin: 0;
-        left: 40px;
-        top: 40vh;
+        top: 10px;
         left: 0;
 
         .circle {display: none; }

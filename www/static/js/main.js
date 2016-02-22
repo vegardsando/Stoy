@@ -165,6 +165,7 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
 			  //Kart
 	    	  if ($m('.map_wrapper').length) {
 	    	      maps();
+				  console.log('map');
 	    	  }
 
 	          $(".grid article").fitVids();
