@@ -414,14 +414,6 @@ $document.on('click', '#saveentry', function (e) {
 
 });
 
-// LAGRE AUTOMATISK HVERT 5. MINUTT
-var timerID = setInterval(function() {
-    // Bygg opp json-object
-    saveAllToJson();
-}, 5000);
-
-clearInterval(timerID);
-
 // PAN SCROLLING
 var orgScrollTop = $('.pianoroll').css('top');
 $canvasMain.on('scroll',function (e) {
@@ -439,6 +431,12 @@ $canvasMain.on('scroll',function (e) {
 
 
 console.log($('#updateEntry input[name="title"]').val());
+
+// Lagre hvert minutt
+setInterval(function() {
+  console.log('test');
+  saveAllToJson();
+}, 60000);
 
 $("#updateEntry").submit( function(e){
   // pjax

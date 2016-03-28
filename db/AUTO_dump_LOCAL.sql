@@ -3,7 +3,7 @@
 -- Host: localhost	Database: stoy_craft
 -- ------------------------------------------------------
 -- Server version 	5.6.23
--- Date: Mon, 28 Mar 2016 23:56:45 +0100
+-- Date: Tue, 29 Mar 2016 00:16:49 +0100
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -2634,4 +2634,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 28 Mar 2016 23:56:45 +0100
+-- Dump completed on: Tue, 29 Mar 2016 00:16:49 +0100
