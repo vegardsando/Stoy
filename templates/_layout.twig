@@ -24,28 +24,47 @@
 	    <header id="main-header">
 
 	        <nav class="nav_main">
-	            <ul>
-	                <li>
-	                    {% for entry in craft.entries.section('lyddesign').limit(1) %}
-	                        <a href="{{entry.url}}">{{entry.title}}</a>
-	                    {% endfor %}
-	                </li>
-	                <li>
-	                    {% for entry in craft.entries.section('musikkproduksjon').limit(1) %}
-	                    <a href="{{entry.url}}">{{entry.title}}</a>
-	                    {% endfor %}
-	                </li>
-	                <li>
-	                    {% for entry in craft.entries.section('kontakt').limit(1) %}
-	                    <a href="{{entry.url}}">{{entry.title}}</a>
-	                    {% endfor %}
-	                </li>
-	                <li class="facebook">
+
+				{% set nav = craft.amNav.getNavRaw("hovedmeny") %}
+
+				{% macro addNodeToNavigation(node, index) %}
+					{%- set nodeClasses = [] -%}
+					{%- if node.hasChildren -%}
+						{%- set nodeClasses = nodeClasses|merge(['has-children']) -%}
+					{%- endif -%}
+					{%- if node.active or node.hasActiveChild -%}
+						{%- set nodeClasses = nodeClasses|merge(['active']) -%}
+					{%- endif -%}
+					{%- if node.level == 1 and index == 1 -%}
+						{%- set nodeClasses = nodeClasses|merge(['first']) -%}
+					{%- endif -%}
+					{%- if node.listClass|length -%}
+						{%- set nodeClasses = nodeClasses|merge([node.listClass]) -%}
+					{%- endif -%}
+
+					<li{% if nodeClasses|length %} class="{{ nodeClasses|join(' ') }}"{% endif %}>
+						<a href="{{ node.url }}" title="{{ node.name }}"{% if node.blank %} target="_blank"{% endif %}>{{ node.name }}</a>
+
+						{% if node.hasChildren %}
+							<ul class="nav__level{{ (node.level + 1) }}">
+								{% for subnode in node.children %}
+									{{ _self.addNodeToNavigation(subnode, loop.index) }}
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+				{% endmacro %}
+
+				<ul>
+					{% for node in nav %}
+						{{ _self.addNodeToNavigation(node, loop.index) }}
+					{% endfor %}
+					<li class="facebook">
 	                    <a href="{{footer.facebook}}" target="_blank">
 	                        <img src="static/img/icon_facebook.svg">
 	                    </a>
 	                </li>
-	            </ul>
+				</ul>
 	        </nav>
 
 	        <a href="/">

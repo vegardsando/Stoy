@@ -79,9 +79,7 @@ html {
                 @media #{$tablet} {
                     display: inline-block;
                 }
-
             }
-
 
             // Interpunct
             &:before {
@@ -95,7 +93,6 @@ html {
                 transition: text-shadow .3s ease-in-out, color .3s ease-in-out, transform .3s ease-in-out;
                 transform: translateX(-50%);
                 pointer-events: none;
-
             }
 
             .no-touch &:hover:before {
@@ -104,13 +101,10 @@ html {
             }
 
             &.active {
-
                 .no-touch &:hover:before {
                     color: $color_pr1;
                     text-shadow: 10px 0 $color_pr1, -10px 0 $color_pr1;
                 }
-
-                a { color: $color_pr1; }
             }
 
         }
@@ -235,7 +229,7 @@ footer {
 
 // TOPP-MODUL
 .top {
-    height: 50vh;
+    height: 500px;
     border: 10px solid #FFF;
     //transform: translateZ(0);
 
@@ -366,6 +360,7 @@ footer {
 
         img {
             min-width: 100%;
+			min-height: 100%;
             opacity: .7;
             position: relative;
             display: block;
@@ -569,6 +564,10 @@ footer {
             width: 50%;
         }
 
+		@media #{$desktop} {
+			height: 650px;
+		}
+
         .sizer-div{
 
             &:after {
@@ -582,6 +581,8 @@ footer {
             }
 
             img {
+				min-width: 120%;
+				min-height: 100%;
                 transition: transform .55s;
             }
 
@@ -589,7 +590,7 @@ footer {
 
         .text {
             position: absolute;
-            top: 0;
+            top: 40%;
             bottom: 0;
             width: 100%;
             color: white;
@@ -691,12 +692,9 @@ footer {
             }
 
             img {
-                max-height: 100%;
                 position: relative;
 
                 @media only screen and (min-width: 1025px) {
-                    width: 110%;
-                    max-height: 150%;
                     transition: transform .55s;
                     transform: skew(16deg) scale(1.1);
                 }
@@ -707,7 +705,7 @@ footer {
 
         .no-touch &:hover {
             .sizer-div {
-                transform: scale(1.2) skew(-16deg) translate3d(0,0,0);
+                transform: scale(1.05) skew(-16deg) translate3d(0,0,0);
             }
         }
 
@@ -721,16 +719,10 @@ footer {
             }
         }
 
-        .sizer-div {
-            img {
-                width: 150%;
-            }
-        }
-
         .no-touch &:hover {
             .sizer-div {
                 img {
-                    transform: scale(1.2) translate3d(0,0,0);
+                    transform: scale(1.05) translate3d(0,0,0);
                 }
             }
         }
@@ -979,9 +971,11 @@ body {
     height: 100%;
 
     .logo {
-        top: 120px;
-        left: 50%;
-        height: 70px;
+		top: 100px;
+	    left: 50%;
+	    height: 120px;
+	    width: 115px;
+	    margin-left: -57px;
 
         @media #{$desktop} {
             top: 80px;
@@ -1037,11 +1031,12 @@ body {
 .underside {
     height: 100%;
 
+	.nav_main {
+		text-align: right;
+	}
+
     .logo {
-        height: 40px;
-        margin: 0;
-        left: 40px;
-        top: 40vh;
+        top: 10px;
         left: 0;
 
         .circle {display: none; }
