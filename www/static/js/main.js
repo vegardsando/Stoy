@@ -170,6 +170,16 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
   render();
 
 	$html.addClass('lastet');
+
+
+if ($('.arranger').length) {
+
+  function initialize() {
+  // Scroll to bottom
+    $canvasMain.scrollTop(1000);  // Er aldri så leng uansett
+  }
+}
+
 /*=======================================================
 				  @Click/hover events
 =======================================================*/

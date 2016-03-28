@@ -1,0 +1,145 @@
+{% extends "_arrangerlayout" %}
+{% set bodyClass = "arranger" %}
+
+{% block content %}
+
+  {% set objInstruments = arranger.instrumenter %}
+  {% set entry = craft.entries.section('arranger').first %}
+
+
+  <script>
+  	var JSONCols = {};
+  	JSONCols = JSON.parse('{{entry.json | raw }}');
+  </script>
+
+  <style>
+
+
+  	{% for instrument in objInstruments.instrument %}
+
+  		.arranger [data-type="{{instrument.navn}}"] {
+  			background-color: {{instrument.farge}};
+  			background-image: url("{{instrument.svg.first().getUrl}}");
+  		}
+  	{% endfor %}
+  </style>
+
+  <section class="contentWrapper-menu">
+  	<header class="topHeader">
+  		<a id="topHeader-menuClose">{{ craft.inlin.er('/static/svg/symbols/icon-close.svg') | raw }}</a>
+  	</header>
+
+  	<section class="listEntries">
+  		<h2>Eksisterende sanger</h2>
+
+      <article>
+    		{% for entry in craft.entries.section('arranger').limit(10) %}
+    					<a href="{{ entry.url }}">{{ entry.title }}</a>
+    		{% endfor %}
+      </article>
+  	</section>
+
+  	<section class="newEntry">
+  		<h2>Lag ny sang</h2>
+  		<form id="newEntry" method="post" accept-charset="UTF-8">
+  				{{ getCsrfInput() }}
+  				<input type="hidden" name="action" value="entries/saveEntry">
+  				<input type="hidden" name="sectionId" value="6">
+  				<input type="hidden" name="enabled" value="1">
+
+  				{% macro errorList(errors) %}
+  						{% if errors %}
+  								<ul class="errors">
+  										{% for error in errors %}
+  												<li>{{ error }}</li>
+  										{% endfor %}
+  								</ul>
+  						{% endif %}
+  				{% endmacro %}
+
+  				{% from _self import errorList %}
+
+  				<label for="title">Title</label>
+  				<input id="title" type="text" name="title">
+
+  				<input type="hidden" name="fields[objcol]" value='[{"instruments":[],"id":0,"name":"Intro","rhytm":4}]'>
+
+  				<input type="submit" value="Publish">
+  		</form>
+
+  	</section>
+
+  </section>
+
+  <form id="updateEntry" method="post" accept-charset="UTF-8">
+      {{ getCsrfInput() }}
+      <input type="hidden" name="action" value="entries/saveEntry">
+      <input type="hidden" name="sectionId" value="6">
+      <input type="hidden" name="enabled" value="1">
+  		<input type="hidden" name="entryId" value="{{ entry.id }}">
+
+      {% macro errorList(errors) %}
+          {% if errors %}
+              <ul class="errors">
+                  {% for error in errors %}
+                      <li>{{ error }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      {% endmacro %}
+
+      {% from _self import errorList %}
+
+      <label for="title">Title</label>
+      <input type="hidden" name="title" value="{{ entry.title }}">
+
+  		<label for="slug">Url</label>
+      <input type="hidden" name="slug" value="{{ entry.slug }}">
+
+  		<label for="json">json</label>
+      <input type="hidden" name="fields[json]" value="{{ entry.json }}">
+
+      {% if entry is defined %}
+          {{ errorList(entry.getErrors('title')) }}
+      {% endif %}
+
+      {% if entry is defined %}
+          {{ errorList(entry.getErrors('body')) }}
+      {% endif %}
+
+      <input type="submit" value="Publish">
+  </form>
+
+  <section id="canvas-wrapper">
+    <a id="saveentry">Lagre</a>
+    <aside id="aside-newcontent">
+      <span>+</span>
+      <div class="instruments">
+        <ul>
+          {% for instrument in objInstruments.instrument %}
+            <li data-type="{{instrument.navn}}" title="{{instrument.navn}}"></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="new-col">
+        <a class="btn-newcol">+</a>
+      </div>
+    </aside>
+
+    <header class="topHeader">
+  		<a id="topHeader-menu">{{ craft.inlin.er('/static/svg/symbols/icon-menu.svg') | raw }}</a>
+  		<h1 contenteditable="true">{{entry.title}}</h1>
+  		<div class="panel-settings">
+  			<span class="delete_element">
+  				{{ craft.inlin.er('/static/svg/symbols/icon-trashcan.svg') | raw }}
+  			</span>
+  		</div>
+  	</header>
+
+    <section class="canvas-main dragscroll">
+  		<aside class="pianoroll"></aside>
+  	</section>
+
+  </section>
+
+{% endblock %}

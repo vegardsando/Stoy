@@ -1,0 +1,51 @@
+{% set midnight = now|date_modify("+1 day")|date("Y-m-d") ~ ' 00:00' %}
+{% set cdnUrl = craft.config.cdnUrl is defined ? craft.config.cdnUrl : siteUrl %}
+
+<!doctype html>
+
+<html class="no-js" lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+		{% include "_partials/_prestuff" %}
+		{% hook 'seomaticRender' %}
+		{% if not craft.config.devMode %}{% include "_partials/_favicon" %}{% endif %}
+		<link rel="stylesheet" href="/dist/{{ rev('css/main.css') }}">
+		<script src="/dist/js/vendor/modernizr-custom-2.8.3.min.js"></script>
+	</head>
+	<body{% if bodyClass is defined %} class="{{ bodyClass }}"{% endif %}>
+
+
+
+		{% block content %}
+			<p>Du mangler innhold</p>
+		{% endblock %}
+
+		<script> initFPSscroll = false; </script>
+	{% if craft.config.devMode %}
+		{# forceFeed.js - https://github.com/Heydon/forceFeed #}
+		<script src='/dist/js/vendor/forceFeed.js'></script>
+		<script>
+		window.words = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'adipsing', 'consectetur', 'elit', 'sed', 'commodo', 'eu', 'ligula', 'vitae', 'mollis'];
+		window.sentences = ['Curabitur tempus lobortis faucibus.', 'Nulla sed consequat libero.', 'Phasellus bibendum neque eros, vel malesuada ligula fermentum et.', 'Vivamus pretium vulputate imperdiet.', 'Morbi eleifend urna ac purus auctor, non porttitor massa semper.', 'Ut tempor ante et mauris sagittis, sed vestibulum urna rhoncus.', 'Mauris quis augue fermentum, auctor metus quis, imperdiet lectus.', 'Morbi nec rhoncus lectus.',  'Nulla cursus venenatis urna maximus bibendum.', 'Cras at ornare tortor.', 'Nulla nulla justo, posuere id ultricies non, feugiat et nisi.', 'Duis porttitor aliquet viverra.', 'Integer vehicula fringilla velit, at iaculis dolor imperdiet vel.'];
+		var runforceFeed = function() { forceFeed({words: window.words, sentences: window.sentences}); }
+		</script>
+	{% endif %}
+	{% if craft.config.devMode or currentUser.admin %}
+		{# Denne må være over main.js, kan tryne om ikke #}
+		<script type='text/javascript'>
+			var ENV = '{{craft.config.env}}', adminplacement = 'bottom';
+			document.write("<script src='/dist/admin/admin.min.js'><\/script>");
+		</script>
+	{% endif %}
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/dist/js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+		<script src="/static/js/arranger/dragscroll.js"></script>
+		<script src="/static/js/arranger/jquery-ui.min.js"></script>		
+		<script src="/dist/{{ rev('js/main.js') }}"></script>
+		<script src="/static/js/arranger.js"></script>
+	</body>
+</html>

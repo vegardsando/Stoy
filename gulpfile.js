@@ -104,62 +104,6 @@ gulp.task("scripts", function(done) {
 
 });
 
-// Make faveicons
-var FAVICON_DATA_FILE = START+'/favicon/faviconData.json';
-
-gulp.task('favicon', function(done) {
-	if (fs.existsSync(START +'/favicon.png')) {
-		plugins.realFavicon.generateFavicon({
-			masterPicture: START +'/favicon.png',
-			dest: START+'/favicon',
-			iconsPath: '/favicon',
-			design: {
-				ios: {
-					pictureAspect: 'noChange'
-				},
-				desktopBrowser: {},
-				windows: {
-					pictureAspect: 'noChange',
-					backgroundColor: '#ffffff',
-					onConflict: 'override'
-				},
-				androidChrome: {
-					pictureAspect: 'noChange',
-					themeColor: '#ffffff',
-					manifest: {
-						name: 'Mustasj',
-						display: 'browser',
-						orientation: 'notSet',
-						onConflict: 'override',
-						declared: true
-					}
-				},
-				safariPinnedTab: {
-					pictureAspect: 'blackAndWhite',
-					threshold: 50,
-					themeColor: '#ffffff'
-				}
-			},
-			settings: {
-				scalingAlgorithm: 'Mitchell',
-				errorOnImageTooSmall: false
-			},
-			markupFile: FAVICON_DATA_FILE
-		}, function() {
-			gulp.start(["check-for-favicon-update", "inject-favicon-markups"]);
-			gulp.src(START + '/favicon/favicon.ico')
-				.pipe(plugins.plumber({ errorHandler: onError }))
-				.pipe(gulp.dest(START));
-
-			done();
-		});
-	} else {
-		gutil.log("\t"+ colors.red('favicon.png mangler i '+START+' mappen. Bør være 260 x 260'));
-		gulp.start("check-for-favicon-update");
-		done();
-	}
-});
-
 // Images
 gulp.task("images", function(done) {
 	var size = Object.size(IMAGES);
@@ -292,9 +236,6 @@ gulp.task("watch", function() {
 	gulp.watch(SRC + "/svg/**/*", ["svg-symbols", "svg"]);
 
 	gulp.watch(["templates/**/*.{html,twig}", "{www,public}/*.{html,php}"]).on("change", browserSync.reload);
-
-	// Watch favicon files
-	gulp.watch(START+'/favicon.png', ["favicon"]);
 
 	// Watch admin files
 	gulp.watch(SRC + "/php/admin/*.{js,scss}", ["admin"]);
