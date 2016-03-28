@@ -2,9 +2,20 @@
 @import "_inc/mustasj";
 @import "_inc/boilerplate";
 @import "_inc/variables";
+@import "_inc/arranger";
 
 @media #{$tablet} {
 
+}
+
+.arranger {
+  height: 100%;
+  overflow: hidden;
+  font-family: Open Sans,sans-serif;
+}
+
+html {
+  height: 100%;
 }
 
 // HEADER OG FOOTER
