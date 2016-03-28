@@ -14,9 +14,7 @@
 
   <style>
 
-
   	{% for instrument in objInstruments.instrument %}
-
   		.arranger [data-type="{{instrument.navn}}"] {
   			background-color: {{instrument.farge}};
   			background-image: url("{{instrument.svg.first().getUrl}}");
@@ -30,6 +28,8 @@
   	</header>
 
   	<section class="listEntries">
+      <h2>Denne sangen</h2>
+      <a id="saveentry">Lagre</a>
   		<h2>Eksisterende sanger</h2>
 
       <article>
@@ -41,6 +41,7 @@
 
   	<section class="newEntry">
   		<h2>Lag ny sang</h2>
+
   		<form id="newEntry" method="post" accept-charset="UTF-8">
   				{{ getCsrfInput() }}
   				<input type="hidden" name="action" value="entries/saveEntry">
@@ -64,7 +65,7 @@
 
   				<input type="hidden" name="fields[objcol]" value='[{"instruments":[],"id":0,"name":"Intro","rhytm":4}]'>
 
-  				<input type="submit" value="Publish">
+  				<input type="submit" value="Lag ny">
   		</form>
 
   	</section>
@@ -76,7 +77,7 @@
       <input type="hidden" name="action" value="entries/saveEntry">
       <input type="hidden" name="sectionId" value="6">
       <input type="hidden" name="enabled" value="1">
-  		<input type="hidden" name="entryId" value="{{ entry.id }}">
+  		<input id="form-id" type="hidden" name="entryId" value="{{ entry.id }}">
 
       {% macro errorList(errors) %}
           {% if errors %}
@@ -97,7 +98,7 @@
       <input type="hidden" name="slug" value="{{ entry.slug }}">
 
   		<label for="json">json</label>
-      <input type="hidden" name="fields[json]" value="{{ entry.json }}">
+      <input id="form-json" type="hidden" name="fields[json]" value="{{ entry.json }}">
 
       {% if entry is defined %}
           {{ errorList(entry.getErrors('title')) }}
@@ -111,7 +112,7 @@
   </form>
 
   <section id="canvas-wrapper">
-    <a id="saveentry">Lagre</a>
+
     <aside id="aside-newcontent">
       <span>+</span>
       <div class="instruments">
@@ -133,7 +134,14 @@
   			<span class="delete_element">
   				{{ craft.inlin.er('/static/svg/symbols/icon-trashcan.svg') | raw }}
   			</span>
+
   		</div>
+
+      <div id="save-icon">
+        <span>saving..</span>
+  				{{ craft.inlin.er('/static/svg/symbols/icon-upload.svg') | raw }}
+  		</div>
+
   	</header>
 
     <section class="canvas-main dragscroll">

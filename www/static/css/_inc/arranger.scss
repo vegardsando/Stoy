@@ -50,6 +50,7 @@
 }
 
 
+
   #topHeader-menu, #topHeader-menuClose {
     height: 70px;
     width: 40px;
@@ -62,13 +63,20 @@
     svg { height: 100%; width: 100%; }
   }
 
+  #topHeader-menu { position: relative; top: -10px; }
+
   .listEntries {
-    padding: 20px;
+    padding: 30px;
   }
 
   .newEntry {
-    padding: 20px;
+    padding: 30px;
     input { width: 100%; display: block; }
+  }
+
+// FORM
+  #newEntry {
+    input { margin-top: 10px; margin-bottom: 10px; }
   }
 
   .topHeader {
@@ -80,7 +88,7 @@
     background-color: $color_pr1;
     z-index: 3;
 
-    h1 { color: white; display: inline-block; padding: 10px; margin: 0; }
+    h1 { text-transform: none; color: white; display: inline-block; padding: 10px; margin: 0; }
 
     .panel-settings {
       display: block;
@@ -114,11 +122,36 @@
   }
 
   #saveentry {
-    position: absolute;
-    bottom: 70px;
-    right: 60px;
-    background: gray;
+    position: relative;
+    background: #999;
     z-index: 2;
+    padding: 5px;
+    color: white;
+    display: inline-block;
+    width: auto;
+    margin-left: 20px;
+    margin-bottom: 3em;
+  }
+
+  #save-icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50px;
+    height: 70px;
+    margin-left: -25px;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    svg { height: 100%; width: 100%; }
+
+    span { color: white; }
+
+    &.visible {
+      opacity: 1;
+    }
   }
 
   #aside-newcontent {
@@ -136,6 +169,7 @@
       position: relative;
       top: -10px;
       right: 15px;
+      cursor: pointer;
     }
 
     &.show .instruments { display: block; }

@@ -414,6 +414,13 @@ $document.on('click', '#saveentry', function (e) {
 
 });
 
+// LAGRE AUTOMATISK HVERT 5. MINUTT
+var timerID = setInterval(function() {
+    // Bygg opp json-object
+    saveAllToJson();
+}, 5000);
+
+clearInterval(timerID);
 
 // PAN SCROLLING
 var orgScrollTop = $('.pianoroll').css('top');
@@ -427,5 +434,40 @@ $canvasMain.on('scroll',function (e) {
   } else {
     orgScrollTop = scrollTop;
   }
+
+});
+
+
+console.log($('#updateEntry input[name="title"]').val());
+
+$("#updateEntry").submit( function(e){
+  // pjax
+  e.preventDefault();
+
+  var data = {
+      entryId: $('#updateEntry input[name="entryId"]').val(),
+      title: $('#updateEntry input[name="title"]').val(),
+      slug: $('#updateEntry input[name="slug"]').val(),
+      'fields[json]': $('#form-json').attr('value')
+  };
+
+  console.log(data);
+
+  $.ajax({
+      context: this,
+      type: "post",
+      dataType: "json",
+      data: data,
+      url: "/actions/entries/saveEntry",
+      success: function(data, response){
+          console.log("success", response, data);
+
+        $('#save-icon').addClass('visible');
+
+        setTimeout(function() {
+          $('#save-icon').removeClass('visible');
+        }, 2000)
+      }
+  });
 
 });
