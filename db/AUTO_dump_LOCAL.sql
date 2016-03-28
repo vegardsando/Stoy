@@ -3,7 +3,7 @@
 -- Host: localhost	Database: stoy_craft
 -- ------------------------------------------------------
 -- Server version 	5.6.23
--- Date: Mon, 28 Mar 2016 18:49:38 +0100
+-- Date: Mon, 28 Mar 2016 19:13:34 +0100
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -2255,7 +2255,6 @@ CREATE TABLE `craft_tasks` (
 LOCK TABLES `craft_tasks` WRITE;
 /*!40000 ALTER TABLE `craft_tasks` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `craft_tasks` VALUES (8,8,1,2,0,NULL,NULL,'pending','DeleteStaleTemplateCaches',NULL,'{\"elementId\":[\"54\"]}','2016-03-28 17:37:29','2016-03-28 17:41:03','4e5e6c58-eaeb-4514-9fba-8f5f95c68981');
 /*!40000 ALTER TABLE `craft_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -2635,4 +2634,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 28 Mar 2016 18:49:38 +0100
+-- Dump completed on: Mon, 28 Mar 2016 19:13:34 +0100
