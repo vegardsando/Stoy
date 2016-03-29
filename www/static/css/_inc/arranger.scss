@@ -83,7 +83,7 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;    
+    margin-top: 10%;
   }
 
   .topHeader {
@@ -170,7 +170,7 @@
     max-width: 200px;
     z-index: 4;
 
-    span {
+    > span {
       font-size: 60px;
       color: white;
       position: relative;
@@ -227,10 +227,30 @@
     padding: 7px;
     top: -14px;
 
+    .colRhytm{
+      font-size: 30px;
+      display: block;
+      cursor: pointer;
+
+      &:hover { color: #de6c64; }
+    }
+
+    .timetable-settings {
+      display: none;
+      position: relative;
+      padding: 20px;
+    }
+
+    &.settings-active {
+      .timetable-settings { display: block; }
+      .btn-newcol { text-align: center; }
+    }
+
     a.btn-newcol {
       position: absolute;
       top: 40%;
       font-size: 30px;
+      width: 90%;
     }
 
     &:hover {
@@ -363,13 +383,43 @@
   }
 
   .big-col {
-    width: 300px;
+
     border-right: 1px solid #797777;
     position: relative;
+
+    &[data-rhytm="2"] {
+      width: 151px;
+
+      .single-col { width: 50%; }
+    }
+
+    &[data-rhytm="3"] {
+      width: 226px;
+
+      .single-col { width: 33.333%; }
+    }
+
+    &[data-rhytm="4"] {
+      width: 300px;
+
+      .single-col { width: 25%; }
+    }
+
+    &[data-rhytm="6"] {
+      width: 450px;
+
+      .single-col { width: 16.666%; }
+    }
+
+    &[data-rhytm="8"] {
+      width: 600px;
+
+      .single-col { width: 12.5%; }
+    }
+
   }
 
   .single-col {
-    width: 25%;
     background: #E0E0EA;
     border-right: 1px dotted gray;
   }
@@ -397,7 +447,7 @@
     .timetable-settings {
       display: none;
       position: absolute;
-      top: -50px;
+      top: -180px;
       right: 6px;
       color: #010202;
       cursor: pointer;
@@ -406,6 +456,11 @@
       background: #fff;
       border: 1px solid #b9b9b9;
       border-radius: 10px;
+
+      span:hover { color: #DE6C64; }
+
+      .colRhytm { display: block; }
+      .deleteColumn { margin-top: 20px; display: block; }
     }
 
     &.settings-active {

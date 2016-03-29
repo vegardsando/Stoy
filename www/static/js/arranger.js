@@ -18,6 +18,14 @@ markup.InstrInner = '<div class="instr_box">' +
                       '</footer></div>';
 markup.ColSingle = '<div class="canvas-col single-col"></div>';
 markup.Col = '<div class="canvas-col big-col"></div>';
+markup.ColSettingsDelete = '<span class="deleteColumn">Delete</span>'
+markup.ColSettings = '<div class="timetable-settings">' +
+                        '<span class="colRhytm" data-rhytm="2">2</span>' +
+                        '<span class="colRhytm" data-rhytm="3">3</span>' +
+                        '<span class="colRhytm" data-rhytm="4">4</span>' +
+                        '<span class="colRhytm" data-rhytm="6">6</span>' +
+                        '<span class="colRhytm" data-rhytm="8">8</span>' +
+                      '</div>'
 
 var $header     = $('.topHeader');
 var $canvasMain = $('.canvas-main');
@@ -73,16 +81,45 @@ function selectElementContents(el) {
 }
 
 // ****************
+// EDIT COLUMN
+// ****************
+
+function editColumn(column, rhytm) {
+
+  console.log(column);
+  console.log(rhytm);
+
+  // Ta bort alle single-col i denne kolonnen
+  column.find('.single-col').remove();
+
+  // Legg til alle kolonnene
+  for ( var i = 0, l = rhytm; i < l; i++ ) {
+      column.prepend(markup.ColSingle);
+  }
+
+  // Endre atributt på big-col
+  column.attr('data-rhytm', rhytm);
+
+}
+
+// ****************
 // ADD COLUMN
 // ****************
 
 // Legg til ny kolonne
-function appendCol(column) {
+function appendCol(column, rhytm) {
 
   // Lag midlertidig element og sett på riktige data-attributter
   var elementCol = $(markup.Col);
   elementCol.attr('data-id', column.id);
-  elementCol.attr('data-rhytm', column.rhytm);
+
+  if (rhytm) {
+    elementCol.attr('data-rhytm', rhytm);
+  } else {
+    elementCol.attr('data-rhytm', column.rhytm);
+  }
+
+
 
   // Legg til små-kolonner i stor kolonne
   for (i = 0; i < column.rhytm; i++) {
@@ -100,8 +137,11 @@ function appendCol(column) {
   elementCol.append('<div class="timetable-block"><p class="editable" contenteditable="true">' + column.name + '</p>' +
                       '<a class="instr_box-settings"></a>' +
                       '<a class="timetable-block--handle"></a>' +
-                      '<div class="timetable-settings">Delete</div>' +
+                      markup.ColSettings +
                     '</div>')
+
+  // Legg til delete-knapp
+  elementCol.find('.timetable-settings').append(markup.ColSettingsDelete);
 
   elementCol.find('.instr_box-footer, .editable').dblclick(function(e) {
     selectElementContents($(this).get());
@@ -119,9 +159,19 @@ function appendCol(column) {
 
   });
 
-  elementCol.find('.timetable-settings').click(function() {
+  elementCol.find('.timetable-settings .deleteColumn').click(function() {
     console.log('Delete this bitch');
     elementCol.remove();
+  });
+
+  elementCol.find('.timetable-settings .colRhytm').click(function() {
+    var selectedRhytm = $(this).data('rhytm');
+    editColumn(elementCol, selectedRhytm);
+
+    setTimeout(function() {
+      elementCol.find('.timetable-block').removeClass('settings-active');
+    }, 1000)
+
   });
 
   // Sørg for at kolonene er droppable
@@ -220,14 +270,25 @@ function appendInstrument(column, instrument) {
     'width' : instrument.width,
     'position' : 'absolute'
   }).mousedown(function(event) {
-
     $(this).draggable('option', { helper : event.ctrlKey ? 'clone' : 'original'});
+  }).mouseleave(function(event) {
+    $canvasMain.addClass('dragscroll ');
+    dragscroll.reset();
   })
+    .click(function(){
+          if ( $(this).is('.ui-draggable-dragging') ) {
+                return;
+          }
+          $canvasMain.removeClass('dragscroll ');
+          dragscroll.reset();
+    })
 
     .draggable({
       grid: [75, 14],
 
       cancel: '.instr_box-settings, .instr_box-footer, .instruments',
+
+
 
       start: function(event, ui) {
 
@@ -392,17 +453,28 @@ $document.on('click', '.instr_box-settings', function (e) {
 });
 
 $document.on('click', '.btn-newcol', function (e) {
+  e.preventDefault();
+  $(this).parent('.new-col').toggleClass('settings-active');
+});
+
+$document.on('click', '.new-col .colRhytm', function (e) {
+
+  console.log('clicking on a rhytm');
 
   var colLength = $('.big-col').length;
-  // Toggle menu
-  e.preventDefault();
+
   var tempColToCreate = [];
   tempColToCreate.id = colLength + 1;
   tempColToCreate.name = 'ny kolonne';
   tempColToCreate.instruments = [];
-  tempColToCreate.rhytm = 4;
+  tempColToCreate.rhytm = $(this).data('rhytm');
   appendCol(tempColToCreate);
+
+  $(this).parent('.new-col').removeClass('settings-active');
+
 });
+
+
 
 // LAGRE ENDRINGER PÅ SIDEN . GJØR OM TIL FUNKSJON!!
 $document.on('click', '#saveentry', function (e) {
