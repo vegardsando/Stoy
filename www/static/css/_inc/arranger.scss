@@ -387,6 +387,10 @@
     border-right: 1px solid #797777;
     position: relative;
 
+    &:hover {
+      .single-col { background-color: #CFCFDE; }
+    }
+
     &[data-rhytm="2"] {
       width: 151px;
 
