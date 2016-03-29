@@ -16,6 +16,7 @@ markup.InstrInner = '<div class="instr_box">' +
                       '<footer class="instr_box-footer" contenteditable="true">' +
                         '<p>..</p>' +
                       '</footer></div>';
+
 markup.ColSingle = '<div class="canvas-col single-col"></div>';
 markup.Col = '<div class="canvas-col big-col"></div>';
 markup.ColSettingsDelete = '<span class="deleteColumn">Delete</span>'
@@ -134,7 +135,8 @@ function appendCol(column, rhytm) {
   }
 
   // Legg til blokk nederst for vers, refr etc
-  elementCol.append('<div class="timetable-block"><p class="editable" contenteditable="true">' + column.name + '</p>' +
+  elementCol.append('<div class="timetable-block">' +
+                      '<div class="timetable-element"><div class="ui-resizable-handle ui-resizable-n"></div><p class="editable" contenteditable="true">' + column.name + '</p></div>' +
                       '<a class="instr_box-settings"></a>' +
                       '<a class="timetable-block--handle"></a>' +
                       markup.ColSettings +
@@ -219,6 +221,47 @@ function appendCol(column, rhytm) {
       }
 
     }
+  });
+
+  var timetable_element = elementCol.find('.timetable-element');
+  timetable_element.attr('data-height', column.height);
+  timetable_element.css({
+    height: column.height
+  });
+
+  // Lag elementet inni kolonnen som resizable
+  timetable_element
+    .resizable({
+      maxHeight: 150,
+      minHeight: 50,
+      handles: {
+          'n': '.ui-resizable-n'
+      },
+
+      start: function(event, ui) {
+        $canvasMain.removeClass('dragscroll ');
+        dragscroll.reset();
+      },
+
+      stop: function(event, ui) {
+        $canvasMain.addClass('dragscroll ');
+        dragscroll.reset();
+        timetable_element.attr('data-height', timetable_element.height());
+      }
+
+    });
+
+
+
+
+  elementCol.find('.timetable-block').on('mouseover', function(e){
+    $canvasMain.removeClass('dragscroll ');
+    dragscroll.reset();
+  });
+
+  elementCol.find('.timetable-block').on('mouseleave', function(e){
+    $canvasMain.addClass('dragscroll ');
+    dragscroll.reset();
   });
 
 
@@ -377,6 +420,7 @@ function saveAllToJson() {
     tempCols.id = i;
     tempCols.name = $(this).find('.timetable-block .editable').text();
     tempCols.rhytm = $(this).data('rhytm');
+    tempCols.height = $(this).find('.timetable-element').data('height');
 
     $(this).find('.gen_box').each(function(index, e) {
       var tempInstr = {};

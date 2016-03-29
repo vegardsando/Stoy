@@ -448,6 +448,19 @@
     text-align: center;
     cursor: auto;
 
+    .timetable-element {
+      background: rgba(86, 181, 228, 0.38);
+      display: block;
+      width: calc(100% - 60px);
+      min-height: 50px;
+      position: absolute!important;
+      bottom: 13px!important;
+      top: auto!important;
+      border: 1px solid gray;
+      border-radius: 10px 10px 0px 0px;
+      padding-top: 10px;
+    }
+
     .timetable-settings {
       display: none;
       position: absolute;
