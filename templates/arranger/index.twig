@@ -5,7 +5,12 @@
 
   {% if currentUser %}
     {% set objInstruments = arranger.instrumenter %}
-    {% set entry = craft.entries.section('arranger').first %}
+
+    {% if entry is not defined %}
+    	{% set entry = craft.entries.section('arranger').first %}
+    {% endif %}
+
+
 
 
     <script>
