@@ -46,4 +46,5 @@ _notes
 dwsync.xml
 logs/*
 node_modules
+dynamic
 *npm-debug.log
