@@ -273,7 +273,11 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
 
   render();
 
-	$html.addClass('lastet');
+  setTimeout(function() {
+    $html.addClass('lastet');
+  }, 500)
+
+
 
 
 if ($('.arranger').length) {
