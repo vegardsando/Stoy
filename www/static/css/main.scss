@@ -903,25 +903,25 @@ body {
 
 // ALT SOM SKAL HA ANIMASJON TIL Å BEGYNNE module_divider
 
-.header_logo svg {
-  transition: transform .3s ease, opacity .3s ease;
-  transform: scale(0.5) translate(20px, 0);
-  opacity: 0;
-  transition-delay: 1.8s;
-}
-
-.top {
-  h1, .h1, p {
-    transition: transform .3s ease, opacity .3s ease;
-    transform: translate(0,20px);
-    opacity: 0;
-  }
-
-  h1 { transition-delay: 2.3s }
-  .h1 { transition-delay: 2.5s }
-  p { transition-delay: 2.7s }
-
-}
+// .header_logo svg {
+//   transition: transform .3s ease, opacity .3s ease;
+//   transform: scale(0.5) translate(20px, 0);
+//   opacity: 0;
+//   transition-delay: 1.8s;
+// }
+//
+// .top {
+//   h1, .h1, p {
+//     transition: transform .3s ease, opacity .3s ease;
+//     transform: translate(0,20px);
+//     opacity: 0;
+//   }
+//
+//   h1 { transition-delay: 2.3s }
+//   .h1 { transition-delay: 2.5s }
+//   p { transition-delay: 2.7s }
+//
+// }
 
 .nav_main ul {
 
@@ -938,11 +938,11 @@ body {
         opacity: 1;
     }
 
-    .header_logo svg { transform: scale(1) translate(0,0); opacity: 1; }
-
-    .text {
-      h1, .h1, p { transform: translate(0,0); opacity: 1; }
-    }
+    // .header_logo svg { transform: scale(1) translate(0,0); opacity: 1; }
+    //
+    // .text {
+    //   h1, .h1, p { transform: translate(0,0); opacity: 1; }
+    // }
 
     .nav_main ul li { transform: translate(0,0); opacity: 1; }
 
