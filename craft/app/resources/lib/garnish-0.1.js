@@ -4910,6 +4910,7 @@ Garnish.NiceText = Garnish.Base.extend({
 	showingHint: false,
 	val: null,
 	inputBoxSizing: 'content-box',
+	width: null,
 	height: null,
 	minHeight: null,
 	initialized: false,
@@ -4918,6 +4919,31 @@ Garnish.NiceText = Garnish.Base.extend({
 	{
 		this.$input = $(input);
 		this.settings = $.extend({}, Garnish.NiceText.defaults, settings);
+
+		if (this.isVisible())
+		{
+			this.initialize();
+		}
+		else
+		{
+			this.addListener(Garnish.$win, 'resize', 'initializeIfVisible');
+		}
+	},
+
+	isVisible: function()
+	{
+		return (this.$input.height() > 0);
+	},
+
+	initialize: function()
+	{
+		if (this.initialized)
+		{
+			return;
+		}
+
+		this.initialized = true;
+		this.removeListener(Garnish.$win, 'resize');
 
 		this.maxLength = this.$input.attr('maxlength');
 
@@ -4952,7 +4978,9 @@ Garnish.NiceText = Garnish.Base.extend({
 			this.minHeight = this.getHeightForValue('');
 			this.updateHeight();
 
-			this.addListener(Garnish.$win, 'resize', 'updateHeight');
+			// Update height when the window resizes
+			this.width = this.$input.width();
+			this.addListener(Garnish.$win, 'resize', 'updateHeightIfWidthChanged');
 		}
 
 		if (this.settings.hint)
@@ -4988,8 +5016,14 @@ Garnish.NiceText = Garnish.Base.extend({
 		}
 
 		this.addListener(this.$input, 'textchange', 'onTextChange');
+	},
 
-		this.initialized = true;
+	initializeIfVisible: function()
+	{
+		if (this.isVisible())
+		{
+			this.initialize();
+		}
 	},
 
 	getVal: function()
@@ -5149,6 +5183,14 @@ Garnish.NiceText = Garnish.Base.extend({
 			{
 				this.onHeightChange();
 			}
+		}
+	},
+
+	updateHeightIfWidthChanged: function()
+	{
+		if (this.width !== (this.width = this.$input.width()) && this.width)
+		{
+			this.updateHeight();
 		}
 	},
 
@@ -5358,8 +5400,7 @@ Garnish.Select = Garnish.Base.extend({
 	$items: null,
 	$selectedItems: null,
 
-	mousedownX: null,
-	mousedownY: null,
+	mousedownTarget: null,
 	mouseUpTimeout: null,
 	callbackFrame: null,
 
@@ -6033,8 +6074,7 @@ Garnish.Select = Garnish.Base.extend({
 			return;
 		}
 
-		this.mousedownX = ev.pageX;
-		this.mousedownY = ev.pageY;
+		this.mousedownTarget = ev.currentTarget;
 
 		var $item = $($.data(ev.currentTarget, 'select-item'));
 
@@ -6072,7 +6112,7 @@ Garnish.Select = Garnish.Base.extend({
 		if (
 			!this._actAsCheckbox(ev) &&
 			!ev.shiftKey &&
-			Garnish.getDist(this.mousedownX, this.mousedownY, ev.pageX, ev.pageY) < 1
+			ev.currentTarget == this.mousedownTarget
 		)
 		{
 			// If this is already selected, wait a moment to see if this is a double click before making any rash decisions

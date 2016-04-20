@@ -22,7 +22,7 @@ class RelabelPlugin extends BasePlugin
 
 	function getVersion()
 	{
-		return '0.1.1';
+		return '0.1.3';
 	}
 
 	public function getSchemaVersion()
@@ -68,13 +68,16 @@ class RelabelPlugin extends BasePlugin
 
 	protected function includeResources()
 	{
-		if(craft()->request->isCpRequest() && !craft()->request->isAjaxRequest() && craft()->userSession->isAdmin())
+		if(craft()->request->isCpRequest() && !craft()->request->isAjaxRequest())
 		{
 			craft()->templates->includeCssResource('relabel/css/main.css');
-
 			craft()->templates->includeJsResource('relabel/js/Relabel.js');
-			craft()->templates->includeJsResource('relabel/js/Editor.js');
-			craft()->templates->includeJsResource('relabel/js/EditorModal.js');
+
+			if(craft()->userSession->isAdmin())
+			{
+				craft()->templates->includeJsResource('relabel/js/Editor.js');
+				craft()->templates->includeJsResource('relabel/js/EditorModal.js');
+			}
 
 			craft()->templates->includeJs('Relabel.fields=' . json_encode($this->_getFields()));
 			craft()->templates->includeJs('Relabel.labels=' . json_encode($this->_getLabels()));
@@ -164,8 +167,8 @@ class RelabelPlugin extends BasePlugin
 				'id' => (int) $label->id,
 				'fieldId' => (int) $label->fieldId,
 				'fieldLayoutId' => (int) $label->fieldLayoutId,
-				'name' => $label->name,
-				'instructions' => $label->instructions
+				'name' => Craft::t($label->name),
+				'instructions' => Craft::t($label->instructions),
 			);
 		}
 

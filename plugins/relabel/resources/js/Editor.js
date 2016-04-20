@@ -13,6 +13,8 @@
 		fld: null,
 		labels: null,
 
+		namespace: 'relabel',
+
 		$form: null,
 
 		init: function(fld)
@@ -33,7 +35,16 @@
 			var fieldLayoutId = Relabel.getFieldLayoutId(this.$form);
 			if(fieldLayoutId !== false)
 			{
-				var initLabels = Relabel.getLabelsOnFieldLayout(fieldLayoutId);
+				this.applyLabels(fieldLayoutId)
+			}
+		},
+
+		applyLabels: function(fieldLayoutId)
+		{
+			var initLabels = Relabel.getLabelsOnFieldLayout(fieldLayoutId);
+
+			if(initLabels)
+			{
 				for(var labelId in initLabels) if(initLabels.hasOwnProperty(labelId))
 				{
 					var label = initLabels[labelId];
@@ -70,8 +81,8 @@
 			var $container = this.fld.$container;
 			var $field = $container.find('.fld-field[data-id="' + fieldId + '"]');
 
-			var nameField = 'relabel[' + fieldId + '][name]';
-			var instructField = 'relabel[' + fieldId + '][instructions]';
+			var nameField = this.namespace + '[' + fieldId + '][name]';
+			var instructField = this.namespace + '[' + fieldId + '][instructions]';
 
 			$field.children('input[name="' + nameField + '"]').remove();
 			$field.children('input[name="' + instructField + '"]').remove();

@@ -26,7 +26,7 @@ class Seomatic_SettingsModel extends BaseModel
             'siteOpenGraphType'                 => array(AttributeType::String, 'default' => 'website'),
             'siteSeoImageId'                    => array(AttributeType::Number, 'default' => null),
             'siteRobots'                        => array(AttributeType::String, 'default' => ''),
-            'siteRobotsTxt'                     => array(AttributeType::Mixed, 'default' => $this->getDefaultRobots()),
+            'siteRobotsTxt'                     => array(AttributeType::String, 'default' => $this->getDefaultRobots()),
 
 /* --------------------------------------------------------------------------------
     IDENTITY settings
@@ -67,6 +67,7 @@ class Seomatic_SettingsModel extends BaseModel
             'organizationOwnerFounder'          => array(AttributeType::String, 'default' => ''),
             'organizationOwnerFoundingDate'     => array(AttributeType::String, 'default' => ''),
             'organizationOwnerFoundingLocation' => array(AttributeType::String, 'default' => ''),
+            'organizationOwnerContactPoints'    => array(AttributeType::Mixed, 'default' => ''),
 
 /* -- LocalBusiness owner fields https://schema.org/LocalBusiness */
 
@@ -94,6 +95,7 @@ class Seomatic_SettingsModel extends BaseModel
             'twitterHandle'                     => array(AttributeType::String, 'default' => ''),
             'facebookHandle'                    => array(AttributeType::String, 'default' => ''),
             'facebookProfileId'                 => array(AttributeType::String, 'default' => ''),
+            'facebookAppId'                     => array(AttributeType::String, 'default' => ''),
             'linkedInHandle'                    => array(AttributeType::String, 'default' => ''),
             'googlePlusHandle'                  => array(AttributeType::String, 'default' => ''),
             'youtubeHandle'                     => array(AttributeType::String, 'default' => ''),
@@ -133,6 +135,7 @@ class Seomatic_SettingsModel extends BaseModel
             'organizationCreatorFounder'        => array(AttributeType::String, 'default' => ''),
             'organizationCreatorFoundingDate'   => array(AttributeType::String, 'default' => ''),
             'organizationCreatorFoundingLocation'   => array(AttributeType::String, 'default' => ''),
+            'organizationCreatorContactPoints'  => array(AttributeType::Mixed, 'default' => ''),
 
 /* -- LocalBusiness Creator fields https://schema.org/LocalBusiness */
 
@@ -155,7 +158,7 @@ class Seomatic_SettingsModel extends BaseModel
 
 /* -- Humans.txt */
 
-            'genericCreatorHumansTxt'           => array(AttributeType::Mixed, 'default' => $this->getDefaultHumans()),
+            'genericCreatorHumansTxt'           => array(AttributeType::String, 'default' => $this->getDefaultHumans()),
         ));
     }
 
@@ -165,9 +168,9 @@ class Seomatic_SettingsModel extends BaseModel
 
     public function getDefaultHumans()
     {
-        $oldPath = craft()->path->getTemplatesPath();
+        $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
         $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-        craft()->path->setTemplatesPath($newPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Return the Humans.txt default template */
 
@@ -175,7 +178,7 @@ class Seomatic_SettingsModel extends BaseModel
         $loader = new TemplateLoader;
         $template = $loader->getSource($templateName);
 
-        craft()->path->setTemplatesPath($oldPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
 
         return $template;
     } /* -- _getDefaultHumans */
@@ -186,9 +189,9 @@ class Seomatic_SettingsModel extends BaseModel
 
     public function getDefaultRobots()
     {
-        $oldPath = craft()->path->getTemplatesPath();
+        $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
         $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-        craft()->path->setTemplatesPath($newPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Return the robots.txt default template */
 
@@ -196,7 +199,7 @@ class Seomatic_SettingsModel extends BaseModel
         $loader = new TemplateLoader;
         $template = $loader->getSource($templateName);
 
-        craft()->path->setTemplatesPath($oldPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
 
         return $template;
     } /* -- _getDefaultRobots */

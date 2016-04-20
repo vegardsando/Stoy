@@ -1,5 +1,147 @@
 [
     {
+        "version": "1.1.14",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-04-19T11:00:00-05:00",
+        "notes": [
+            "[Added] Added [Organization Contact Points](https://developers.google.com/structured-data/customize/contact-points) that can appear in the Google Knowledge panel in some searches",
+            "[Added] You can control whether Product JSON-LD is rendered via the `renderCommerceProductJSONLD` config variable",
+            "[Added] Added support for arrays as the root JSON-LD type in the JSON-LD generator",
+            "[Improved] SEOmatic now outputs JSON-LD microdata for all of the Craft Commerce Product Variants (previously it was outputting only the default Variant)",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.13",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-04-16T11:00:00-05:00",
+        "notes": [
+            "[Added] If an SEOmatic FieldType is attached to a Craft Commerce Product, in addition to rendering the page SEO Meta, it will also generate [Product JSON-LD microdata](https://developers.google.com/structured-data/rich-snippets/products) that describes the product.",
+            "[Improved] SEOmatic now uses control panel sub-navs if you're running Craft 2.5 or later",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.12",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-04-14T11:00:00-05:00",
+        "notes": [
+            "[Improved] SEOmatic will now populate its FieldType with default values on saveElement(), which is triggered via import plugings and also via Settings → Edit My Section → hit Save",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.11",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-04-08T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed an issue with rendering the humans.tx and robots.txt templates",
+            "[Improved] An HTML comment is added if the Google Analytics script is not included due to LivePreview or devMode being on",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.10",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-03-29T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed API 'deprecation' errors with Craft 2.6.2778 or later",
+            "[Improved] Added more controls for the default title, description, and keywords values in config.php",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.9",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-03-17T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed a typo in the Preview SEO Tags window",
+            "[Fixed] We now handle Twig errors in SEOmatic FieldType fields gracefully",
+            "[Improved] Query strings are now stripped from the canonical URL",
+            "[Improved] All things that should be fully qualified URLs are now fully qualified URLs, even if you specify them via path or relative URL",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.8",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-03-10T11:00:00-05:00",
+        "notes": [
+            "[Improved] In the SEOmatic FieldType, moved default setting to prepValue() so it'll work if the entries are all re-saved via resaveAllElements",
+            "[Added] Added getFullyQualifiedUrl() helper as a Twig function/filter and as a variable for Twig templating",
+            "[Improved] Turn things that should be fully qualified URLs into fully qualified URLs, such as the canonicalUrl, seoImage, and anything with url as a key",
+            "[Improved] Added seoImage() and seoImageID() to the model so you can get at those values from, say, entry.seoField.seoImage()",
+            "[Fixed] canonicalUrl fixes for multilingual sites",
+            "[Fixed] Fixed errant ordinal encoding of the first element in a sequential array",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.7",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-03-04T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed a regression that would cause the Place JSON-LD to render incorrectly",
+            "[Fixed] Fixed a nasty bug that would cause SEOmatic to crash if you used {title} or other variables in your SEOmatic Entry Meta fields",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.6",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-03-03T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed a fun recursion bug that would cause meta arrays nested more than 1 deep to not be sanitized & parsed properly",
+            "[Added] Added Composer support for type: craft-plugin in composer.json",
+            "[Fixed] Removed the ?> from the config.php as per Lindsey's best practices",
+            "[Fixed] The meta variables rendered by craft.seomatic.renderIdentity(), craft.seomatic.renderWebsite() and craft.seomatic.renderPlace() are now taken from the Twig context, so they can be modified before output",
+            "[Fixed] The metas will now be cached as intended (oops), which should increase performance a bit",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.5",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-02-27T11:00:00-05:00",
+        "notes": [
+            "[Added] Added support for OpenGraph article types",
+            "[Added] Added support for OpenGraph fb:app_id on the Social Media settings",
+            "[Fixed] The canonicalUrl should be set properly to a fully qualified URL now",
+            "[Fixed] The Site Creator will now remember the LocalBusiness and Corporation settings",
+            "[Fixed] The SEOmatic FieldType will preview the canonicalUrl properly now",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.4",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-02-19T11:00:00-05:00",
+        "notes": [
+            "[Added] Set the default Twig escaping strategy for robots.txt and humans.txt to false (so the tag output is not escaped)",
+            "[Fixed] Handle the case where there is no Twitter field",
+            "[Fixed] Handle empty OpeningHours spec correctly, and other OpeningHours fixes",
+            "[Fixed] actionRenderRobots is now publicly accessible (doh!), allowing robots.txt to render properly when not logged in",
+            "[Fixed] Fixed a template error on the SEO Site Meta tab on localized sites",
+            "[Improved] Updated the Roadmap section with pending bugs/features",
+            "[Improved] Removed the siteRobotsTxt from the globals display",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
+        "version": "1.1.3",
+        "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
+        "date": "2016-02-17T11:00:00-05:00",
+        "notes": [
+            "[Fixed] Fixed some typos in SEOmatic & the docs re: robots.txt",
+            "[Fixed] The Google Analytics script no longer renders if the Google Analytics Tracking ID field is empty",
+            "[Fixed] Fixed an issue with console errors on the backend with the SEOmatic FieldType",
+            "[Fixed] OpeningHours now only displays for LocalBusiness",
+            "[Added] SEOmatic now processes adding the SEO Site Name to the og and twitter titles just before rendering, so you can do things like change the seomaticSiteMeta.siteSeoTitlePlacement via Twig, and it'll do the right thing",
+            "[Fixed] Fixed a PHP error if the Site Creator is a Person",
+            "[Improved] Updated the README.md"
+        ]
+    },
+    {
         "version": "1.1.1",
         "downloadUrl": "https://github.com/nystudio107/seomatic/archive/master.zip",
         "date": "2016-02-09T11:00:00-05:00",

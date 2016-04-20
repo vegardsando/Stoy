@@ -20,6 +20,8 @@ class Seomatic_MetaFieldModel extends Seomatic_MetaModel
             'seoKeywordsSourceField'		=> array(AttributeType::String, 'default' => ''),
             'seoImageIdSource'				=> array(AttributeType::Enum, 'values' => "custom,field", 'default' => 'custom'),
             'seoImageIdSourceField'			=> array(AttributeType::String, 'default' => ''),
+/* -- For Commerce products */
+            'seoCommerceVariants'           => array(AttributeType::Mixed),
         ));
     }
 

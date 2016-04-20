@@ -13,20 +13,26 @@
 
 {% set title = "SEOmatic"|t %}
 
-{% set docsUrl = "https://github.com/khalwat/seomatic/blob/master/README.md" %}
-
 {% set fullPageForm = true %}
 {% set hasCustomLayout = true %}
 
-{% set tabs = {
-    meta:       { label: "SEO Template Meta"|t, url: url('seomatic/meta') },
-    site:       { label: "SEO Site Meta"|t, url: url('seomatic/site') },
+{% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
+
+{% set seomaticSections = {
+    meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
+    site:       { label: "Site Meta"|t, url: url('seomatic/site') },
     identity:   { label: "Site Identity"|t, url: url('seomatic/identity') },
     social:     { label: "Social Media"|t, url: url('seomatic/social') },
     creator:    { label: "Site Creator"|t, url: url('seomatic/creator') },
 } %}
 
-{% set selectedTab = 'creator' %}
+{% if craft.app.version < 2.5 %}
+    {% set tabs = seomaticSections %}
+    {% set selectedTab = 'creator' %}
+{% else %}
+    {% set subnav = seomaticSections %}
+    {% set selectedSubnavItem = 'creator' %}
+{% endif %}
 
 {% block main %}
 
@@ -49,7 +55,9 @@
         <div class="grid first">
             <div class="item" data-position="left" data-min-colspan="2" data-max-colspan="3">
                 <div id="fields" class="pane">
-                    {% include "_includes/tabs" %}
+                    {% if tabs is defined %}
+                        {% include "_includes/tabs" %}
+                    {% endif %}
 
 <!-- Site Creatorship -->
 
@@ -343,6 +351,45 @@
                             </div>
                         </div>
 
+                        <h2>{{ "Organization Contact Points" |t }}</h2>
+
+                        <div class="field">
+                        <div class="heading">
+                            <label for="organizationCreatorContactPoints">{{ "Contact Points"|t}}{% if craft.isLocalized and creator.locale %}<span class="locale">{{ creator.locale }}</span>{% endif %}</label>
+                            <div class="instructions"><p>{{ "Use <a href='https://developers.google.com/structured-data/customize/contact-points' target='_blank'>organization contact points</a> to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number <strong>must be</strong> an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: <code>+1-800-555-1212</code> or <code>+44-2078225951</code>" |t |raw}}</p></div>
+                        </div>
+                            {{ forms.editableTable({
+                                id: 'organizationCreatorContactPoints',
+                                name: 'organizationCreatorContactPoints',
+                                required: false,
+                                cols: {
+                                    telephone: {
+                                        heading: "Telephone Number" |t,
+                                        type: "singleline" |t,
+                                    },
+                                    contactType: {
+                                        heading: "Contact Type" |t,
+                                        type: "select" |t,
+                                        options: {
+                                            "customer support": "Customer Support",
+                                            "technical support": "Technical Support",
+                                            "billing support": "Billing Support",
+                                            "bill payment": "Bill Payment",
+                                            "sales": "Sales",
+                                            "reservations": "Reservations",
+                                            "credit card support": "Credit Card Support",
+                                            "emergency": "Emergency",
+                                            "baggage tracking": "Baggage Tracking",
+                                            "roadside assistance": "Roadside Assistance",
+                                            "package tracking": "Package Tracking",
+                                        }
+                                    }
+                                },
+                                rows: creator.organizationCreatorContactPoints,
+                                locale: creator.locale,
+                            }) }}
+                        </div>
+
                     </div>
 
 <!-- Corporation-specific fields -->
@@ -419,7 +466,7 @@
                     <div class="field" id="genericCreatorHumansTxt-field">
                         <div class="heading">
                             <label for="genericCreatorHumansTxt">{{ "Humans.txt Template"|t}}{% if craft.isLocalized and creator.locale %}<span class="locale">{{ creator.locale }}</span>{% endif %}</label>
-                            <div class="instructions">{{ "<p><a href='http://humanstxt.org' target='_blank'>Humans.txt</a> is an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website.  By adding a txt file, you can prove your authorship (not your property) in an external, fast, easy and accessible way.</p><p>This is the template used to render it; you have access to all of the Craft &amp; SEOmatic variables.</p>" |t |raw }}</div>
+                            <div class="instructions">{{ "<p><a href='http://humanstxt.org' target='_blank'>Humans.txt</a> is an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website.  By adding a txt file, you can prove your authorship (not your property) in an external, fast, easy and accessible way.</p><p>This is the template used to render it; you have access to all of the Craft &amp; SEOmatic variables.</p><p>This is a full Twig template, so you should use standard <code>{{ myVariable }}</code> or <code>{% set woof = dog.bark %}</code> Twig syntax. Environmental variables must be accessed via <code>{{ craft.config.environmentVariables.myVariable }}</code></p>" |t |raw }}</div>
                         </div>
                         {{ forms.textarea({
                             label: "Humans.txt Template"|t,

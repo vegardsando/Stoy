@@ -7,6 +7,8 @@ use Twig_Filter_Method;
 class SeomaticTwigExtension extends \Twig_Extension
 {
 
+    protected $seomaticInitializing = false;
+
 /* --------------------------------------------------------------------------------
     The name of our Twig extension
 -------------------------------------------------------------------------------- */
@@ -24,9 +26,10 @@ class SeomaticTwigExtension extends \Twig_Extension
     {
         $result = array();
 
-        if (craft()->request->isSiteRequest())
+        if (craft()->request->isSiteRequest() && !$this->seomaticInitializing)
         {
 
+            $this->seomaticInitializing = true;
             $element = craft()->urlManager->getMatchedElement();
             $entryMeta = craft()->seomatic->getMetaFromElement($element);
             $entryMetaUrl = "";
@@ -36,6 +39,7 @@ class SeomaticTwigExtension extends \Twig_Extension
             $currentTemplate = $this->_get_current_template_path();
             $result = craft()->seomatic->getGlobals($currentTemplate, craft()->language);
         }
+        $this->seomaticInitializing = false;
         return $result;
     }
 
@@ -52,6 +56,7 @@ class SeomaticTwigExtension extends \Twig_Extension
             'truncateStringOnWord' => new \Twig_Filter_Method($this, 'truncateStringOnWord'),
             'encodeEmailAddress' => new \Twig_Filter_Method($this, 'encodeEmailAddress'),
             'extractTextFromMatrix' => new \Twig_Filter_Method($this, 'extractTextFromMatrix'),
+            'getFullyQualifiedUrl' => new \Twig_Filter_Method($this, 'getFullyQualifiedUrl'),
         );
     }
 
@@ -68,6 +73,7 @@ class SeomaticTwigExtension extends \Twig_Extension
             'truncateStringOnWord' => new \Twig_Function_Method($this, 'truncateStringOnWord'),
             'encodeEmailAddress' => new \Twig_Function_Method($this, 'encodeEmailAddress'),
             'extractTextFromMatrix' => new \Twig_Function_Method($this, 'extractTextFromMatrix'),
+            'getFullyQualifiedUrl' => new \Twig_Function_Method($this, 'getFullyQualifiedUrl'),
         );
     }
 
@@ -170,6 +176,17 @@ class SeomaticTwigExtension extends \Twig_Extension
     } /* -- extractTextFromMatrix */
 
 /* --------------------------------------------------------------------------------
+    Get a fully qualified URL based on the siteUrl, if no scheme/host is present
+-------------------------------------------------------------------------------- */
+
+    public function getFullyQualifiedUrl($url)
+    {
+        $result = craft()->seomatic->getFullyQualifiedUrl($url);
+
+        return $result;
+    } /* -- getFullyQualifiedUrl */
+
+/* --------------------------------------------------------------------------------
     Get the current template path
 -------------------------------------------------------------------------------- */
 
@@ -177,7 +194,7 @@ class SeomaticTwigExtension extends \Twig_Extension
     {
         $result = "";
         $currentTemplate = craft()->templates->getRenderingTemplate();
-        $templatesPath = craft()->path->templatesPath;
+        $templatesPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
 
         $path_parts = pathinfo($currentTemplate);
 

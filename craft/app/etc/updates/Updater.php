@@ -25,25 +25,6 @@ class Updater
 	}
 
 	/**
-	 * @throws Exception
-	 * @return null
-	 */
-	public function getLatestUpdateInfo()
-	{
-		$updateModel = craft()->updates->getUpdates(true);
-
-		if (!empty($updateModel->errors))
-		{
-			throw new Exception(implode(',', $updateModel->errors));
-		}
-
-		if ($updateModel->app->releases == null)
-		{
-			throw new Exception(Craft::t('Craft is already up to date.'));
-		}
-	}
-
-	/**
 	 * @param $handle
 	 *
 	 * @return array
@@ -113,7 +94,7 @@ class Updater
 
 			if (!empty($errors))
 			{
-				throw new Exception(StringHelper::parseMarkdown(Craft::t('Your server does not meet the following minimum requirements for Craft to run:')."\n\n".$this->_markdownList($errors)));
+				throw new Exception(StringHelper::parseMarkdown(Craft::t('Your server does not meet the following minimum requirements for Craft CMS to run:')."\n\n".$this->_markdownList($errors)));
 			}
 		}
 
@@ -123,7 +104,7 @@ class Updater
 
 		if (count($writableErrors) > 0)
 		{
-			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft needs to be able to write to the following paths, but can’t:')."\n\n".$this->_markdownList($writableErrors)));
+			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft CMS needs to be able to write to the following paths, but can’t:')."\n\n".$this->_markdownList($writableErrors)));
 		}
 
 		return array('uid' => $uid);
@@ -516,7 +497,7 @@ class Updater
 		// Make sure we can write to craft/app/requirements
 		if (!IOHelper::isWritable(craft()->path->getAppPath().'etc/requirements/'))
 		{
-			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft needs to be able to write to your craft/app/etc/requirements folder and cannot. Please check your [permissions]({url}).', array('url' => 'http://craftcms.com/docs/updating#one-click-updating'))));
+			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft CMS needs to be able to write to your craft/app/etc/requirements folder and cannot. Please check your [permissions]({url}).', array('url' => 'http://craftcms.com/docs/updating#one-click-updating'))));
 		}
 
 		$tempFileName = StringHelper::UUID().'.php';

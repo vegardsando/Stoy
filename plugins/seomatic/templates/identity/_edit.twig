@@ -13,20 +13,26 @@
 
 {% set title = "SEOmatic"|t %}
 
-{% set docsUrl = "https://github.com/khalwat/seomatic/blob/master/README.md" %}
-
 {% set fullPageForm = true %}
 {% set hasCustomLayout = true %}
 
-{% set tabs = {
-    meta:       { label: "SEO Template Meta"|t, url: url('seomatic/meta') },
-    site:       { label: "SEO Site Meta"|t, url: url('seomatic/site') },
+{% set docsUrl = "https://github.com/nystudio107/seomatic/wiki" %}
+
+{% set seomaticSections = {
+    meta:       { label: "Template Meta"|t, url: url('seomatic/meta') },
+    site:       { label: "Site Meta"|t, url: url('seomatic/site') },
     identity:   { label: "Site Identity"|t, url: url('seomatic/identity') },
     social:     { label: "Social Media"|t, url: url('seomatic/social') },
     creator:    { label: "Site Creator"|t, url: url('seomatic/creator') },
 } %}
 
-{% set selectedTab = 'identity' %}
+{% if craft.app.version < 2.5 %}
+    {% set tabs = seomaticSections %}
+    {% set selectedTab = 'identity' %}
+{% else %}
+    {% set subnav = seomaticSections %}
+    {% set selectedSubnavItem = 'identity' %}
+{% endif %}
 
 {% block main %}
 
@@ -48,7 +54,9 @@
         <div class="grid first">
             <div class="item" data-position="left" data-min-colspan="2" data-max-colspan="3">
                 <div id="fields" class="pane">
-                    {% include "_includes/tabs" %}
+                    {% if tabs is defined %}
+                        {% include "_includes/tabs" %}
+                    {% endif %}
 
 <!-- Site Ownership -->
 
@@ -537,6 +545,45 @@
                             </div>
                         </div>
 
+                        <h2>{{ "Organization Contact Points" |t }}</h2>
+
+                        <div class="field">
+                        <div class="heading">
+                            <label for="organizationOwnerContactPoints">{{ "Contact Points"|t}}{% if craft.isLocalized and identity.locale %}<span class="locale">{{ identity.locale }}</span>{% endif %}</label>
+                            <div class="instructions"><p>{{ "Use <a href='https://developers.google.com/structured-data/customize/contact-points' target='_blank'>organization contact points</a> to add your organizations's contact information to the Google Knowledge panel in some searches.  The Telephone Number <strong>must be</strong> an internationalized version of the phone number, starting with the '+' symbol and country code (+1 in the US and Canada).  e.g.: <code>+1-800-555-1212</code> or <code>+44-2078225951</code>" |t |raw}}</p></div>
+                        </div>
+                            {{ forms.editableTable({
+                                id: 'organizationOwnerContactPoints',
+                                name: 'organizationOwnerContactPoints',
+                                required: false,
+                                cols: {
+                                    telephone: {
+                                        heading: "Telephone Number" |t,
+                                        type: "singleline" |t,
+                                    },
+                                    contactType: {
+                                        heading: "Contact Type" |t,
+                                        type: "select" |t,
+                                        options: {
+                                            "customer support": "Customer Support",
+                                            "technical support": "Technical Support",
+                                            "billing support": "Billing Support",
+                                            "bill payment": "Bill Payment",
+                                            "sales": "Sales",
+                                            "reservations": "Reservations",
+                                            "credit card support": "Credit Card Support",
+                                            "emergency": "Emergency",
+                                            "baggage tracking": "Baggage Tracking",
+                                            "roadside assistance": "Roadside Assistance",
+                                            "package tracking": "Package Tracking",
+                                        }
+                                    }
+                                },
+                                rows: identity.organizationOwnerContactPoints,
+                                locale: identity.locale,
+                            }) }}
+                        </div>
+
                     </div>
 
 <!-- ========== siteCreatorSubType ========== -->
@@ -580,7 +627,7 @@
                         <div class="field" id="localBusinessOwnerOpeningHours-field">
                             <div class="heading">
                                 <label for="localBusinessOwnerOpeningHours">{{ "Opening Hours"|t}}{% if craft.isLocalized and identity.locale %}<span class="locale">{{ identity.locale }}</span>{% endif %}</label>
-                                <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank." |t |raw}}</p></div>
+                                <div class="instructions"><p>{{ "The opening hours for this local business.  If the business is closed on a given day, just leave the hours for that day blank.  If you leave everything blank, no opening hours will be listed." |t |raw}}</p></div>
                             </div>
 
                             {% macro day(id, name, value, day) %}
@@ -620,7 +667,7 @@
                                 </thead>
                                 <tbody>
                                     {% for i in 0..6 %}
-                                        {{ day('localBusinessCreatorOpeningHours', 'localBusinessCreatorOpeningHours', identity.localBusinessCreatorOpeningHours, i) }}
+                                        {{ day('localBusinessOwnerOpeningHours', 'localBusinessOwnerOpeningHours', identity.localBusinessOwnerOpeningHours, i) }}
                                     {% endfor %}
                                 </tbody>
                             </table>

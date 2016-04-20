@@ -27,7 +27,7 @@ class Seomatic_SettingsRecord extends BaseRecord
             'siteTwitterCardType'				=> array(AttributeType::String, 'default' => ''),
             'siteOpenGraphType'					=> array(AttributeType::String, 'default' => ''),
             'siteRobots'						=> array(AttributeType::String, 'default' => ''),
-            'siteRobotsTxt'                     => array(AttributeType::Mixed),
+            'siteRobotsTxt'                     => array(AttributeType::String, 'column' => ColumnType::Text),
 
 /* --------------------------------------------------------------------------------
 	IDENTITY settings
@@ -66,7 +66,8 @@ class Seomatic_SettingsRecord extends BaseRecord
             'organizationOwnerDuns'				=> array(AttributeType::String, 'default' => ''),
             'organizationOwnerFounder'			=> array(AttributeType::String, 'default' => ''),
             'organizationOwnerFoundingDate'		=> array(AttributeType::String, 'default' => ''),
-            'organizationOwnerFoundingLocation'	=> array(AttributeType::String, 'default' => ''),
+            'organizationOwnerFoundingLocation' => array(AttributeType::String, 'default' => ''),
+            'organizationOwnerContactPoints'    => array(AttributeType::Mixed),
 
 /* -- LocalBusiness owner fields https://schema.org/LocalBusiness */
 
@@ -99,7 +100,8 @@ class Seomatic_SettingsRecord extends BaseRecord
 
             'twitterHandle'             		=> array(AttributeType::String, 'default' => ''),
             'facebookHandle'            		=> array(AttributeType::String, 'default' => ''),
-            'facebookProfileId'         		=> array(AttributeType::String, 'default' => ''),
+            'facebookProfileId'                 => array(AttributeType::String, 'default' => ''),
+            'facebookAppId'                     => array(AttributeType::String, 'default' => ''),
             'linkedInHandle'            		=> array(AttributeType::String, 'default' => ''),
             'googlePlusHandle'          		=> array(AttributeType::String, 'default' => ''),
             'youtubeHandle'                     => array(AttributeType::String, 'default' => ''),
@@ -138,7 +140,8 @@ class Seomatic_SettingsRecord extends BaseRecord
             'organizationCreatorDuns'			=> array(AttributeType::String, 'default' => ''),
             'organizationCreatorFounder'		=> array(AttributeType::String, 'default' => ''),
             'organizationCreatorFoundingDate'	=> array(AttributeType::String, 'default' => ''),
-            'organizationCreatorFoundingLocation'	=> array(AttributeType::String, 'default' => ''),
+            'organizationCreatorFoundingLocation'   => array(AttributeType::String, 'default' => ''),
+            'organizationCreatorContactPoints'  => array(AttributeType::Mixed),
 
 /* -- LocalBusiness Creator fields https://schema.org/LocalBusiness */
 
@@ -161,7 +164,7 @@ class Seomatic_SettingsRecord extends BaseRecord
 
 /* -- Humans.txt */
 
-            'genericCreatorHumansTxt'           => array(AttributeType::Mixed),
+            'genericCreatorHumansTxt'           => array(AttributeType::String, 'column' => ColumnType::Text),
 
 /* -- This is defined in definteRelations() below, of note:
       You don’t need to specify the foreign key column name in BELONGS_TO relations (defaults to the relation name appended with “Id”)
@@ -177,9 +180,9 @@ class Seomatic_SettingsRecord extends BaseRecord
 
     public function getDefaultHumans()
     {
-        $oldPath = craft()->path->getTemplatesPath();
+        $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
         $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-        craft()->path->setTemplatesPath($newPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Return the Humans.txt default template */
 
@@ -187,7 +190,7 @@ class Seomatic_SettingsRecord extends BaseRecord
 		$loader = new TemplateLoader;
         $template = $loader->getSource($templateName);
 
-        craft()->path->setTemplatesPath($oldPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
 
         return $template;
     } /* -- _getDefaultHumans */
@@ -198,9 +201,9 @@ class Seomatic_SettingsRecord extends BaseRecord
 
     public function getDefaultRobots()
     {
-        $oldPath = craft()->path->getTemplatesPath();
+        $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
         $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-        craft()->path->setTemplatesPath($newPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Return the robots.txt default template */
 
@@ -208,7 +211,7 @@ class Seomatic_SettingsRecord extends BaseRecord
         $loader = new TemplateLoader;
         $template = $loader->getSource($templateName);
 
-        craft()->path->setTemplatesPath($oldPath);
+        method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
 
         return $template;
     } /* -- _getDefaultRobots */

@@ -4,7 +4,7 @@ namespace Craft;
 class SeomaticController extends BaseController
 {
 
-    protected $allowAnonymous = array('actionRenderHumans');
+    protected $allowAnonymous = array('actionRenderHumans', 'actionRenderRobots');
 
 /* --------------------------------------------------------------------------------
     Render the humans.txt template
@@ -18,22 +18,28 @@ class SeomaticController extends BaseController
             $locale = craft()->language;
         $metaVars = craft()->seomatic->getGlobals('', $locale);
 
+/* -- Tell Twig not to escape at all for this text template */
+
+        $twig = craft()->templates->getTwig();
+        $escaper = $twig->getExtension('escaper');
+        $escaper->setDefaultStrategy(false);
+
         if ($templatePath)
         {
             $htmlText = craft()->templates->render($templatePath);
         }
         else
         {
-            $oldPath = craft()->path->getTemplatesPath();
+            $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
             $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-            craft()->path->setTemplatesPath($newPath);
+            method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Render the core template */
 
             $templateName = '_humans';
             $this->renderTemplate($templateName, $metaVars);
 
-            craft()->path->setTemplatesPath($oldPath);
+            method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
         }
     } /* -- actionRenderHumans */
 
@@ -49,15 +55,21 @@ class SeomaticController extends BaseController
             $locale = craft()->language;
         $metaVars = craft()->seomatic->getGlobals('', $locale);
 
+/* -- Tell Twig not to escape at all for this text template */
+
+        $twig = craft()->templates->getTwig();
+        $escaper = $twig->getExtension('escaper');
+        $escaper->setDefaultStrategy(false);
+
         if ($templatePath)
         {
             $htmlText = craft()->templates->render($templatePath);
         }
         else
         {
-            $oldPath = craft()->path->getTemplatesPath();
+            $oldPath = method_exists(craft()->templates, 'getTemplatesPath') ? craft()->templates->getTemplatesPath() : craft()->path->getTemplatesPath();
             $newPath = craft()->path->getPluginsPath().'seomatic/templates';
-            craft()->path->setTemplatesPath($newPath);
+            method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($newPath) : craft()->path->setTemplatesPath($newPath);
 
 /* -- Render the core template */
 
@@ -65,6 +77,7 @@ class SeomaticController extends BaseController
             $this->renderTemplate($templateName, $metaVars);
 
             craft()->path->setTemplatesPath($oldPath);
+            method_exists(craft()->templates, 'setTemplatesPath') ? craft()->templates->setTemplatesPath($oldPath) : craft()->path->setTemplatesPath($oldPath);
         }
     } /* -- actionRenderRobots */
 
@@ -81,10 +94,11 @@ class SeomaticController extends BaseController
             $locale = craft()->language;
 
         $siteMeta = craft()->seomatic->getSiteMeta($locale);
+        $titleLength = craft()->config->get("maxTitleLength", "seomatic");
         if ($siteMeta['siteSeoTitlePlacement'] == "none")
-            $variables['titleLength'] = 70;
+            $variables['titleLength'] = $titleLength;
         else
-            $variables['titleLength'] = (70 - strlen(" | ") - strlen($siteMeta['siteSeoName']));
+            $variables['titleLength'] = ($titleLength - strlen(" | ") - strlen($siteMeta['siteSeoName']));
 
         $variables['siteMeta'] = $siteMeta;
 
@@ -247,10 +261,11 @@ class SeomaticController extends BaseController
             $locale = craft()->language;
 
         $siteMeta = craft()->seomatic->getSiteMeta($locale);
+        $titleLength = craft()->config->get("maxTitleLength", "seomatic");
         if ($siteMeta['siteSeoTitlePlacement'] == "none")
-            $variables['titleLength'] = 70;
+            $variables['titleLength'] = $titleLength;
         else
-            $variables['titleLength'] = (70 - strlen(" | ") - strlen($siteMeta['siteSeoName']));
+            $variables['titleLength'] = ($titleLength - strlen(" | ") - strlen($siteMeta['siteSeoName']));
 
         if (empty($variables['meta']))
         {
@@ -526,6 +541,7 @@ class SeomaticController extends BaseController
         $record->organizationOwnerFounder = craft()->request->getPost('organizationOwnerFounder', $record->organizationOwnerFounder);
         $record->organizationOwnerFoundingDate = craft()->request->getPost('organizationOwnerFoundingDate', $record->organizationOwnerFoundingDate);
         $record->organizationOwnerFoundingLocation = craft()->request->getPost('organizationOwnerFoundingLocation', $record->organizationOwnerFoundingLocation);
+        $record->organizationOwnerContactPoints = craft()->request->getPost('organizationOwnerContactPoints');
 
 /* -- Person owner fields https://schema.org/Person */
 
@@ -534,9 +550,9 @@ class SeomaticController extends BaseController
 
 /* -- LocalBusiness owner fields https://schema.org/LocalBusiness */
 
-        $hours = craft()->request->getPost('localBusinessCreatorOpeningHours', $record->localBusinessCreatorOpeningHours);
+        $hours = craft()->request->getPost('localBusinessOwnerOpeningHours');
         craft()->seomatic->convertTimes($hours, craft()->getTimeZone());
-        $record->localBusinessCreatorOpeningHours = $hours;
+        $record->localBusinessOwnerOpeningHours = $hours;
 
 /* -- Corporation owner fields http://schema.org/Corporation */
 
@@ -594,6 +610,7 @@ class SeomaticController extends BaseController
         $record->twitterHandle = craft()->request->getPost('twitterHandle', $record->twitterHandle);
         $record->facebookHandle = craft()->request->getPost('facebookHandle', $record->facebookHandle);
         $record->facebookProfileId = craft()->request->getPost('facebookProfileId', $record->facebookProfileId);
+        $record->facebookAppId = craft()->request->getPost('facebookAppId', $record->facebookAppId);
         $record->linkedInHandle = craft()->request->getPost('linkedInHandle', $record->linkedInHandle);
         $record->googlePlusHandle = craft()->request->getPost('googlePlusHandle', $record->googlePlusHandle);
         $record->youtubeHandle = craft()->request->getPost('youtubeHandle', $record->youtubeHandle);
@@ -668,6 +685,7 @@ class SeomaticController extends BaseController
         $record->organizationCreatorFounder = craft()->request->getPost('organizationCreatorFounder', $record->organizationCreatorFounder);
         $record->organizationCreatorFoundingDate = craft()->request->getPost('organizationCreatorFoundingDate', $record->organizationCreatorFoundingDate);
         $record->organizationCreatorFoundingLocation = craft()->request->getPost('organizationCreatorFoundingLocation', $record->organizationCreatorFoundingLocation);
+        $record->organizationCreatorContactPoints = craft()->request->getPost('organizationCreatorContactPoints');
 
 /* -- Person Creator fields https://schema.org/Person */
 

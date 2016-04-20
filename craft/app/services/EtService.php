@@ -142,7 +142,7 @@ class EtService extends BaseApplicationComponent
 
 		if ($handle == 'craft')
 		{
-			$path = 'http://download.craftcms.com/craft/'.$updateModel->app->latestVersion.'/'.$buildVersion.'/Patch/'.($handle == 'craft' ? $updateModel->app->localBuild : $updateModel->app->localVersion.'.'.$updateModel->app->localBuild).'/'.$md5.'.zip';
+			$path = 'https://download.craftcdn.com/craft/'.$updateModel->app->latestVersion.'/'.$buildVersion.'/Patch/'.($handle == 'craft' ? $updateModel->app->localBuild : $updateModel->app->localVersion.'.'.$updateModel->app->localBuild).'/'.$md5.'.zip';
 		}
 		else
 		{
@@ -167,7 +167,7 @@ class EtService extends BaseApplicationComponent
 				}
 			}
 
-			$path = 'http://download.craftcms.com/plugins/'.$handle.'/'.$latestVersion.'/'.$latestVersion.'.'.$latestBuild.'/Patch/'.$localVersion.'.'.$localBuild.'/'.$md5.'.zip';
+			$path = 'https://download.craftcdn.com/plugins/'.$handle.'/'.$latestVersion.'/'.$latestVersion.'.'.$latestBuild.'/Patch/'.$localVersion.'.'.$localBuild.'/'.$md5.'.zip';
 		}
 
 		$et = new Et($path, 240);
@@ -291,6 +291,7 @@ class EtService extends BaseApplicationComponent
 						case 'license_has_edition':  $error = Craft::t('Your Craft license already has this edition.'); break;
 						case 'price_mismatch':       $error = Craft::t('The cost of this edition just changed.'); break;
 						case 'unknown_error':        $error = Craft::t('An unknown error occurred.'); break;
+						case 'invalid_coupon_code':  $error = Craft::t('Invalid coupon code.'); break;
 
 						// Stripe errors
 						case 'incorrect_number':     $error = Craft::t('The card number is incorrect.'); break;
