@@ -19,6 +19,9 @@ $color_pr1: #392B28; // Brun
 $color_pr2: #5b5657; // grå
 $color_pr3: #756c59; // grønnlig
 $color_sec1: #5f5656; // lysere brun
+$color_sec2: #FFFDFD; // Kremet lys hvit
+
+$white: $color_sec2;
 
 $selection: $color_pr2;
 
@@ -36,7 +39,7 @@ $h6: 10px;
 
 /* FONTS FACE VARIABLES */
 /**************************/
-@import url(http://fonts.googleapis.com/css?family=Raleway:700,800,400|Playfair+Display:700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:700,800,400|Playfair+Display:400,700,900);
 
 // @font-face {font-family: 'AlrightSans';src: url('/dist/fonts/AlrightSans-Bold-v3.eot');src: url('/dist/fonts/AlrightSans-Bold-v3.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/AlrightSans-Bold-v3.woff2') format('woff2'),url('/dist/fonts/AlrightSans-Bold-v3.woff') format('woff'),url('/dist/fonts/AlrightSans-Bold-v3.ttf') format('truetype'),url('/dist/fonts/AlrightSans-Bold-v3.svg#wf') format('svg');}
 //
@@ -51,7 +54,6 @@ $font_playfair: 'Playfair Display', sans-serif;
 
 h1, h2, h3, h4, h5, h6, b, p, strong, textarea.textarea, a {
     margin: 0;
-    margin-bottom: .5em;
     font-weight: normal;
     font-variant: normal;
 }
@@ -67,7 +69,7 @@ body {
     font-family: $font_default;
 }
 
-.h1,.h2,.h3,.h4,.h5,.h6 { display: block; }
+.h1,.h2,.h3,.h4,.h5,.h6 { display: block;}
 
 h1, .h1 {
     font-size: $h1;
@@ -79,6 +81,10 @@ h2, .h2 {
     font-size: $h4;
     margin-bottom: .5em;
     text-transform: uppercase;
+
+    @media #{$desktop} {
+      font-size: $h3;
+    }
 }
 
 h3, .h3 {
@@ -144,10 +150,4 @@ $cubicbezier: cubic-bezier(.36, 0, .07, 1);
     right: 0;
     bottom: 0;
     overflow: hidden;
-}
-
-.sizer {
-    width: 100%!important;
-    min-height: inherit!important;
-    visibility: hidden;
 }

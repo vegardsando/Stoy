@@ -15,16 +15,7 @@
         <div class="text">
             <h1>{{entry.tittel}}</h1>
             <span class="h1">&</span>
-            <span>
-                {{entry.undertittel}}
-            </span>
-            <!--
-<p>Lyd som gir liv til gode historier</p>
-<p>Lyden av den gode historie</p>
-<p>Lyden som gir liv til din historie</p>
-<p>Lyden gir liv til den gode historie</p>
--->
-
+            <span>{{entry.undertittel}}</span>
         </div>
     </div>
     <figure class="divider"></figure>
@@ -36,7 +27,7 @@
     </figure>
 </div>
 
-<figure class="divider down"></figure>
+<figure class="divider"></figure>
 
 <section class="jobber grid">
     {% for block in entry.utvalgteJobber %}
@@ -44,26 +35,23 @@
         {% set video = craft.embedder.url(block.video, {max_width:500, max_height:800}) %}
 
         <article class="effect-one">
-            <img class="sizer" src="http://placehold.it/350x250">
-            <div class="sizer-div">
-                <img src="{{ video.video_highres }}">
-                <div class="video">
-                    {{ video.embed_code }}
-                </div>
-                <figcaption>
-                    <h2>{{block.title}}</h2>
-                    <p>{{block.tekstRen}}</p>
-                    <span class="icon_play">
-                        <?php include "/static/img/icon_play.svg" ?>
-                    </span>
-                </figcaption>
+            <img src="{{ video.video_highres }}">
+            <div class="video">
+                {{ video.embed_code }}
             </div>
+            <figcaption>
+                <h3>{{block.title}}</h3>
+                <p>{{block.tekstRen}}</p>
+                <span class="icon_play">
+                    <?php include "/static/img/icon_play.svg" ?>
+                </span>
+            </figcaption>
         </article>
     {% endfor %}
 
     <div class="row centered">
         <div class="btn border">
-            <a href="/jobber">Se alle jobber</a>
+            <a href="/jobber">Portefølje</a>
         </div>
     </div>
 </section>
@@ -119,7 +107,6 @@
         {% endfor %}
 
     </div>
-    <figure class="divider down colored"></figure>
 </section>
 
 <section class="map_wrapper">
