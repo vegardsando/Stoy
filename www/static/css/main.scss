@@ -225,7 +225,6 @@ footer {
 .top {
     height: 500px;
     border: 10px solid $white;
-    //transform: translateZ(0);
 
     @media #{$desktop} {
       height: 70vh;
@@ -252,36 +251,11 @@ footer {
         font-family: $font_playfair;
         font-weight: 900;
         text-transform: none;
-        opacity: 0;
-        transform: translate3d(0,20px,0);
     }
 
     .h1 { font-weight: 700; position: relative; top: -3px; }
     span a{
         font-size: $basesize;
-        opacity: 0;
-        transform: translate3d(0,20px,0);
-    }
-
-    span {
-        opacity: 0;
-        transform: translate3d(0,20px,0);
-    }
-
-    h1 {
-        transition: opacity .55s $cubicbezier 1.9s, transform .55s $cubicbezier 1.9s;
-    }
-
-    .h1 {
-        transition: opacity .55s $cubicbezier 1.9s, transform .55s $cubicbezier 2s;
-    }
-
-    span {
-        transition: opacity .55s $cubicbezier 2.1s, transform .55s $cubicbezier 2.1s;
-    }
-
-    span a{
-        transition: opacity .55s $cubicbezier 2.1s, transform .55s $cubicbezier 2.1s;
     }
 
     .text {
@@ -906,6 +880,12 @@ footer {
     height: 100%;
 }
 
+.lazyload {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.lazyloaded { opacity: 1; }
 
 // SELVE SIDEN
 
@@ -916,29 +896,55 @@ html {
 
 body {
     min-height: 100%;
-  //  transition: transform 1s $cubicbezier .2s, opacity 1s $cubicbezier;
-    //transform: translate3d(0, -80px, 0);
-  //  opacity: 0;
+    transition: transform 1s $cubicbezier .2s, opacity 1s $cubicbezier;
+    transform: translate3d(0, -80px, 0);
+    opacity: 0;
+}
+
+// ALT SOM SKAL HA ANIMASJON TIL Å BEGYNNE module_divider
+
+.header_logo svg {
+  transition: transform .3s ease, opacity .3s ease;
+  transform: scale(0.5) translate(20px, 0);
+  opacity: 0;
+  transition-delay: 1.8s;
+}
+
+.top {
+  h1, .h1, p {
+    transition: transform .3s ease, opacity .3s ease;
+    transform: translate(0,20px);
+    opacity: 0;
+  }
+
+  h1 { transition-delay: 2.3s }
+  .h1 { transition-delay: 2.5s }
+  p { transition-delay: 2.7s }
+
+}
+
+.nav_main ul {
+
+  li { transition: transform .3s ease, opacity .3s ease }
+  li:nth-of-type(1) { transition-delay: 2.8s }
+  li:nth-of-type(2) { transition-delay: 3s }
 }
 
 // SITE LOADED
 .lastet {
-    .nav_main ul li {
-        opacity: 1;
-        transform: translate3d(0,0,0);
-    }
-
-    .top {
-        h1, .h1, span, span a {
-            opacity: 1;
-            transform: translate3d(0,0,0);
-        }
-    }
 
     body {
         transform: translate3d(0,0,0);
         opacity: 1;
     }
+
+    .header_logo svg { transform: scale(1) translate(0,0); opacity: 1; }
+
+    .text {
+      h1, .h1, p { transform: translate(0,0); opacity: 1; }
+    }
+
+    .nav_main ul li { transform: translate(0,0); opacity: 1; }
 
 }
 
@@ -1126,7 +1132,7 @@ body {
       }
 
       @media #{$desktop} {
-        height: 220px; 
+        height: 220px;
       }
 
     }
