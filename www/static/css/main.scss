@@ -388,6 +388,14 @@ footer {
 
             }
 
+            a {
+              display: block;
+              height: 100%;
+              width: 100%;
+
+              &:hover { color: white; }
+            }
+
             .icon_play {
                 position: absolute;
                 top: 50%;
@@ -716,7 +724,7 @@ footer {
 }
 
 .map_wrapper {
-    height: 400px;
+    height: 220px;
     border-top: 0;
 
     @media #{$desktop} {

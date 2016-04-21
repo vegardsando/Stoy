@@ -227,6 +227,7 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
       var mapOptions = {
           center: { lat: 63.4391142, lng: 10.4155636 },
           scrollwheel: false,
+          draggable: false,
           zoom: 15,
           mapTypeControl: false,
           panControl: false,
@@ -234,6 +235,10 @@ if (typeof requestFrame === 'function') { requestFrame('native'); } // re/ decla
               position: google.maps.ControlPosition.LEFT_CENTER
           }
       };
+
+      if (desktop) {
+        mapOptions.draggable = true;
+      }
 
 
 
@@ -292,19 +297,28 @@ if ($('.arranger').length) {
 				  @Click/hover events
 =======================================================*/
 
-  // Forside - vimeo-videoer
-  $( ".grid article" ).on('click', function() {
+  // Jobber, videoer, clicks
+  $( ".grid article a" ).on('click', function(e) {
 
-      // Sett alle vimeo-videoer på pause
-      var iframe = $('iframe');
-      iframe.each(function(index){
-          var player = $f($(this)[0]);
-          player.api('pause');
-      })
+    if ($(this).find('.video').children().length > 0 ) {
+      e.preventDefault();
 
-      // Fjern alle video_active på andre elementer
-      $('.video_active').removeClass('video_active');
-      $(this).addClass('video_active');
+      console.log('click');
+
+        // Sett alle vimeo-videoer på pause
+        var iframe = $('iframe');
+        iframe.each(function(index){
+            var player = $f($(this)[0]);
+            player.api('pause');
+        })
+
+        // Fjern alle video_active på andre elementer
+        $('.video_active').removeClass('video_active');
+        $(this).parents('article').addClass('video_active');
+
+    }
+
+
 
   });
 

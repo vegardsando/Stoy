@@ -12,21 +12,44 @@
 <figure class="divider"></figure>
 
 <section class="jobber grid">
-    {% for entry in craft.entries.section('jobber') %}
 
-        {% set video = craft.embedder.url(entry.video, {max_width:500, max_height:800}) %}
+    {% for block in portefolje.utvalgteJobber %}
+
+        {% set video = craft.embedder.url(block.video, {max_width:500, max_height:800}) %}
 
         <article class="effect-one">
-            <img src="{{ video.video_highres }}">
+
+          {% set isVideo = video.video_title %}
+
+            {% if isVideo %}
+              <img src="{{ video.video_highres }}">
+            {% else %}
+
+            {% set img = block.bilde.first | default(false) %}
+
+              {% set bilde = craft.imager.transformImage(img, [
+                { width: 320 },
+                { width: 840 },
+                { width: 1680 },
+                ], { mode: 'crop', ratio:"16/9" }) %}
+
+                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
+
+            {% endif %}
+
             <div class="video">
                 {{ video.embed_code }}
             </div>
             <figcaption>
-                <h3>{{entry.title}}</h3>
-                <p>{{entry.tekstRen}}</p>
-                <span class="icon_play">
-                    <?php include "/static/img/icon_play.svg" ?>
-                </span>
+
+                <a href="{{ block.video }}" target="_blank">
+                  <h3>{{block.title}}</h3>
+                  <p>{{block.tekstRen}}</p>
+                  <span class="icon_play">
+                      <?php include "/static/img/icon_play.svg" ?>
+                  </span>
+                </a>
+
             </figcaption>
         </article>
     {% endfor %}
