@@ -22,7 +22,7 @@
           {% set isVideo = video.video_title %}
 
             {% if isVideo %}
-              <img src="{{ video.video_highres }}">
+              <img class="lazyload" data-bgset="{{ video.video_highres }}">
             {% else %}
 
             {% set img = block.bilde.first | default(false) %}
@@ -33,7 +33,7 @@
                 { width: 1680 },
                 ], { mode: 'crop', ratio:"16/9" }) %}
 
-                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
+                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-bgset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
 
             {% endif %}
 
