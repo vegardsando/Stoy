@@ -300,7 +300,7 @@ if ($('.arranger').length) {
   // Jobber, videoer, clicks
   $( ".grid article a" ).on('click', function(e) {
 
-    if ($(this).find('.video').children().length > 0 ) {
+    if ($(this).parents('article').find('.video').children().length > 0 ) {
       e.preventDefault();
 
       console.log('click');
