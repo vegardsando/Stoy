@@ -58,7 +58,7 @@
 
 <section class="row">
     <figure class="emblem-heading">
-        <h2>Hva vi er <strong>gode</strong> på</h2>
+        <h2>Vi er <strong>gode</strong> på</h2>
     </figure>
 </section>
 
@@ -76,7 +76,7 @@
 
     <article class="eq{{ loop.index}}">
             <div class="sizer-div">
-                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
+                <img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-bgset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}" alt="{{img.title | default("")}}">
 						</div>
             <div class="text">
                 <div class="tittel">{{block.tittel}}</div>

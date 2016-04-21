@@ -2,23 +2,10 @@
 {% set bodyClass = "underside jobber" %}
 
 {% block content %}
-<section class="top">
-
-	{% set img = header.toppbilde.first | default(false) %}
-	{% set bilde = craft.imager.transformImage(img, [
-		{ width: 320 },
-		{ width: 840 },
-		{ width: 1680 },
-		], { mode: 'crop', ratio:"16/9" }) %}
-
-    <div class="top-content lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-bgset="{{bilde[0].url}} 400w, {{bilde[1].url}} 767w, {{bilde[2].url}}">
-    </div>
-    <figure class="divider"></figure>
-</section>
 
 <div class="row">
     <figure class="emblem-heading">
-        <h2>Alle<strong> jobber</strong></h2>
+        <h1><strong>Portefølje</strong></h1>
     </figure>
 </div>
 
